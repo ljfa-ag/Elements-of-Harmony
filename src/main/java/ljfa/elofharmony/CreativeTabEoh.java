@@ -8,7 +8,7 @@ public class CreativeTabEoh {
     public static final CreativeTabs EOH_TAB = new CreativeTabs(Reference.MODID) {
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(ModBlocks.poisonjoke);
+            return Item.getItemFromBlock(ModBlocks.sapling_flutter);
         }
     };
 }
