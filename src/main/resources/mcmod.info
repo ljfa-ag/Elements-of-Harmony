@@ -1,0 +1,16 @@
+[
+{
+  "modid": "elofharmony",
+  "name": "Elements of Harmony",
+  "description": "A magic mod inspired by other magic mods and My Little Pony: Friendship is Magic",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ljfa"],
+  "credits": "Mojang, the creators of Forge, the creators of other mods, the creators of MLPFiM",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

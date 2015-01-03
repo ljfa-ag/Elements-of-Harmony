@@ -1,0 +1,10 @@
+elofharmony.configgui.ctgy.general.tooltip=General options
+elofharmony.configgui.ctgy.poisonjoke.tooltip=The Poison Joke plant
+itemGroup.elofharmony=Elements of Harmony
+tile.elofharmony:poisonjoke.name=Poison Joke
+tile.elofharmony:log_flutter.name=Flutterlog
+tile.elofharmony:leaves_flutter.name=Flutterleaves
+tile.elofharmony:sapling_flutter.name=Fluttersapling
+tile.elofharmony:planks_flutter.name=Flutterplanks
+tile.elofharmony:slab_flutter.name=Flutterslab
+tile.elofharmony:stairs_flutter.name=Flutterstairs
