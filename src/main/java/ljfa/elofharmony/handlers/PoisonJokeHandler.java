@@ -52,7 +52,7 @@ public class PoisonJokeHandler {
         int maxDuration = (int)(1.6 * Config.pjAvgDurations[index]);
         int duration = LjfaMathHelper.triangularInt(rand, minDuration, maxDuration);
         if(isSquid(entity))
-            duration *= 1.2;
+            duration *= 1.1;
         
         int level = rand.nextInt(Config.pjMaxLevels[index]);
         
