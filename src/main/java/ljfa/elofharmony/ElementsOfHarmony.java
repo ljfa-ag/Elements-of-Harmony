@@ -2,6 +2,7 @@ package ljfa.elofharmony;
 
 import ljfa.elofharmony.blocks.ModBlocks;
 import ljfa.elofharmony.handlers.PoisonJokeHandler;
+import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.proxy.CommonProxy;
 import ljfa.elofharmony.worldgen.DecorationPoisonJoke;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +25,7 @@ public class ElementsOfHarmony {
     public void preInit(FMLPreInitializationEvent event) {
         Config.loadConfig(event.getSuggestedConfigurationFile());
         ModBlocks.init();
+        ModItems.init();
         proxy.preInit(event);
     }
     
