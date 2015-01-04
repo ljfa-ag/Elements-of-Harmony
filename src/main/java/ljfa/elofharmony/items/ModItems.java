@@ -11,11 +11,17 @@ public class ModItems {
         
     }
     
+    /** Sets the item's name and texture and registers it */
     public static Item register(Item item, String name, String imageName) {
         item.setCreativeTab(CreativeTabEoh.EOH_TAB)
         .setUnlocalizedName(Reference.MODID + ":" + name)
         .setTextureName(Reference.MODID + ":" + imageName);
         GameRegistry.registerItem(item, name);
         return item;
+    }
+    
+    /** Sets the item's name and texture and registers it */
+    public static Item register(Item item, String name) {
+        return register(item, name, name);
     }
 }
