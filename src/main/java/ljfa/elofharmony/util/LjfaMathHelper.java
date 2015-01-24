@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class LjfaMathHelper {
     /** Generates a symmetrically triangular distributed integer between min and max (inclusive).
-     * 
      * The expected value is (min+max)/2.
      */
     public static int triangularInt(Random rand, int min, int max) {
@@ -13,7 +12,6 @@ public class LjfaMathHelper {
     }
     
     /** Generates a symmetrically triangular distributed double in ]min, max[.
-     * 
      * The modus is at (min+max)/2.
      */
     public static double triangularDouble(Random rand, double min, double max) {
