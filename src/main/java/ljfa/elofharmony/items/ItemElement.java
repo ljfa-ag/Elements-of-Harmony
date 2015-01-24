@@ -1,0 +1,74 @@
+package ljfa.elofharmony.items;
+
+import java.util.List;
+
+import ljfa.elofharmony.Reference;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class ItemElement extends Item {
+    @SideOnly(Side.CLIENT)
+    private IIcon[] textures;
+    
+    public enum ElementType {
+        HONESTY("honesty"),
+        KINDNESS("kindness"),
+        LAUGHTER("laughter"),
+        LOYALTY("loyalty"),
+        GENEROSITY("generosity"),
+        MAGIC("magic");
+        
+        private String subname;
+        private String unlocalizedName;
+        private String textureName;
+        
+        private ElementType(String subname) {
+            this.subname = subname;
+            this.unlocalizedName = Reference.MODID + ":element_" + subname; 
+            this.textureName = Reference.MODID + ":element_" + subname; 
+        }
+    }
+    
+    private final int elementCount = 6;
+    
+    public ItemElement() {
+        ModItems.register(this, "element_of_harmony", "element_honesty");
+        setHasSubtypes(true);
+    }
+    
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        int meta = stack.getItemDamage();
+        if(meta >= elementCount)
+            meta = 0;
+        return "item." + ElementType.values()[meta].unlocalizedName;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for(int i = 0; i < elementCount; i++)
+            list.add(new ItemStack(item, 1, i));
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        textures = new IIcon[elementCount];
+        for(int i = 0; i < elementCount; i++)
+            textures[i] = iconRegister.registerIcon(ElementType.values()[i].textureName);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        if(meta >= elementCount)
+            meta = 0;
+        return textures[meta];
+    }
+}
