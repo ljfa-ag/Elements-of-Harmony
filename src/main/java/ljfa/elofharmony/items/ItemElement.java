@@ -5,6 +5,7 @@ import java.util.List;
 import ljfa.elofharmony.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -39,6 +40,16 @@ public class ItemElement extends Item {
     public ItemElement() {
         ModItems.register(this, "element_of_harmony", "element_honesty");
         setHasSubtypes(true);
+    }
+    
+    @Override
+    public boolean hasEffect(ItemStack stack, int pass) {
+        return true;
+    }
+    
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.rare;
     }
     
     @Override
