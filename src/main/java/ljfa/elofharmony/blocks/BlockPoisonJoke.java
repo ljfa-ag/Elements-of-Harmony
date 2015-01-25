@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPoisonJoke extends BlockBush implements IGrowable {
-    private String name = "poisonjoke";
+    private final String name = "poisonjoke";
     
     private final int maxGrowth = 7;
 

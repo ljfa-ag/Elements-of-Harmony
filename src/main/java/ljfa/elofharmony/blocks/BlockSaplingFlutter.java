@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSaplingFlutter extends BlockSapling {
-    private String name = "sapling_flutter";
+    private final String name = "sapling_flutter";
     
     private FluttertreeGenerator treeGen;
     

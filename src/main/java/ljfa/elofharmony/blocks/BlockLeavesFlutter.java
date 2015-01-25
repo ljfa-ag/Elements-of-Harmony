@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLeavesFlutter extends BlockLeaves {
-    private String name = "leaves_flutter";
+    private final String name = "leaves_flutter";
     
     @SideOnly(Side.CLIENT)
     private IIcon texture_transparent;

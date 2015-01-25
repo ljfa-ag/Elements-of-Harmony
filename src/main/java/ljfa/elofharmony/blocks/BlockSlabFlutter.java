@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSlabFlutter extends BlockSlab {
-    private String name = "slab_flutter";
+    private final String name = "slab_flutter";
     
     public BlockSlabFlutter(boolean is_double_slab) {
         super(is_double_slab, Material.wood);

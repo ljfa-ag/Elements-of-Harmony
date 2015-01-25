@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogFlutter extends BlockLog {
-    private String name = "log_flutter";
+    private final String name = "log_flutter";
     
     @SideOnly(Side.CLIENT)
     private IIcon[] textures;
