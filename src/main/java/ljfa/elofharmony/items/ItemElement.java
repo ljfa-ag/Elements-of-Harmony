@@ -40,6 +40,7 @@ public class ItemElement extends Item {
     public ItemElement() {
         ModItems.register(this, "element_of_harmony", "element_honesty");
         setHasSubtypes(true);
+        setMaxStackSize(1);
     }
     
     @Override
@@ -49,7 +50,10 @@ public class ItemElement extends Item {
     
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.rare;
+        if(stack.getItemDamage() == ElementType.MAGIC.ordinal())
+            return EnumRarity.epic;
+        else
+            return EnumRarity.rare;
     }
     
     @Override
