@@ -43,6 +43,7 @@ public class ItemElement extends Item {
         setMaxStackSize(1);
     }
     
+    @SideOnly(Side.CLIENT)
     @Override
     public boolean hasEffect(ItemStack stack, int pass) {
         return true;
