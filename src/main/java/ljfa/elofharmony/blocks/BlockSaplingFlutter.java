@@ -26,10 +26,8 @@ public class BlockSaplingFlutter extends BlockSapling {
     private IIcon texture;
     
     public BlockSaplingFlutter() {
-        setBlockName(Reference.MODID + ":" + name);
         setStepSound(soundTypeGrass);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
+        ModBlocks.register(this, name);
         
         treeGen = new FluttertreeGenerator(true, ModBlocks.log_flutter, ModBlocks.leaves_flutter);
     }

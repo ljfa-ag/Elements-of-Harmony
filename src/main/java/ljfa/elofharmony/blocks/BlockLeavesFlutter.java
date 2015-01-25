@@ -25,9 +25,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     private IIcon texture_opaque;
     
     public BlockLeavesFlutter() {
-        setBlockName(Reference.MODID + ":" + name);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, ItemBlockLeavesFlutter.class, name);
+        ModBlocks.register(this, name);
     }
     
     @Override

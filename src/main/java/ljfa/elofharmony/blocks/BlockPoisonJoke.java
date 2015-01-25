@@ -29,13 +29,11 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     private IIcon[] textures;
     
     public BlockPoisonJoke() {
-        setBlockName(Reference.MODID + ":" + name);
         float f = 0.5F;
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         setHardness(0.0F);
         setStepSound(soundTypeGrass);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
+        ModBlocks.register(this, name);
     }
     
     @Override

@@ -17,12 +17,10 @@ public class BlockSlabFlutter extends BlockSlab {
     
     public BlockSlabFlutter(boolean is_double_slab) {
         super(is_double_slab, Material.wood);
-        setBlockName(Reference.MODID + ":" + name);
         setHardness(2.0F);
         setResistance(5.0F);
         setStepSound(soundTypeWood);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
+        ModBlocks.register(this, name);
     }
     
     public BlockSlabFlutter() { this(false); }

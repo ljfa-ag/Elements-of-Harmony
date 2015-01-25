@@ -11,8 +11,6 @@ public class BlockStairsFlutter extends BlockStairs {
     
     public BlockStairsFlutter(Block block, int meta) {
         super(block, meta);
-        setBlockName(Reference.MODID + ":" + name);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
+        ModBlocks.register(this, name);
     }
 }

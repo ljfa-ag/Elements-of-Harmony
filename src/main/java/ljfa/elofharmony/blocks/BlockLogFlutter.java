@@ -16,9 +16,7 @@ public class BlockLogFlutter extends BlockLog {
     private IIcon[] textures;
     
     public BlockLogFlutter() {
-        setBlockName(Reference.MODID + ":" + name);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
+        ModBlocks.register(this, name);
     }
     
     @SideOnly(Side.CLIENT)

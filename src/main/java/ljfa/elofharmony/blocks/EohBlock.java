@@ -11,11 +11,8 @@ public class EohBlock extends Block {
 
     public EohBlock(String name, Material material) {
         super(material);
-        this.name = name;
-        setBlockName(Reference.MODID + ":" + name);
+        ModBlocks.register(this, name);
         setBlockTextureName(Reference.MODID + ":" + name);
-        setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(this, name);
     }
     
     public String getName() {
