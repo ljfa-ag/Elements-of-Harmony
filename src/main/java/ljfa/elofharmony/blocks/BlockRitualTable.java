@@ -1,5 +1,7 @@
 package ljfa.elofharmony.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ljfa.elofharmony.tile.TileRitualTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -30,4 +32,16 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
         super.breakBlock(world, x, y, z, block, meta);
         world.removeTileEntity(x, y, z);
     }
+    
+    /*@SideOnly(Side.CLIENT)
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getRenderType() {
+        return 0;
+    }*/
 }

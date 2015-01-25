@@ -16,6 +16,7 @@ public final class ModBlocks {
     public static EohBlock planks_flutter;
     public static BlockSlabFlutter slab_flutter;
     public static BlockStairsFlutter stairs_flutter;
+    public static BlockRitualTable ritual_table;
     
     public static void init() {
         poisonjoke = new BlockPoisonJoke();
@@ -25,6 +26,7 @@ public final class ModBlocks {
         planks_flutter = (EohBlock)new EohBlock("planks_flutter", Material.wood).setHardness(2.0f).setResistance(5.0f).setStepSound(Block.soundTypeWood);
         slab_flutter = new BlockSlabFlutter();
         stairs_flutter = new BlockStairsFlutter(planks_flutter, 0);
+        ritual_table = new BlockRitualTable();
     }
     
     /** Sets the block's name and registers it with the given ItemBlock class */
