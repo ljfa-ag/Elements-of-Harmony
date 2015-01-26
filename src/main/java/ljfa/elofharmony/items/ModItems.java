@@ -8,9 +8,11 @@ import net.minecraft.item.Item;
 public class ModItems {
 
     public static ItemElement elementOfHarmony;
+    public static ItemTwilicane twilicane;
     
     public static void init() {
         elementOfHarmony = new ItemElement();
+        twilicane = new ItemTwilicane();
     }
     
     /** Sets the item's name and texture and registers it */
