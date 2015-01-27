@@ -48,7 +48,7 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
 
         double mean = 300.0, sigma = 20.0;
         
-        double dist = mean + sigma * rand.nextGaussian();
+        double dist = mean + sigma * LjfaMathHelper.stdTriangular(rand);
         double angle = 2 * Math.PI * rand.nextDouble();
         
         int tpx = (int)(dist * Math.sin(angle));

@@ -17,4 +17,12 @@ public class LjfaMathHelper {
     public static double triangularDouble(Random rand, double min, double max) {
         return min + 0.5*(max-min)*(rand.nextDouble() - rand.nextDouble() + 1.0);
     }
+    
+    /** Generates a triangular distributed double with expected value 0 and variance 1.
+     * The range is ]-sqrt(6), sqrt(6)[
+     */
+    public static double stdTriangular(Random rand) {
+        final double sqrt6 = Math.sqrt(6.0);
+        return triangularDouble(rand, -sqrt6, sqrt6);
+    }
 }
