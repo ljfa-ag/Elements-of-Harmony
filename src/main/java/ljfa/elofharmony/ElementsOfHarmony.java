@@ -1,6 +1,7 @@
 package ljfa.elofharmony;
 
 import ljfa.elofharmony.blocks.ModBlocks;
+import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.handlers.PoisonJokeHandler;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.proxy.CommonProxy;
@@ -35,6 +36,8 @@ public class ElementsOfHarmony {
             MinecraftForge.EVENT_BUS.register(new PoisonJokeHandler());
         if(Config.pjSpawnChance != 0)
             MinecraftForge.TERRAIN_GEN_BUS.register(new DecorationPoisonJoke());
+        MinecraftForge.EVENT_BUS.register(new ChallengeHandler());
+        
         ModRecipes.addOredict();
         ModRecipes.addRecipes();
         proxy.init(event);

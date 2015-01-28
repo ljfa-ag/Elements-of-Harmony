@@ -1,6 +1,7 @@
 package ljfa.elofharmony.tile;
 
 import ljfa.elofharmony.util.LogHelper;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -116,6 +117,12 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     }
     
     public void spillItems() {
-        LogHelper.info("Spilling stuff at (%d,%d,%d)!", xCoord, yCoord, zCoord);
+        for(int i = 0; i < inv.length; i++) {
+            ItemStack stack = getStackInSlot(i);
+            if(stack != null) {
+                EntityItem entity = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, stack);
+                worldObj.spawnEntityInWorld(entity);
+            }
+        }
     }
 }

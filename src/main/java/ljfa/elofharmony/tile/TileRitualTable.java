@@ -2,6 +2,8 @@ package ljfa.elofharmony.tile;
 
 import java.util.List;
 
+import ljfa.elofharmony.handlers.ChallengeHandler;
+import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -26,12 +28,17 @@ public class TileRitualTable extends TileInventoryBase {
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         Item item = stack.getItem();
-        return item == Items.apple
-                || item == Items.feather
-                || item == Items.cake
-                || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id)
-                || item == Items.diamond
-                || item == Items.nether_star;
+        return item == ModItems.elementOfHarmony
+            || item == Items.apple
+            || item == Items.feather
+            || item == Items.cake
+            || item == Items.diamond
+            || item == Items.nether_star
+            || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id);
+    }
+    
+    public void startChallenge(EntityPlayer player) {
+        ChallengeHandler.startChallenge(player, this);
     }
     
     private boolean isPotionOfType(Item item, int damage, int potionID) {
