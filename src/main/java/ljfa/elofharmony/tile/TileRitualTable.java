@@ -45,10 +45,10 @@ public class TileRitualTable extends TileInventoryBase {
         if(!(item instanceof ItemPotion))
             return false;
         ItemPotion potion = (ItemPotion)item;
-        List<PotionEffect> effects = potion.getEffects(damage);
-        if(effects == null)
+        List<PotionEffect> effectList = potion.getEffects(damage);
+        if(effectList == null)
             return false;
-        for(PotionEffect eff: effects) {
+        for(PotionEffect eff: effectList) {
             if(eff != null && eff.getPotionID() == potionID)
                 return true;
         }
