@@ -35,7 +35,7 @@ public class ItemElement extends Item {
         }
     }
     
-    public final int elementCount = 6;
+    public final int elementCount = ElementType.values().length;
     
     public ItemElement() {
         ModItems.register(this, "element_of_harmony", "element_honesty");

@@ -9,10 +9,12 @@ public class ModItems {
 
     public static ItemElement elementOfHarmony;
     public static ItemTwilicane twilicane;
+    public static ItemResource resource;
     
     public static void init() {
         elementOfHarmony = new ItemElement();
         twilicane = new ItemTwilicane();
+        resource = new ItemResource();
     }
     
     /** Sets the item's name and texture and registers it */
