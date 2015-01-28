@@ -2,10 +2,8 @@ package ljfa.elofharmony.blocks;
 
 import java.util.ArrayList;
 
-import ljfa.elofharmony.CreativeTabEoh;
 import ljfa.elofharmony.Reference;
-import ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
-import ljfa.elofharmony.items.ItemResource;
+import ljfa.elofharmony.items.ItemResource.ResourceType;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,7 +41,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
         // 2.3% to 4.7% chance
         // Expected: 1.2 to 2.5 per tree
         if(world.rand.nextInt(128) < 3 + fortune)
-            ret.add(new ItemStack(ModItems.resource, 1, ItemResource.ResourceType.YELLOW_FEATHER.ordinal()));
+            ret.add(new ItemStack(ModItems.resource, 1, ResourceType.YELLOW_FEATHER.ordinal()));
         
         return ret;
     }

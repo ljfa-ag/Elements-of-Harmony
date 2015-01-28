@@ -1,6 +1,8 @@
 package ljfa.elofharmony;
 
 import ljfa.elofharmony.blocks.ModBlocks;
+import ljfa.elofharmony.items.ItemResource.ResourceType;
+import ljfa.elofharmony.items.ModItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -10,6 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ModRecipes {
     public static void addOredict() {
         OreDictionary.registerOre("itemFeather", Items.feather);
+        OreDictionary.registerOre("itemFeather", new ItemStack(ModItems.resource, 1, ResourceType.YELLOW_FEATHER.ordinal()));
         
         OreDictionary.registerOre("plankWood", ModBlocks.planks_flutter);
         OreDictionary.registerOre("logWood", ModBlocks.log_flutter);
