@@ -25,12 +25,15 @@ public class ModRecipes {
     public static void addRecipes() {
         GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks_flutter, 4), ModBlocks.log_flutter);
         GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.sapling_flutter, "FYF", "PSP", "JYJ",
-                'J', ModBlocks.poisonjoke, 'P', "dyePurple", 'Y', "dyeYellow", 'S', "treeSapling", 'F', "itemFeather").setMirrored(false));
+                'J', ModBlocks.poisonjoke, 'P', "dyePink", 'Y', "dyeYellow", 'S', "treeSapling", 'F', "itemFeather").setMirrored(false));
         GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.sapling_flutter, "FPF", "YSY", "JPJ",
-                'J', ModBlocks.poisonjoke, 'P', "dyePurple", 'Y', "dyeYellow", 'S', "treeSapling", 'F', "itemFeather").setMirrored(false));
+                'J', ModBlocks.poisonjoke, 'P', "dyePink", 'Y', "dyeYellow", 'S', "treeSapling", 'F', "itemFeather").setMirrored(false));
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.slab_flutter, 6), "PPP",
                 'P', ModBlocks.planks_flutter);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.stairs_flutter, 6), "P  ", "PP ", "PPP",
                 'P', ModBlocks.planks_flutter);
+        GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.ritual_table, "OYP", "###", "LWV",
+                'O', "dyeOrange", 'Y', "dyeYellow", 'P', "dyePink", 'L', "dyeLightBlue",
+                'W', "dyeWhite", 'V', "dyePurple", '#', ModBlocks.planks_flutter).setMirrored(false));
     }
 }
