@@ -53,7 +53,7 @@ public class TileRitualTable extends TileInventoryBase {
             else
                 return false;
             
-            if(ChallengeHandler.startChallenge(player, challenge, xCoord, yCoord, zCoord)) {
+            if(ChallengeHandler.startChallenge(player, challenge, this)) {
                 setInventorySlotContents(0, null);
                 challengerUUID = player.getUniqueID();
                 return true;

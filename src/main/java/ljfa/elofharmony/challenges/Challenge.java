@@ -1,5 +1,6 @@
 package ljfa.elofharmony.challenges;
 
+import ljfa.elofharmony.tile.TileRitualTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,10 +14,10 @@ public abstract class Challenge {
     }
     
     /** @return if the challenge is ready to be started on the player */
-    public abstract boolean checkStartingCondition(EntityPlayer player, int x, int y, int z);
+    public abstract boolean checkStartingCondition(EntityPlayer player, TileRitualTable tile);
     
     /** Called when a challenge is about to start for the player. */
-    public abstract void start(EntityPlayer player, NBTTagCompound data, int x, int y, int z);
+    public abstract void start(EntityPlayer player, NBTTagCompound data, TileRitualTable tile);
     
     /** @return true if the challenge's restriction is met */
     public abstract boolean checkRestriction(EntityPlayer player, NBTTagCompound data);

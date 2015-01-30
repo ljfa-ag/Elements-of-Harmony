@@ -2,6 +2,7 @@ package ljfa.elofharmony.challenges;
 
 import ljfa.elofharmony.items.ItemElement.ElementType;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,12 +17,12 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public boolean checkStartingCondition(EntityPlayer player, int x, int y, int z) {
+    public boolean checkStartingCondition(EntityPlayer player, TileRitualTable tile) {
         return true;
     }
     
     @Override
-    public void start(EntityPlayer player, NBTTagCompound data, int x, int y, int z) {
+    public void start(EntityPlayer player, NBTTagCompound data, TileRitualTable tile) {
         World world = player.getEntityWorld();
         //double mean = 300.0, sigma = 20.0;
         double mean = 30.0, sigma = 2.0;

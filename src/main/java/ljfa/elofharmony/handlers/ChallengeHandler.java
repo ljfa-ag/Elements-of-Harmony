@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -39,15 +40,16 @@ public class ChallengeHandler {
         }
     }
     
-    public static boolean startChallenge(EntityPlayer player, Challenge ch, int x, int y, int z) {
-        if(ch.checkStartingCondition(player, x, y, z)) {
+    public static boolean startChallenge(EntityPlayer player, Challenge ch, TileRitualTable tile) {
+        if(ch.checkStartingCondition(player, tile)) {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("id", ch.id);
-            tag.setInteger("tableX", x);
-            tag.setInteger("tableY", y);
-            tag.setInteger("tableZ", z);
+            tag.setInteger("tableX", tile.xCoord);
+            tag.setInteger("tableY", tile.yCoord);
+            tag.setInteger("tableZ", tile.zCoord);
+            tag.setInteger("tableDim", tile.getWorldObj().provider.dimensionId);
             player.getEntityData().setTag("eoh:challenge", tag);
-            ch.start(player, tag, x, y, z);
+            ch.start(player, tag, tile);
             ChatHelper.toPlayer(player, "The challenge is on");
             return true;
         } else {
@@ -59,13 +61,14 @@ public class ChallengeHandler {
     private static void endChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
         ch.complete(player, data);
         int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
-        TileEntity te = player.worldObj.getTileEntity(x, y, z);
+        int dim = data.getInteger("tableDim");
+        TileEntity te = WorldProvider.getProviderForDimension(dim).worldObj.getTileEntity(x, y, z);
         if(te instanceof TileRitualTable) {
             TileRitualTable tile = (TileRitualTable)te;
             tile.endChallenge();
             tile.setInventorySlotContents(0, ch.getResult());
         } else {
-            LogHelper.error("Wrong or missing tile entity at (%d,%d,%d)", x, y, z);
+            LogHelper.error("Wrong or missing tile entity at dim %d (%d,%d,%d)", dim, x, y, z);
         }
         player.getEntityData().removeTag("eoh:challenge");
     }
@@ -85,11 +88,12 @@ public class ChallengeHandler {
         if(hasChallengeRunning(player)) {
             ch.abort(player, data);
             int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
-            TileEntity tile = player.worldObj.getTileEntity(x, y, z);
+            int dim = data.getInteger("tableDim");
+            TileEntity tile = WorldProvider.getProviderForDimension(dim).worldObj.getTileEntity(x, y, z);
             if(tile instanceof TileRitualTable) {
                 ((TileRitualTable)tile).endChallenge();
             } else {
-                LogHelper.error("Wrong or missing tile entity at (%d,%d,%d)", x, y, z);
+                LogHelper.error("Wrong or missing tile entity at dim %d (%d,%d,%d)", dim, x, y, z);
             }
             player.getEntityData().removeTag("eoh:challenge");
         }
