@@ -1,5 +1,7 @@
 package ljfa.elofharmony.inventory;
 
-public abstract class InventoryRestriction {
+import net.minecraft.entity.player.EntityPlayer;
 
+public abstract class InventoryRestriction {
+    public abstract void check(EntityPlayer player);
 }
