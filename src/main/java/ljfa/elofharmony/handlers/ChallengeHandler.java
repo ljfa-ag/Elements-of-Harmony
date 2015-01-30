@@ -38,6 +38,20 @@ public class ChallengeHandler {
         }
     }
     
+    public static boolean startChallenge(EntityPlayer player, Challenge ch) {
+        if(ch.checkStartingCondition(player)) {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setInteger("id", ch.id);
+            ch.start(player, tag);
+            player.getEntityData().setTag("eoh:challenge", tag);
+            ChatHelper.toPlayer(player, "The challenge is on");
+            return true;
+        } else {
+            ChatHelper.toPlayer(player, "You're not quite ready for the challenge");
+            return false;
+        }
+    }
+    
     public static boolean isChallengeRunning(EntityPlayer player) {
         return player.getEntityData().hasKey("eoh:challenge");
     }

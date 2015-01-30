@@ -11,10 +11,11 @@ public abstract class Challenge {
         this.id = id;
     }
     
-    /** Called when a challenge is about to start for the player.
-     * @return true if it successfully started
-     */
-    public abstract boolean start(EntityPlayer player, NBTTagCompound data);
+    /** @return if the challenge is ready to be started on the player */
+    public abstract boolean checkStartingCondition(EntityPlayer player);
+    
+    /** Called when a challenge is about to start for the player. */
+    public abstract void start(EntityPlayer player, NBTTagCompound data);
     
     /** @return true if the challenge's restriction is met */
     public abstract boolean checkRestriction(EntityPlayer player, NBTTagCompound data);

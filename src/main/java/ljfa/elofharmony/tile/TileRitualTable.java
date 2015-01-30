@@ -2,18 +2,17 @@ package ljfa.elofharmony.tile;
 
 import java.util.List;
 
+import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 
 public class TileRitualTable extends TileInventoryBase {
     public TileRitualTable() {
@@ -44,10 +43,13 @@ public class TileRitualTable extends TileInventoryBase {
             if(inv[0] == null)
                 return false;
             Item item = inv[0].getItem();
-            if(item == Items.diamond) {
-                ChallengeGenerosity.instance.start(player);
-                return true;
-            }
+            Challenge challenge;
+            if(item == Items.diamond)
+                challenge = ChallengeGenerosity.instance;
+            else
+                return false;
+            
+            return ChallengeHandler.startChallenge(player, challenge);
         }
         return false;
     }

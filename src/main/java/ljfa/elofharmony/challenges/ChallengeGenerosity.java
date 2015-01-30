@@ -1,10 +1,8 @@
 package ljfa.elofharmony.challenges;
 
-import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
@@ -14,7 +12,11 @@ public class ChallengeGenerosity extends Challenge {
         super(4);
     }
     
-    public boolean start(EntityPlayer player, NBTTagCompound data) {
+    public boolean checkStartingCondition(EntityPlayer player) {
+        return true;
+    }
+    
+    public void start(EntityPlayer player, NBTTagCompound data) {
         World world = player.getEntityWorld();
         double mean = 300.0, sigma = 20.0;
         
@@ -26,9 +28,6 @@ public class ChallengeGenerosity extends Challenge {
         int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
         
         player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
-        ChatHelper.toPlayer(player, "Generostiy Challenge started!");
-        
-        return true;
     }
 
     @Override
