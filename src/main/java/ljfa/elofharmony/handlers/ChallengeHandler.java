@@ -3,6 +3,7 @@ package ljfa.elofharmony.handlers;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -16,6 +17,9 @@ public class ChallengeHandler {
             return;
         
         EntityPlayer player = (EntityPlayer)event.entityLiving;
+        if(player.getEntityData().hasKey("eoh_challenge")) {
+            NBTTagCompound tag = player.getEntityData().getCompoundTag("eoh_challenge");
+        }
     }
     
     public static void startChallenge(EntityPlayer player, TileRitualTable tile) {
