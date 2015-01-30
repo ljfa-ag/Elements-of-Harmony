@@ -50,7 +50,7 @@ public class ChallengeHandler {
             tag.setInteger("tableZ", tile.zCoord);
             tag.setInteger("tableDim", tile.getWorldObj().provider.dimensionId);
             player.getEntityData().setTag("eoh:challenge", tag);
-            ch.start(player, tag, tile);
+            ch.onStart(player, tag, tile);
             ChatHelper.toPlayer(player, "The challenge is on");
             return true;
         } else {

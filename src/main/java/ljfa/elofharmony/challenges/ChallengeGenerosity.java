@@ -20,7 +20,7 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public void start(EntityPlayer player, NBTTagCompound data, TileRitualTable tile) {
+    public void onStart(EntityPlayer player, NBTTagCompound data, TileRitualTable tile) {
         World world = player.getEntityWorld();
         //double mean = 300.0, sigma = 20.0;
         double mean = 30.0, sigma = 2.0;
