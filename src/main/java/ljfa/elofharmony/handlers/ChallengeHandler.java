@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -62,7 +63,7 @@ public class ChallengeHandler {
         ch.complete(player, data);
         int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
         int dim = data.getInteger("tableDim");
-        TileEntity te = WorldProvider.getProviderForDimension(dim).worldObj.getTileEntity(x, y, z);
+        TileEntity te = DimensionManager.getWorld(dim).getTileEntity(x, y, z);
         if(te instanceof TileRitualTable) {
             TileRitualTable tile = (TileRitualTable)te;
             tile.endChallenge();
@@ -89,7 +90,7 @@ public class ChallengeHandler {
             ch.abort(player, data);
             int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
             int dim = data.getInteger("tableDim");
-            TileEntity tile = WorldProvider.getProviderForDimension(dim).worldObj.getTileEntity(x, y, z);
+            TileEntity tile = DimensionManager.getWorld(dim).getTileEntity(x, y, z);
             if(tile instanceof TileRitualTable) {
                 ((TileRitualTable)tile).endChallenge();
             } else {
