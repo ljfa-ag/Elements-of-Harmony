@@ -13,13 +13,21 @@ import net.minecraftforge.common.util.Constants;
 
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
     protected ItemStack[] inv;
+    protected int size;
     
-    public TileInventoryBase() {
-        inv = new ItemStack[getSizeInventory()];
+    public TileInventoryBase(int size) {
+        inv = new ItemStack[size];
+        this.size = size;
     }
     
     @Override
-    public abstract int getSizeInventory();
+    public int getSizeInventory() {
+        return size;
+    }
+    
+    public ItemStack[] getSlots() {
+        return inv;
+    }
 
     @Override
     public ItemStack getStackInSlot(int slot) {

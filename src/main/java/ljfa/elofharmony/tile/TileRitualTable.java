@@ -15,11 +15,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileRitualTable extends TileInventoryBase {
-    @Override
-    public int getSizeInventory() {
-        return 1;
+    public TileRitualTable() {
+        super(1);
     }
-
+    
     @Override
     public String getInventoryName() {
         return "TileRitualTable";
@@ -27,6 +26,8 @@ public class TileRitualTable extends TileInventoryBase {
     
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        if(stack == null)
+            return true;
         Item item = stack.getItem();
         return item == ModItems.elementOfHarmony
             || item == Items.apple
