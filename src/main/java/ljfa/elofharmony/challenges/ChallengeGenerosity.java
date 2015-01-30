@@ -33,12 +33,11 @@ public class ChallengeGenerosity extends Challenge {
         int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
         
         player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
-        player.inventory.inventoryChanged = false;
     }
 
     @Override
     public boolean checkRestriction(EntityPlayer player, NBTTagCompound data) {
-        return !player.inventory.inventoryChanged;
+        return true;
     }
     
     @Override
