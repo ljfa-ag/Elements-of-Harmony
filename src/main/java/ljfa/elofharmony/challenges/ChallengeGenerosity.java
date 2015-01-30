@@ -6,14 +6,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-public class ChallengeGenerosity extends ChallengeBase {
+public class ChallengeGenerosity extends Challenge {
     public static final ChallengeGenerosity instance = new ChallengeGenerosity();
     
     private ChallengeGenerosity() {
         
     }
     
-    public void start(EntityPlayer player) {
+    public boolean start(EntityPlayer player) {
         World world = player.getEntityWorld();
         double mean = 300.0, sigma = 20.0;
         
@@ -26,5 +26,27 @@ public class ChallengeGenerosity extends ChallengeBase {
         
         player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
         ChatHelper.toPlayer(player, "Generostiy Challenge started!");
+        
+        return true;
+    }
+
+    @Override
+    public boolean checkRestriction(EntityPlayer player) {
+        return true;
+    }
+    
+    @Override
+    public boolean checkCondition(EntityPlayer player) {
+        return false;
+    }
+
+    @Override
+    public void tick(EntityPlayer player) {
+        
+    }
+
+    @Override
+    public void abort(EntityPlayer player) {
+        
     }
 }
