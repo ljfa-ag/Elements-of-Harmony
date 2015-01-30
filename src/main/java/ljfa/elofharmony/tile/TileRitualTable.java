@@ -49,7 +49,7 @@ public class TileRitualTable extends TileInventoryBase {
             Item item = inv[0].getItem();
             Challenge challenge;
             if(item == Items.diamond)
-                challenge = ChallengeGenerosity.instance;
+                challenge = Challenge.generosity;
             else
                 return false;
             

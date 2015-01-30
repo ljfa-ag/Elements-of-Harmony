@@ -8,8 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class Challenge {
     public final int id;
     
+    public static ChallengeGenerosity generosity;
+    
     protected Challenge(int id) {
-        challenges[id] = this;
         this.id = id;
     }
     
@@ -37,7 +38,12 @@ public abstract class Challenge {
     /** @return the reward the player gets for completing the challenge */
     public abstract ItemStack getResult();
     
-    private static Challenge[] challenges = new Challenge[6];
+    private static Challenge[] challenges;
+    
+    public static void initChallenges() {
+        challenges = new Challenge[6];
+        challenges[4] = generosity = new ChallengeGenerosity(4);
+    }
     
     public static Challenge fromId(int id) {
         return challenges[id];

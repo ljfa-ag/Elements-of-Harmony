@@ -10,10 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
-    public static final ChallengeGenerosity instance = new ChallengeGenerosity();
-    
-    private ChallengeGenerosity() {
-        super(4);
+    protected ChallengeGenerosity(int id) {
+        super(id);
     }
     
     @Override
@@ -44,7 +42,8 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
-        return LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
+        return player.worldObj.provider.dimensionId == data.getInteger("tableDim")
+            && LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
                 data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
     }
 
