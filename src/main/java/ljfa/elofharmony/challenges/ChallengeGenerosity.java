@@ -49,4 +49,9 @@ public class ChallengeGenerosity extends Challenge {
     public void abort(EntityPlayer player) {
         
     }
+    
+    @Override
+    public void complete(EntityPlayer player) {
+        
+    }
 }
