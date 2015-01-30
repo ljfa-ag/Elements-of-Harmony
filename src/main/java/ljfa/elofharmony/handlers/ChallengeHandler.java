@@ -1,5 +1,6 @@
 package ljfa.elofharmony.handlers;
 
+import ljfa.elofharmony.challenges.Challenge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -16,7 +17,10 @@ public class ChallengeHandler {
         EntityPlayer player = (EntityPlayer)event.entityLiving;
         if(player.getEntityData().hasKey("eoh:challenge")) {
             NBTTagCompound tag = player.getEntityData().getCompoundTag("eoh:challenge");
-            
+            int chID = tag.getInteger("id");
+            Challenge ch = Challenge.fromId(chID);
+            if(!ch.checkRestriction(player))
+                ch.abort(player);
         }
     }
     
