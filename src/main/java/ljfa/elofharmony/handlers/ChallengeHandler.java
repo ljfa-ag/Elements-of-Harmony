@@ -26,7 +26,7 @@ public class ChallengeHandler {
             int chID = tag.getInteger("id");
             Challenge ch = Challenge.fromId(chID);
             
-            ch.tick(player, tag);
+            ch.onTick(player, tag);
             if(!ch.checkRestriction(player, tag)) {
                 abortChallenge(ch, player, tag);
                 ChatHelper.toPlayer(player, "You failed the challenge!");
@@ -60,7 +60,7 @@ public class ChallengeHandler {
     }
     
     private static void endChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
-        ch.complete(player, data);
+        ch.onComplete(player, data);
         int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
         int dim = data.getInteger("tableDim");
         TileEntity te = DimensionManager.getWorld(dim).getTileEntity(x, y, z);
@@ -87,7 +87,7 @@ public class ChallengeHandler {
     
     public static void abortChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
         if(hasChallengeRunning(player)) {
-            ch.abort(player, data);
+            ch.onAbort(player, data);
             int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
             int dim = data.getInteger("tableDim");
             TileEntity tile = DimensionManager.getWorld(dim).getTileEntity(x, y, z);

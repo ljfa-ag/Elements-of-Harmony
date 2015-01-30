@@ -48,17 +48,17 @@ public class ChallengeGenerosity extends Challenge {
     }
 
     @Override
-    public void tick(EntityPlayer player, NBTTagCompound data) {
+    public void onTick(EntityPlayer player, NBTTagCompound data) {
         
     }
 
     @Override
-    public void abort(EntityPlayer player, NBTTagCompound data) {
+    public void onAbort(EntityPlayer player, NBTTagCompound data) {
         
     }
     
     @Override
-    public void complete(EntityPlayer player, NBTTagCompound data) {
+    public void onComplete(EntityPlayer player, NBTTagCompound data) {
         
     }
     

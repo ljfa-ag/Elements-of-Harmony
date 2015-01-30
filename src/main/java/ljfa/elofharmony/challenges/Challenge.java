@@ -27,13 +27,13 @@ public abstract class Challenge {
     public abstract boolean checkCondition(EntityPlayer player, NBTTagCompound data);
     
     /** Called each tick during the challenge */
-    public abstract void tick(EntityPlayer player, NBTTagCompound data);
+    public abstract void onTick(EntityPlayer player, NBTTagCompound data);
     
     /** Called when the challenge should be aborted */
-    public abstract void abort(EntityPlayer player, NBTTagCompound data);
+    public abstract void onAbort(EntityPlayer player, NBTTagCompound data);
     
     /** Called when the challenge is completed */
-    public abstract void complete(EntityPlayer player, NBTTagCompound data);
+    public abstract void onComplete(EntityPlayer player, NBTTagCompound data);
     
     /** @return the reward the player gets for completing the challenge */
     public abstract ItemStack getResult();
