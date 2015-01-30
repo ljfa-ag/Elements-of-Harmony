@@ -26,6 +26,11 @@ public class LjfaMathHelper {
         return triangularDouble(rand, -sqrt6, sqrt6);
     }
     
+    /** Computes the Manhattan distance between two points */
+    public static double dist1(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return Math.abs(x1-x2) + Math.abs(y1-y2) + Math.abs(z1-z2);
+    }
+    
     /** Computes the squared euclidean distance between two points */
     public static double dist2sq(double x1, double y1, double z1, double x2, double y2, double z2) {
         return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) + (z1-z2)*(z1-z2);
@@ -34,5 +39,10 @@ public class LjfaMathHelper {
     /** Computes the euclidean distance between two points */
     public static double dist2(double x1, double y1, double z1, double x2, double y2, double z2) {
         return Math.sqrt(dist2sq(x1, y1, z1, x2, y2, z2));
+    }
+    
+    /** Computes the maximum norm distance between two points */
+    public static double distInf(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return Math.max(Math.abs(x1-x2), Math.max(Math.abs(y1-y2), Math.abs(z1-z2)));
     }
 }
