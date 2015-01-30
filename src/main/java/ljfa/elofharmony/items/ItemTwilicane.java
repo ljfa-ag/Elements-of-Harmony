@@ -1,11 +1,13 @@
 package ljfa.elofharmony.items;
 
+import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
-import ljfa.elofharmony.util.LogHelper;
+import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -23,7 +25,13 @@ public class ItemTwilicane extends Item {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable)
             return ((TileRitualTable)tile).startChallenge(player);
-        else
-            return false;
+        else {
+            if(ChallengeHandler.hasChallengeRunning(player)) {
+                NBTTagCompound data = ChallengeHandler.getChallengeData(player);
+                ChallengeHandler.abortChallenge(ChallengeHandler.getCurrentChallenge(player, data), player, data);
+                ChatHelper.toPlayer(player, "You aborted the challenge!");
+            }
+        }
+        return true;
     }
 }

@@ -39,7 +39,7 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     public boolean startChallenge(EntityPlayer player) {
-        if(!ChallengeHandler.isChallengeRunning(player)) {
+        if(!ChallengeHandler.hasChallengeRunning(player)) {
             if(inv[0] == null)
                 return false;
             Item item = inv[0].getItem();
