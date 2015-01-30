@@ -22,7 +22,8 @@ public class ItemTwilicane extends Item {
             return true;
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable)
-            ((TileRitualTable)tile).startChallenge(player);
-        return true;
+            return ((TileRitualTable)tile).startChallenge(player);
+        else
+            return false;
     }
 }
