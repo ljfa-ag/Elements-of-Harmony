@@ -2,6 +2,8 @@ package ljfa.elofharmony.util;
 
 import java.util.Random;
 
+import net.minecraft.util.MathHelper;
+
 public class LjfaMathHelper {
     /** Generates a symmetrically triangular distributed integer between min and max (inclusive).
      * The expected value is (min+max)/2.
@@ -24,5 +26,15 @@ public class LjfaMathHelper {
     public static double stdTriangular(Random rand) {
         final double sqrt6 = Math.sqrt(6.0);
         return triangularDouble(rand, -sqrt6, sqrt6);
+    }
+    
+    /** Computes the squared euclidean distance between two points */
+    public static double dist2sq(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) + (z1-z2)*(z1-z2);
+    }
+    
+    /** Computes the euclidean distance between two points */
+    public static double dist2(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return Math.sqrt(dist2sq(x1, y1, z1, x2, y2, z2));
     }
 }
