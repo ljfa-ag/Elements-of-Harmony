@@ -2,8 +2,6 @@ package ljfa.elofharmony.util;
 
 import java.util.Random;
 
-import net.minecraft.util.MathHelper;
-
 public class LjfaMathHelper {
     /** Generates a symmetrically triangular distributed integer between min and max (inclusive).
      * The expected value is (min+max)/2.
