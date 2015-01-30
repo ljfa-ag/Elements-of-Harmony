@@ -1,6 +1,7 @@
 package ljfa.elofharmony.handlers;
 
 import ljfa.elofharmony.challenges.Challenge;
+import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -19,8 +20,21 @@ public class ChallengeHandler {
             NBTTagCompound tag = player.getEntityData().getCompoundTag("eoh:challenge");
             int chID = tag.getInteger("id");
             Challenge ch = Challenge.fromId(chID);
-            if(!ch.checkRestriction(player))
+            
+            ch.tick(player);
+            if(!ch.checkRestriction(player)) {
                 ch.abort(player);
+                player.getEntityData().removeTag("eoh:challenge");
+                ChatHelper.toPlayer(player, "You failed the challenge!");
+            }
+            if((world.getWorldTime() & 15) == 0) {
+                ChatHelper.toPlayer(player, "The challenge is running");
+                if(ch.checkCondition(player)) {
+                    ch.complete(player);
+                    player.getEntityData().removeTag("eoh:challenge");
+                    ChatHelper.toPlayer(player, "You completed the challenge!");
+                }
+            }
         }
     }
     
