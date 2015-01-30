@@ -47,21 +47,6 @@ public class ChallengeGenerosity extends Challenge {
             && LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
                 data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
     }
-
-    @Override
-    public void onTick(EntityPlayer player, NBTTagCompound data) {
-        
-    }
-
-    @Override
-    public void onAbort(EntityPlayer player, NBTTagCompound data) {
-        
-    }
-    
-    @Override
-    public void onComplete(EntityPlayer player, NBTTagCompound data) {
-        
-    }
     
     @Override
     public ItemStack getResult() {
