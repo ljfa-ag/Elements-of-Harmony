@@ -49,7 +49,11 @@ public class TileRitualTable extends TileInventoryBase {
             else
                 return false;
             
-            return ChallengeHandler.startChallenge(player, challenge, xCoord, yCoord, zCoord);
+            if(ChallengeHandler.startChallenge(player, challenge, xCoord, yCoord, zCoord)) {
+                setInventorySlotContents(0, null);
+                return true;
+            } else
+                return false;
         }
         return false;
     }
