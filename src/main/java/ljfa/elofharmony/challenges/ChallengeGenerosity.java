@@ -43,7 +43,8 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
-        return false;
+        return LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
+                data.getInteger("x"), data.getInteger("y"), data.getInteger("z")) <= 25.0;
     }
 
     @Override
