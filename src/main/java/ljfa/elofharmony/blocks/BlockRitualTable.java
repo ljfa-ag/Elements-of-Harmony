@@ -1,5 +1,6 @@
 package ljfa.elofharmony.blocks;
 
+import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.tile.TileInventoryBase;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LogHelper;
@@ -40,20 +41,24 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
         InventoryPlayer playerInv = player.inventory;
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable) {
+            int playerSlot = playerInv.currentItem;
+            ItemStack playerStack = playerInv.getCurrentItem();
+            if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
+                return false;
+            
             TileRitualTable te = (TileRitualTable)tile;
-            ItemStack stack = te.getStackInSlot(0);
-            if(stack != null) {
-                if(playerInv.addItemStackToInventory(stack)) {
+            ItemStack tableStack = te.getStackInSlot(0);
+            if(tableStack != null) {
+                if(playerInv.addItemStackToInventory(tableStack)) {
                     te.setInventorySlotContents(0, null);
                     return true;
                 } else
                     return false;
             } else {
-                int playerSlot = playerInv.currentItem;
-                if(te.isItemValidForSlot(0, playerInv.getCurrentItem())) {
-                    ItemStack playerStack = playerInv.decrStackSize(playerSlot, 1);
-                    te.setInventorySlotContents(0, playerStack);
-                    return playerStack != null;
+                if(te.isItemValidForSlot(0, playerStack)) {
+                    ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
+                    te.setInventorySlotContents(0, playerSplitStack);
+                    return playerSplitStack != null;
                 } else
                     return false;
             }
