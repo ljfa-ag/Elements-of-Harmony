@@ -42,6 +42,9 @@ public class ChallengeHandler {
         if(ch.checkStartingCondition(player, x, y, z)) {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("id", ch.id);
+            tag.setInteger("tableX", x);
+            tag.setInteger("tableY", y);
+            tag.setInteger("tableZ", z);
             player.getEntityData().setTag("eoh:challenge", tag);
             ch.start(player, tag, x, y, z);
             ChatHelper.toPlayer(player, "The challenge is on");

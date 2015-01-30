@@ -30,10 +30,6 @@ public class ChallengeGenerosity extends Challenge {
         int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
         
         player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
-        
-        data.setInteger("x", x);
-        data.setInteger("y", y);
-        data.setInteger("z", z);
     }
 
     @Override
@@ -44,7 +40,7 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
         return LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
-                data.getInteger("x"), data.getInteger("y"), data.getInteger("z")) <= 25.0;
+                data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
     }
 
     @Override
