@@ -2,6 +2,7 @@ package ljfa.elofharmony.tile;
 
 import java.util.List;
 
+import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,8 +39,17 @@ public class TileRitualTable extends TileInventoryBase {
             || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id);
     }
     
-    public void startChallenge(EntityPlayer player) {
-        ChallengeHandler.startChallenge(player, this);
+    public boolean startChallenge(EntityPlayer player) {
+        if(!ChallengeHandler.isChallengeRunning(player)) {
+            if(inv[0] == null)
+                return false;
+            Item item = inv[0].getItem();
+            if(item == Items.diamond) {
+                ChallengeGenerosity.instance.start(player);
+                return true;
+            }
+        }
+        return false;
     }
     
     private boolean isPotionOfType(Item item, int damage, int potionID) {
