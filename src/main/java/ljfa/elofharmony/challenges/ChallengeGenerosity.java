@@ -1,7 +1,10 @@
 package ljfa.elofharmony.challenges;
 
+import ljfa.elofharmony.items.ItemElement.ElementType;
+import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -57,5 +60,10 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void complete(EntityPlayer player, NBTTagCompound data) {
         
+    }
+    
+    @Override
+    public ItemStack getResult() {
+        return new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
     }
 }

@@ -63,20 +63,24 @@ public class TileRitualTable extends TileInventoryBase {
         return false;
     }
     
+    public void endChallenge() {
+        challengerUUID = null;
+    }
+    
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         if(challengerUUID != null) {
-            tag.setLong("challengerUUIDMost", challengerUUID.getMostSignificantBits());
-            tag.setLong("challengerUUIDLeast", challengerUUID.getLeastSignificantBits());
+            tag.setLong("challengerMost", challengerUUID.getMostSignificantBits());
+            tag.setLong("challengerLeast", challengerUUID.getLeastSignificantBits());
         }
     }
     
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
-        if(tag.hasKey("challengerUUIDMost")) {
-            challengerUUID = new UUID(tag.getLong("challengerUUIDMost"), tag.getLong("challengerUUIDLeast"));
+        if(tag.hasKey("challengerMost")) {
+            challengerUUID = new UUID(tag.getLong("challengerMost"), tag.getLong("challengerLeast"));
         }
     }
     

@@ -1,6 +1,7 @@
 package ljfa.elofharmony.challenges;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
@@ -31,6 +32,9 @@ public abstract class Challenge {
     
     /** Called when the challenge is completed */
     public abstract void complete(EntityPlayer player, NBTTagCompound data);
+    
+    /** @return the reward the player gets for completing the challenge */
+    public abstract ItemStack getResult();
     
     private static Challenge[] challenges = new Challenge[6];
     

@@ -1,9 +1,12 @@
 package ljfa.elofharmony.handlers;
 
 import ljfa.elofharmony.challenges.Challenge;
+import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
+import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -29,8 +32,7 @@ public class ChallengeHandler {
             if((world.getWorldTime() & 31) == 0) {
                 ChatHelper.toPlayer(player, "The challenge is running");
                 if(ch.checkCondition(player, tag)) {
-                    ch.complete(player, tag);
-                    player.getEntityData().removeTag("eoh:challenge");
+                    endChallenge(ch, player, tag);
                     ChatHelper.toPlayer(player, "You completed the challenge!");
                 }
             }
@@ -54,6 +56,20 @@ public class ChallengeHandler {
         }
     }
     
+    private static void endChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
+        ch.complete(player, data);
+        int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
+        TileEntity te = player.worldObj.getTileEntity(x, y, z);
+        if(te instanceof TileRitualTable) {
+            TileRitualTable tile = (TileRitualTable)te;
+            tile.endChallenge();
+            tile.setInventorySlotContents(0, ch.getResult());
+        } else {
+            LogHelper.error("Wrong or missing tile entity at (%d,%d,%d)", x, y, z);
+        }
+        player.getEntityData().removeTag("eoh:challenge");
+    }
+    
     public static boolean hasChallengeRunning(EntityPlayer player) {
         return player.getEntityData().hasKey("eoh:challenge");
     }
@@ -68,6 +84,13 @@ public class ChallengeHandler {
     public static void abortChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
         if(hasChallengeRunning(player)) {
             ch.abort(player, data);
+            int x = data.getInteger("tableX"), y = data.getInteger("tableY"), z = data.getInteger("tableZ");
+            TileEntity tile = player.worldObj.getTileEntity(x, y, z);
+            if(tile instanceof TileRitualTable) {
+                ((TileRitualTable)tile).endChallenge();
+            } else {
+                LogHelper.error("Wrong or missing tile entity at (%d,%d,%d)", x, y, z);
+            }
             player.getEntityData().removeTag("eoh:challenge");
         }
     }
