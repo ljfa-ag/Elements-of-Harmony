@@ -23,8 +23,7 @@ public class ChallengeHandler {
             
             ch.tick(player, tag);
             if(!ch.checkRestriction(player, tag)) {
-                ch.abort(player, tag);
-                player.getEntityData().removeTag("eoh:challenge");
+                abortChallenge(ch, player, tag);
                 ChatHelper.toPlayer(player, "You failed the challenge!");
             }
             if((world.getWorldTime() & 31) == 0) {
@@ -55,7 +54,29 @@ public class ChallengeHandler {
         }
     }
     
-    public static boolean isChallengeRunning(EntityPlayer player) {
+    public static boolean hasChallengeRunning(EntityPlayer player) {
         return player.getEntityData().hasKey("eoh:challenge");
+    }
+    
+    public static Challenge getCurrentChallenge(EntityPlayer player, NBTTagCompound data) {
+        if(hasChallengeRunning(player))
+            return Challenge.fromId(data.getInteger("id"));
+        else
+            return null;
+    }
+    
+    public static void abortChallenge(Challenge ch, EntityPlayer player, NBTTagCompound data) {
+        if(hasChallengeRunning(player)) {
+            ch.abort(player, data);
+            player.getEntityData().removeTag("eoh:challenge");
+        }
+        
+    }
+    
+    public static NBTTagCompound getChallengeData(EntityPlayer player) {
+        if(hasChallengeRunning(player))
+            return player.getEntityData().getCompoundTag("eoh:challenge");
+        else
+            return null;
     }
 }
