@@ -70,7 +70,6 @@ public class ChallengeHandler {
             ch.abort(player, data);
             player.getEntityData().removeTag("eoh:challenge");
         }
-        
     }
     
     public static NBTTagCompound getChallengeData(EntityPlayer player) {

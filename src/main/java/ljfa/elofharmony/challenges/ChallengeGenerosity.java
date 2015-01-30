@@ -20,7 +20,8 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void start(EntityPlayer player, NBTTagCompound data, int x, int y, int z) {
         World world = player.getEntityWorld();
-        double mean = 300.0, sigma = 20.0;
+        //double mean = 300.0, sigma = 20.0;
+        double mean = 30.0, sigma = 2.0;
         
         double dist = mean + sigma * LjfaMathHelper.stdTriangular(world.rand);
         double angle = 2 * Math.PI * world.rand.nextDouble();
