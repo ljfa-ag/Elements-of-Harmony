@@ -10,7 +10,7 @@ public class ChallengeGenerosity extends Challenge {
     public static final ChallengeGenerosity instance = new ChallengeGenerosity();
     
     private ChallengeGenerosity() {
-        
+        super(4);
     }
     
     public boolean start(EntityPlayer player) {
