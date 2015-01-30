@@ -21,16 +21,16 @@ public class ChallengeHandler {
             int chID = tag.getInteger("id");
             Challenge ch = Challenge.fromId(chID);
             
-            ch.tick(player);
-            if(!ch.checkRestriction(player)) {
-                ch.abort(player);
+            ch.tick(player, tag);
+            if(!ch.checkRestriction(player, tag)) {
+                ch.abort(player, tag);
                 player.getEntityData().removeTag("eoh:challenge");
                 ChatHelper.toPlayer(player, "You failed the challenge!");
             }
-            if((world.getWorldTime() & 15) == 0) {
+            if((world.getWorldTime() & 31) == 0) {
                 ChatHelper.toPlayer(player, "The challenge is running");
-                if(ch.checkCondition(player)) {
-                    ch.complete(player);
+                if(ch.checkCondition(player, tag)) {
+                    ch.complete(player, tag);
                     player.getEntityData().removeTag("eoh:challenge");
                     ChatHelper.toPlayer(player, "You completed the challenge!");
                 }

@@ -3,6 +3,7 @@ package ljfa.elofharmony.challenges;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
@@ -13,7 +14,7 @@ public class ChallengeGenerosity extends Challenge {
         super(4);
     }
     
-    public boolean start(EntityPlayer player) {
+    public boolean start(EntityPlayer player, NBTTagCompound data) {
         World world = player.getEntityWorld();
         double mean = 300.0, sigma = 20.0;
         
@@ -31,27 +32,27 @@ public class ChallengeGenerosity extends Challenge {
     }
 
     @Override
-    public boolean checkRestriction(EntityPlayer player) {
+    public boolean checkRestriction(EntityPlayer player, NBTTagCompound data) {
         return true;
     }
     
     @Override
-    public boolean checkCondition(EntityPlayer player) {
+    public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
         return false;
     }
 
     @Override
-    public void tick(EntityPlayer player) {
+    public void tick(EntityPlayer player, NBTTagCompound data) {
         
     }
 
     @Override
-    public void abort(EntityPlayer player) {
+    public void abort(EntityPlayer player, NBTTagCompound data) {
         
     }
     
     @Override
-    public void complete(EntityPlayer player) {
+    public void complete(EntityPlayer player, NBTTagCompound data) {
         
     }
 }
