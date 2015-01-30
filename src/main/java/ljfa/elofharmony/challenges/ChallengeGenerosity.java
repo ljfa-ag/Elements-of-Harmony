@@ -18,6 +18,18 @@ public class ChallengeGenerosity extends Challenge {
     public boolean checkStartingCondition(EntityPlayer player, TileRitualTable tile) {
         return true;
     }
+
+    @Override
+    public boolean checkRestriction(EntityPlayer player, NBTTagCompound data) {
+        return !player.isDead;
+    }
+    
+    @Override
+    public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
+        return player.worldObj.provider.dimensionId == data.getInteger("tableDim")
+            && LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
+                data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
+    }
     
     @Override
     public void onStart(EntityPlayer player, NBTTagCompound data, TileRitualTable tile) {
@@ -34,18 +46,6 @@ public class ChallengeGenerosity extends Challenge {
         
         player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
         player.worldObj.setWorldTime(18000);
-    }
-
-    @Override
-    public boolean checkRestriction(EntityPlayer player, NBTTagCompound data) {
-        return true;
-    }
-    
-    @Override
-    public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
-        return player.worldObj.provider.dimensionId == data.getInteger("tableDim")
-            && LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
-                data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
     }
     
     @Override
