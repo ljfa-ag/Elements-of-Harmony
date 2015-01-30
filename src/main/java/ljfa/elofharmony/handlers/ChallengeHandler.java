@@ -38,12 +38,12 @@ public class ChallengeHandler {
         }
     }
     
-    public static boolean startChallenge(EntityPlayer player, Challenge ch) {
-        if(ch.checkStartingCondition(player)) {
+    public static boolean startChallenge(EntityPlayer player, Challenge ch, int x, int y, int z) {
+        if(ch.checkStartingCondition(player, x, y, z)) {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("id", ch.id);
             player.getEntityData().setTag("eoh:challenge", tag);
-            ch.start(player, tag);
+            ch.start(player, tag, x, y, z);
             ChatHelper.toPlayer(player, "The challenge is on");
             return true;
         } else {

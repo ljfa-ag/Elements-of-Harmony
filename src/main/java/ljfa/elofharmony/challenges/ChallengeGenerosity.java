@@ -12,11 +12,13 @@ public class ChallengeGenerosity extends Challenge {
         super(4);
     }
     
-    public boolean checkStartingCondition(EntityPlayer player) {
+    @Override
+    public boolean checkStartingCondition(EntityPlayer player, int x, int y, int z) {
         return true;
     }
     
-    public void start(EntityPlayer player, NBTTagCompound data) {
+    @Override
+    public void start(EntityPlayer player, NBTTagCompound data, int x, int y, int z) {
         World world = player.getEntityWorld();
         double mean = 300.0, sigma = 20.0;
         

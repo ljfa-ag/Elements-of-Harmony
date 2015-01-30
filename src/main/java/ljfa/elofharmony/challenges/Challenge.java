@@ -12,10 +12,10 @@ public abstract class Challenge {
     }
     
     /** @return if the challenge is ready to be started on the player */
-    public abstract boolean checkStartingCondition(EntityPlayer player);
+    public abstract boolean checkStartingCondition(EntityPlayer player, int x, int y, int z);
     
     /** Called when a challenge is about to start for the player. */
-    public abstract void start(EntityPlayer player, NBTTagCompound data);
+    public abstract void start(EntityPlayer player, NBTTagCompound data, int x, int y, int z);
     
     /** @return true if the challenge's restriction is met */
     public abstract boolean checkRestriction(EntityPlayer player, NBTTagCompound data);

@@ -49,7 +49,7 @@ public class TileRitualTable extends TileInventoryBase {
             else
                 return false;
             
-            return ChallengeHandler.startChallenge(player, challenge);
+            return ChallengeHandler.startChallenge(player, challenge, xCoord, yCoord, zCoord);
         }
         return false;
     }
