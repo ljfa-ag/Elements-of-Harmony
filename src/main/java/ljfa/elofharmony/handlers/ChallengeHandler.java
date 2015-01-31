@@ -8,17 +8,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ChallengeHandler {
     @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event) {
         World world = event.player.worldObj;
-        if(world.isRemote)
+        if(event.phase != Phase.END || world.isRemote)
             return;
 
         if(event.player.getEntityData().hasKey("eoh:challenge")) {
