@@ -27,7 +27,7 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
         return player.worldObj.provider.dimensionId == data.getInteger("tableDim")
-            && LjfaMathHelper.dist2sq(player.posX, player.posY, player.posZ,
+            && LjfaMathHelper.dist2sq(player,
                 data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
     }
     
