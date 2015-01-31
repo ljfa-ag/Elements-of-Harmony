@@ -56,12 +56,7 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
                     return false;
             } else {
                 if(te.isItemValidForSlot(0, playerStack)) {
-                    ItemStack playerSplitStack;
-                    if(player.capabilities.isCreativeMode)
-                        playerSplitStack = playerStack.copy();
-                    else
-                        playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
-                    
+                    ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
                     te.setInventorySlotContents(0, playerSplitStack);
                     return playerSplitStack != null;
                 } else
