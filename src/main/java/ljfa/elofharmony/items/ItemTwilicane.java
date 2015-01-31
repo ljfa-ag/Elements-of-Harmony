@@ -1,6 +1,5 @@
 package ljfa.elofharmony.items;
 
-import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
@@ -26,12 +25,22 @@ public class ItemTwilicane extends Item {
         if(tile instanceof TileRitualTable)
             return ((TileRitualTable)tile).startChallenge(player);
         else {
-            if(ChallengeHandler.hasChallengeRunning(player)) {
-                NBTTagCompound data = ChallengeHandler.getChallengeData(player);
-                ChallengeHandler.abortChallenge(ChallengeHandler.getCurrentChallenge(player, data), player, data);
-                ChatHelper.toPlayer(player, "You aborted the challenge!");
-            }
+            abortChallenge(player);
+            return true;
         }
-        return true;
+    }
+    
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        abortChallenge(player);
+        return super.onItemRightClick(stack, world, player);
+    }
+    
+    private void abortChallenge(EntityPlayer player) {
+        if(ChallengeHandler.hasChallengeRunning(player)) {
+            NBTTagCompound data = ChallengeHandler.getChallengeData(player);
+            ChallengeHandler.abortChallenge(ChallengeHandler.getCurrentChallenge(player, data), player, data);
+            ChatHelper.toPlayer(player, "You aborted the challenge!");
+        }
     }
 }
