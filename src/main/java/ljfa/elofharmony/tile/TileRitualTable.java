@@ -29,6 +29,11 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     @Override
+    public int getInventoryStackLimit() {
+        return 1;
+    }
+    
+    @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         if(stack == null)
             return true;
