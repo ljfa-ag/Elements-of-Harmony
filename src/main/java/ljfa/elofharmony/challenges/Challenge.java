@@ -29,8 +29,8 @@ public abstract class Challenge {
     /** Called each tick during the challenge */
     public void onTick(EntityPlayer player, NBTTagCompound data) {}
     
-    /** Called when the player dies during the challenge */
-    public void onPlayerDeath(EntityPlayer player, NBTTagCompound data) {}
+    ///** Called when the player dies during the challenge */
+    //public void onPlayerDeath(EntityPlayer player, NBTTagCompound data) {}
     
     /** Called when the challenge should be aborted */
     public void onAbort(EntityPlayer player, NBTTagCompound data) {}
