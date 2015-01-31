@@ -1,7 +1,7 @@
 package ljfa.elofharmony;
 
 import ljfa.elofharmony.blocks.ModBlocks;
-import ljfa.elofharmony.challenges.Challenge;
+import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.handlers.PoisonJokeHandler;
 import ljfa.elofharmony.items.ModItems;
@@ -42,7 +42,7 @@ public class ElementsOfHarmony {
         
         ModRecipes.addOredict();
         ModRecipes.addRecipes();
-        Challenge.initChallenges();
+        ChallengeRegistry.initChallenges();
         proxy.init(event);
     }
     

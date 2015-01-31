@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import ljfa.elofharmony.challenges.Challenge;
-import ljfa.elofharmony.challenges.ChallengeGenerosity;
+import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +49,7 @@ public class TileRitualTable extends TileInventoryBase {
             Item item = inv[0].getItem();
             Challenge challenge;
             if(item == Items.diamond)
-                challenge = Challenge.generosity;
+                challenge = ChallengeRegistry.generosity;
             else
                 return false;
             

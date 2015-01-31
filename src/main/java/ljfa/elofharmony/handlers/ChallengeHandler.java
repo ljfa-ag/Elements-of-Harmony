@@ -1,6 +1,7 @@
 package ljfa.elofharmony.handlers;
 
 import ljfa.elofharmony.challenges.Challenge;
+import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.LogHelper;
@@ -20,10 +21,11 @@ public class ChallengeHandler {
         if(event.phase != Phase.END || world.isRemote)
             return;
 
-        if(event.player.getEntityData().hasKey("eoh:challenge")) {
-            NBTTagCompound tag = event.player.getEntityData().getCompoundTag("eoh:challenge");
+        NBTTagCompound playerData = event.player.getEntityData();
+        if(playerData.hasKey("eoh:challenge")) {
+            NBTTagCompound tag = playerData.getCompoundTag("eoh:challenge");
             int chID = tag.getInteger("id");
-            Challenge ch = Challenge.fromId(chID);
+            Challenge ch = ChallengeRegistry.fromId(chID);
             
             ch.onTick(event.player, tag);
             if(!ch.checkRestriction(event.player, tag)) {
@@ -79,7 +81,7 @@ public class ChallengeHandler {
     
     public static Challenge getCurrentChallenge(EntityPlayer player, NBTTagCompound data) {
         if(hasChallengeRunning(player))
-            return Challenge.fromId(data.getInteger("id"));
+            return ChallengeRegistry.fromId(data.getInteger("id"));
         else
             return null;
     }
