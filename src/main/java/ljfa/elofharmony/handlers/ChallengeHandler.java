@@ -12,30 +12,30 @@ import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ChallengeHandler {
     @SubscribeEvent
-    public void onLivingUpdateEvent(LivingUpdateEvent event) {
-        World world = event.entityLiving.worldObj;
-        if(world.isRemote || !(event.entityLiving instanceof EntityPlayer))
+    public void onPlayerTick(PlayerTickEvent event) {
+        World world = event.player.worldObj;
+        if(world.isRemote)
             return;
-        
-        EntityPlayer player = (EntityPlayer)event.entityLiving;
-        if(player.getEntityData().hasKey("eoh:challenge")) {
-            NBTTagCompound tag = player.getEntityData().getCompoundTag("eoh:challenge");
+
+        if(event.player.getEntityData().hasKey("eoh:challenge")) {
+            NBTTagCompound tag = event.player.getEntityData().getCompoundTag("eoh:challenge");
             int chID = tag.getInteger("id");
             Challenge ch = Challenge.fromId(chID);
             
-            ch.onTick(player, tag);
-            if(!ch.checkRestriction(player, tag)) {
-                abortChallenge(ch, player, tag);
-                ChatHelper.toPlayer(player, "You failed the challenge!");
+            ch.onTick(event.player, tag);
+            if(!ch.checkRestriction(event.player, tag)) {
+                abortChallenge(ch, event.player, tag);
+                ChatHelper.toPlayer(event.player, "You failed the challenge!");
             }
             if((world.getWorldTime() & 31) == 0) {
-                ChatHelper.toPlayer(player, "The challenge is running");
-                if(ch.checkCondition(player, tag)) {
-                    endChallenge(ch, player, tag);
-                    ChatHelper.toPlayer(player, "You completed the challenge!");
+                ChatHelper.toPlayer(event.player, "The challenge is running");
+                if(ch.checkCondition(event.player, tag)) {
+                    endChallenge(ch, event.player, tag);
+                    ChatHelper.toPlayer(event.player, "You completed the challenge!");
                 }
             }
         }
