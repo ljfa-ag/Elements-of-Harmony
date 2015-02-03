@@ -1,0 +1,22 @@
+elofharmony.configgui.ctgy.general.tooltip=options générales
+elofharmony.configgui.ctgy.poisonjoke.tooltip=La plante de plaisanterie empoisonnée
+
+itemGroup.elofharmony=Les éléments de l'harmonie
+
+tile.elofharmony:poisonjoke.name=Poison Joke
+tile.elofharmony:log_flutter.name=Bois flottant
+tile.elofharmony:leaves_flutter.name=Feuilles flottantes
+tile.elofharmony:sapling_flutter.name=Pousse flottante
+tile.elofharmony:planks_flutter.name=planches flottantes
+tile.elofharmony:slab_flutter.name=dalle flottante
+tile.elofharmony:stairs_flutter.name=Escaliers flottants
+tile.elofharmony:ritual_table.name=Table d'harmonie
+
+item.elofharmony:element_honesty.name=Élément d'honnêteté
+item.elofharmony:element_kindness.name=Élément de bonté
+item.elofharmony:element_laughter.name=Élément de rire
+item.elofharmony:element_loyalty.name=Élément de fidélité
+item.elofharmony:element_generosity.name=Élément de générosité
+item.elofharmony:element_magic.name=Élément de magie
+item.elofharmony:twilicane.name=Canne sergé
+item.elofharmony:yellow_feather.name=Plume jaune
