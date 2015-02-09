@@ -124,7 +124,7 @@ public class TileRitualTable extends TileInventoryBase {
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
     }
     
     @Override
