@@ -41,8 +41,7 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
             int side, float par7, float par8, float par9) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable) {
-            ((TileRitualTable)tile).onPlayerInteract(player);
-            return true;
+            return ((TileRitualTable)tile).onPlayerInteract(player);
         } else {
             LogHelper.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
             return false;

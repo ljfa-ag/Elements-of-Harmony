@@ -49,23 +49,29 @@ public class TileRitualTable extends TileInventoryBase {
             || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id);
     }
     
-    public void onPlayerInteract(EntityPlayer player) {
+    public boolean onPlayerInteract(EntityPlayer player) {
         InventoryPlayer playerInv = player.inventory;
         int playerSlot = playerInv.currentItem;
         ItemStack playerStack = playerInv.getCurrentItem();
         if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
-            return;
+            return false;
         
         ItemStack tableStack = getStackInSlot(0);
         if(tableStack != null) {
+            //Remove item from table
             if(playerInv.addItemStackToInventory(tableStack)) {
                 setInventorySlotContents(0, null);
-            }
+                return true;
+            } else
+                return false;
         } else {
+            //Put item in table
             if(isItemValidForSlot(0, playerStack)) {
                 ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
                 setInventorySlotContents(0, playerSplitStack);
-            }
+                return playerSplitStack != null;
+            } else
+                return false;
         }
     }
     
