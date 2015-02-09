@@ -13,7 +13,7 @@ import net.minecraftforge.common.util.Constants;
 
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
     protected ItemStack[] inv;
-    protected int size;
+    protected final int size;
     
     public TileInventoryBase(int size) {
         inv = new ItemStack[size];
@@ -114,7 +114,7 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         
-        inv = new ItemStack[size];
+        clear();
         NBTTagList invList = tag.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < invList.tagCount(); i++) {
             NBTTagCompound stackTag = invList.getCompoundTagAt(i);
@@ -133,5 +133,9 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
                 worldObj.spawnEntityInWorld(entity);
             }
         }
+    }
+    
+    public void clear() {
+        inv = new ItemStack[size];
     }
 }
