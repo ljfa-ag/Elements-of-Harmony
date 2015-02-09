@@ -114,6 +114,7 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         
+        inv = new ItemStack[size];
         NBTTagList invList = tag.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < invList.tagCount(); i++) {
             NBTTagCompound stackTag = invList.getCompoundTagAt(i);
