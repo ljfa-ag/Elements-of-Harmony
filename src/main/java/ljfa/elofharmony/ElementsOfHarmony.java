@@ -5,6 +5,7 @@ import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.handlers.PoisonJokeHandler;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.network.PacketUpdateTile;
 import ljfa.elofharmony.proxy.CommonProxy;
 import ljfa.elofharmony.worldgen.DecorationPoisonJoke;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +17,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION,
     guiFactory = Reference.GUI_FACTORY_CLASS)
@@ -34,6 +36,7 @@ public class ElementsOfHarmony {
         ModBlocks.init();
         ModItems.init();
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
+        network.registerMessage(PacketUpdateTile.Handler.class, PacketUpdateTile.class, 0, Side.CLIENT);
         proxy.preInit(event);
     }
     
