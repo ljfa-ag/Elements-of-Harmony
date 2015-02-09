@@ -14,9 +14,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION,
-guiFactory = Reference.GUI_FACTORY_CLASS)
+    guiFactory = Reference.GUI_FACTORY_CLASS)
 public class ElementsOfHarmony {
     @Mod.Instance(Reference.MODID)
     public static ElementsOfHarmony instance;
@@ -24,11 +26,14 @@ public class ElementsOfHarmony {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
     
+    public static SimpleNetworkWrapper network;
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Config.loadConfig(event.getSuggestedConfigurationFile());
         ModBlocks.init();
         ModItems.init();
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
         proxy.preInit(event);
     }
     
