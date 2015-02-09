@@ -1,5 +1,6 @@
 package ljfa.elofharmony.network;
 
+import ljfa.elofharmony.util.LogHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,6 +47,8 @@ public class PacketUpdateTile implements IMessage {
                 TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(message.x, message.y, message.z);
                 if(tile != null)
                     tile.readFromNBT(message.tag);
+                LogHelper.trace("Packet recieved, updated %s at (%d, %d, %d)", tile, message.x, message.y, message.z);
+                LogHelper.trace("Tag: %s", message.tag);
             }
             return null;
         }
