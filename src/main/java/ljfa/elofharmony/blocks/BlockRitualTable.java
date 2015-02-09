@@ -39,30 +39,10 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,
             int side, float par7, float par8, float par9) {
-        InventoryPlayer playerInv = player.inventory;
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable) {
-            int playerSlot = playerInv.currentItem;
-            ItemStack playerStack = playerInv.getCurrentItem();
-            if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
-                return false;
-            
-            TileRitualTable te = (TileRitualTable)tile;
-            ItemStack tableStack = te.getStackInSlot(0);
-            if(tableStack != null) {
-                if(playerInv.addItemStackToInventory(tableStack)) {
-                    te.setInventorySlotContents(0, null);
-                    return true;
-                } else
-                    return false;
-            } else {
-                if(te.isItemValidForSlot(0, playerStack)) {
-                    ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
-                    te.setInventorySlotContents(0, playerSplitStack);
-                    return playerSplitStack != null;
-                } else
-                    return false;
-            }
+            ((TileRitualTable)tile).onPlayerInteract(player);
+            return true;
         } else {
             LogHelper.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
             return false;

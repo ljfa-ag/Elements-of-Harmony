@@ -6,8 +6,10 @@ import java.util.UUID;
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.handlers.ChallengeHandler;
+import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
@@ -45,6 +47,26 @@ public class TileRitualTable extends TileInventoryBase {
             || item == Items.diamond
             || item == Items.nether_star
             || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id);
+    }
+    
+    public void onPlayerInteract(EntityPlayer player) {
+        InventoryPlayer playerInv = player.inventory;
+        int playerSlot = playerInv.currentItem;
+        ItemStack playerStack = playerInv.getCurrentItem();
+        if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
+            return;
+        
+        ItemStack tableStack = this.getStackInSlot(0);
+        if(tableStack != null) {
+            if(playerInv.addItemStackToInventory(tableStack)) {
+                this.setInventorySlotContents(0, null);
+            }
+        } else {
+            if(this.isItemValidForSlot(0, playerStack)) {
+                ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
+                this.setInventorySlotContents(0, playerSplitStack);
+            }
+        }
     }
     
     public boolean startChallenge(EntityPlayer player) {
