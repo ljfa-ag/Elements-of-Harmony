@@ -1,12 +1,15 @@
 package ljfa.elofharmony.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
 
 public class PacketUpdateTile implements IMessage {
     private int x, y, z;
@@ -39,7 +42,11 @@ public class PacketUpdateTile implements IMessage {
     public static class Handler implements IMessageHandler<PacketUpdateTile, IMessage> {
         @Override
         public IMessage onMessage(PacketUpdateTile message, MessageContext ctx) {
-            
+            if(ctx.side == Side.CLIENT) {
+                TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(message.x, message.y, message.z);
+                if(tile != null)
+                    tile.readFromNBT(message.tag);
+            }
             return null;
         }
     }
