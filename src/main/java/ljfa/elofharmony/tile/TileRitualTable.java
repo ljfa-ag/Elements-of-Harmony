@@ -56,15 +56,15 @@ public class TileRitualTable extends TileInventoryBase {
         if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
             return;
         
-        ItemStack tableStack = this.getStackInSlot(0);
+        ItemStack tableStack = getStackInSlot(0);
         if(tableStack != null) {
             if(playerInv.addItemStackToInventory(tableStack)) {
-                this.setInventorySlotContents(0, null);
+                setInventorySlotContents(0, null);
             }
         } else {
-            if(this.isItemValidForSlot(0, playerStack)) {
+            if(isItemValidForSlot(0, playerStack)) {
                 ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
-                this.setInventorySlotContents(0, playerSplitStack);
+                setInventorySlotContents(0, playerSplitStack);
             }
         }
     }
