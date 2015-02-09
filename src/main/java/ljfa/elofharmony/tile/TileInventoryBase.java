@@ -91,10 +91,7 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     @Override
     public abstract boolean isItemValidForSlot(int slot, ItemStack stack);
     
-    @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
-        
+    public void writeCustomNBT(NBTTagCompound tag) {
         NBTTagList invList = new NBTTagList();
         for(int i = 0; i < inv.length; i++) {
             if(inv[i] != null) { 
@@ -108,10 +105,7 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
         tag.setTag("Inventory", invList);
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        
+    public void readCustomNBT(NBTTagCompound tag) {
         clear();
         NBTTagList invList = tag.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < invList.tagCount(); i++) {
@@ -121,6 +115,18 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
             if(slot >= 0 && slot < inv.length)
                 inv[slot] = ItemStack.loadItemStackFromNBT(stackTag);
         }
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        writeCustomNBT(tag);
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        readCustomNBT(tag);
     }
     
     public void spillItems() {

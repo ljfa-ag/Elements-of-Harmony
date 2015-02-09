@@ -104,8 +104,8 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
+    public void writeCustomNBT(NBTTagCompound tag) {
+        super.writeCustomNBT(tag);
         if(challengerUUID != null) {
             tag.setLong("challengerMost", challengerUUID.getMostSignificantBits());
             tag.setLong("challengerLeast", challengerUUID.getLeastSignificantBits());
@@ -113,8 +113,8 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
+    public void readCustomNBT(NBTTagCompound tag) {
+        super.readCustomNBT(tag);
         if(tag.hasKey("challengerMost")) {
             challengerUUID = new UUID(tag.getLong("challengerMost"), tag.getLong("challengerLeast"));
         }
@@ -123,13 +123,13 @@ public class TileRitualTable extends TileInventoryBase {
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();
-        writeToNBT(tag);
+        writeCustomNBT(tag);
         return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
     }
     
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        readCustomNBT(packet.func_148857_g());
     }
     
     private boolean isPotionOfType(Item item, int damage, int potionID) {
