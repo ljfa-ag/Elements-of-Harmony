@@ -28,14 +28,14 @@ public class PacketUpdateTile implements IMessage {
     
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(x).writeInt(y).writeInt(z);
+        buf.writeInt(x).writeShort(y).writeInt(z);
         ByteBufUtils.writeTag(buf, tag);
     }
     
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
-        y = buf.readInt();
+        y = buf.readShort();
         z = buf.readInt();
         tag = ByteBufUtils.readTag(buf);
     }
