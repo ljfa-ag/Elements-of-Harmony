@@ -1,7 +1,9 @@
 package ljfa.elofharmony.handlers;
 
+import ljfa.elofharmony.ElementsOfHarmony;
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeRegistry;
+import ljfa.elofharmony.network.PacketUpdateTile;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.LogHelper;
@@ -69,6 +71,7 @@ public class ChallengeHandler {
             TileRitualTable tile = (TileRitualTable)te;
             tile.endChallenge();
             tile.setInventorySlotContents(0, ch.getResult());
+            ElementsOfHarmony.network.sendToDimension(new PacketUpdateTile(tile), dim);
         } else {
             LogHelper.error("Wrong or missing tile entity at dim %d (%d,%d,%d)", dim, x, y, z);
         }

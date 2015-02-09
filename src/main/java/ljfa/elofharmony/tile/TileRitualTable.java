@@ -3,11 +3,13 @@ package ljfa.elofharmony.tile;
 import java.util.List;
 import java.util.UUID;
 
+import ljfa.elofharmony.ElementsOfHarmony;
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeRegistry;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.network.PacketUpdateTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -88,6 +90,7 @@ public class TileRitualTable extends TileInventoryBase {
             
             if(ChallengeHandler.startChallenge(player, challenge, this)) {
                 setInventorySlotContents(0, null);
+                ElementsOfHarmony.network.sendToDimension(new PacketUpdateTile(this), worldObj.provider.dimensionId);
                 challengerUUID = player.getUniqueID();
                 return true;
             } else
