@@ -1,7 +1,6 @@
 package ljfa.elofharmony.tile;
 
 import java.util.List;
-import java.util.UUID;
 
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeGenerosity;
@@ -24,6 +23,7 @@ import net.minecraft.potion.PotionEffect;
 
 public class TileRitualTable extends TileInventoryBase {
     private boolean hasChallenge = false;
+    private Challenge challenge = null;
     
     public TileRitualTable() {
         super(1);
@@ -85,7 +85,7 @@ public class TileRitualTable extends TileInventoryBase {
         return hasChallenge;
     }
     
-    public boolean startChallenge(EntityPlayer player) {
+    public boolean startChallenge(EntityPlayerMP player) {
         ChallengeHandler handler = ChallengeHandler.getInstance();
         if(!handler.hasChallengeRunning(player)) {
             if(inv[0] == null)
@@ -93,13 +93,14 @@ public class TileRitualTable extends TileInventoryBase {
             Item item = inv[0].getItem();
             Challenge challenge;
             if(item == Items.diamond)
-                challenge = new ChallengeGenerosity((EntityPlayerMP)player, this);
+                challenge = new ChallengeGenerosity(player, this);
             else
                 return false;
             
             if(handler.tryStartChallenge(challenge)) {
                 setInventorySlotContents(0, null);
                 this.hasChallenge = true;
+                this.challenge = challenge;
                 return true;
             } else
                 return false;
@@ -109,6 +110,7 @@ public class TileRitualTable extends TileInventoryBase {
     
     public void endChallenge() {
         hasChallenge = false;
+        challenge = null;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     

@@ -2,11 +2,10 @@ package ljfa.elofharmony.items;
 
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
-import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -23,7 +22,7 @@ public class ItemTwilicane extends Item {
             return true;
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable)
-            return ((TileRitualTable)tile).startChallenge(player);
+            return ((TileRitualTable)tile).startChallenge((EntityPlayerMP)player);
         else
             return false;
     }
