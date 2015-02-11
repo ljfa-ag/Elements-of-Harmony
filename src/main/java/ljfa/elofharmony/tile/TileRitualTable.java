@@ -7,6 +7,7 @@ import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -85,6 +86,10 @@ public class TileRitualTable extends TileInventoryBase {
         return hasChallenge;
     }
     
+    public Challenge getChallenge() {
+        return challenge;
+    }
+    
     public boolean startChallenge(EntityPlayerMP player) {
         ChallengeHandler handler = ChallengeHandler.getInstance();
         if(!handler.hasChallengeRunning(player)) {
@@ -112,6 +117,15 @@ public class TileRitualTable extends TileInventoryBase {
         hasChallenge = false;
         challenge = null;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+    
+    @Override
+    public void spillItems() {
+        if(challenge != null) {
+            ChatHelper.toPlayer(challenge.getPlayer(), "The challenge has been aborted as the table was broken!");
+            ChallengeHandler.getInstance().abortChallenge(challenge);
+        }
+        super.spillItems();
     }
     
     @Override

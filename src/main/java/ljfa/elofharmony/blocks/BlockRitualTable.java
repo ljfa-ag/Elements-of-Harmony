@@ -1,5 +1,6 @@
 package ljfa.elofharmony.blocks;
 
+import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.block.Block;
@@ -28,9 +29,11 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if(tile instanceof TileRitualTable) {
-            TileRitualTable te = (TileRitualTable)tile;
-            te.spillItems();
+        if(!world.isRemote) {
+            if(tile instanceof TileRitualTable) {
+                TileRitualTable te = (TileRitualTable)tile;
+                te.spillItems();
+            }
         }
         world.removeTileEntity(x, y, z);
         super.breakBlock(world, x, y, z, block, meta);
