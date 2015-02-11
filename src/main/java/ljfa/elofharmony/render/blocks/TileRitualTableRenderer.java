@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -86,11 +87,12 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         
         tess.draw();
         
-        
         if(tile.getStackInSlot(0) != null) {
+            World world = tile.getWorldObj();
             GL11.glTranslated(0.5, 0.65, 0.5);
-            EntityItem shownItem = new EntityItem(tile.getWorldObj());
+            EntityItem shownItem = new EntityItem(world);
             shownItem.setEntityItemStack(tile.getStackInSlot(0));
+            //shownItem.hoverStart = (System.currentTimeMillis() % 8192) * (2.0f*(float)Math.PI/8192.0f);
             shownItem.hoverStart = 0.0f;
             renderItem.doRender(shownItem, 0, 0, 0, 0, 0);
         }
