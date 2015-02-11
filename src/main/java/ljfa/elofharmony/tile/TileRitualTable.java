@@ -5,6 +5,7 @@ import java.util.List;
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
+import ljfa.elofharmony.items.ItemResource;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.util.ChatHelper;
@@ -47,13 +48,14 @@ public class TileRitualTable extends TileInventoryBase {
         else if(hasChallenge)
             return false;
         Item item = stack.getItem();
+        int meta = stack.getItemDamage();
         return item == ModItems.elementOfHarmony
             || item == Items.apple
-            || item == Items.feather
+            || item == ModItems.resource && meta == ItemResource.ResourceType.YELLOW_FEATHER.ordinal()
             || item == Items.cake
             || item == Items.diamond
             || item == Items.nether_star
-            || isPotionOfType(item, stack.getItemDamage(), Potion.moveSpeed.id);
+            || isPotionOfType(item, meta, Potion.moveSpeed.id);
     }
     
     public boolean onPlayerInteract(EntityPlayer player) {
