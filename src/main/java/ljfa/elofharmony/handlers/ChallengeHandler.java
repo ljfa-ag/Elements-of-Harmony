@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
@@ -48,6 +49,11 @@ public class ChallengeHandler {
         }
     }
     
+    @SubscribeEvent
+    public void onPlayerLogout(PlayerLoggedOutEvent event) {
+        tryAbortChallenge(event.player);
+    }
+    
     public Challenge getChallenge(EntityPlayer player) {
         return challenges.get(player);
     }
@@ -72,12 +78,18 @@ public class ChallengeHandler {
         ch.onStart();
     }
     
-    public void abortChallenge(Challenge ch) {
-        if(hasChallengeRunning(ch.getPlayer())) {
-            ch.onAbort();
-            ch.getTable().endChallenge();
-            challenges.remove(ch.getPlayer());
+    public void tryAbortChallenge(EntityPlayer player) {
+        if(hasChallengeRunning(player)) {
+            Challenge ch = challenges.get(player);
+            abortChallenge(ch);
+            ChatHelper.toPlayer(player, "You aborted the challenge!");
         }
+    }
+    
+    public void abortChallenge(Challenge ch) {
+        ch.onAbort();
+        ch.getTable().endChallenge();
+        challenges.remove(ch.getPlayer());
     }
     
     private void endChallenge(Challenge ch) {
