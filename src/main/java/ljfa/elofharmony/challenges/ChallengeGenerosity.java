@@ -5,34 +5,34 @@ import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LjfaMathHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
-    protected ChallengeGenerosity(int id) {
-        super(id);
+    public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
+        super(player, tile);
     }
     
     @Override
-    public boolean checkStartingCondition(EntityPlayer player, TileRitualTable tile) {
+    public boolean checkStartingCondition(EntityPlayerMP player, TileRitualTable tile) {
         return true;
     }
 
     @Override
-    public boolean checkRestriction(EntityPlayer player, NBTTagCompound data) {
+    public boolean checkRestriction() {
         return !player.isDead;
     }
     
     @Override
-    public boolean checkCondition(EntityPlayer player, NBTTagCompound data) {
-        return player.worldObj.provider.dimensionId == data.getInteger("tableDim")
-            && LjfaMathHelper.dist2sq(player,
-                data.getInteger("tableX"), data.getInteger("tableY"), data.getInteger("tableZ")) <= 25.0;
+    public boolean checkCondition() {
+        return player.worldObj == table.getWorldObj()
+            && LjfaMathHelper.dist2sq(player, table.xCoord+0.5, table.yCoord+0.5, table.zCoord+0.5) <= 25.0;
     }
     
     @Override
-    public void onStart(EntityPlayer player, NBTTagCompound data, TileRitualTable tile) {
+    public void onStart() {
         World world = player.getEntityWorld();
         //double mean = 300.0, sigma = 20.0;
         double mean = 30.0, sigma = 2.0;
@@ -49,7 +49,7 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public ItemStack getResult() {
-        return new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
+    public void onComplete() {
+        table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
     }
 }
