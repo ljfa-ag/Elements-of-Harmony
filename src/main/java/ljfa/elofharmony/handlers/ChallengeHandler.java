@@ -26,13 +26,13 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event) {
         World world = event.player.worldObj;
-        if(event.phase != Phase.END || world.isRemote)
+        if(world.isRemote || event.phase != Phase.END)
             return;
         EntityPlayerMP player = (EntityPlayerMP)event.player;
 
         if(hasChallengeRunning(player)) {
             Challenge ch = challenges.get(player);
-            
+
             ch.onTick();
             if(!ch.checkRestriction()) {
                 abortChallenge(ch);
@@ -77,7 +77,6 @@ public class ChallengeHandler {
             ch.onAbort();
             ch.getTable().endChallenge();
             challenges.remove(ch.getPlayer());
-            ChatHelper.toPlayer(ch.getPlayer(), "You aborted the challenge!");
         }
     }
     

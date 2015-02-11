@@ -32,8 +32,10 @@ public class ItemTwilicane extends Item {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if(!world.isRemote && player.isSneaking()) {
             ChallengeHandler handler = ChallengeHandler.getInstance();
-            if(handler.hasChallengeRunning(player))
+            if(handler.hasChallengeRunning(player)) {
                 handler.abortChallenge(handler.getChallenge(player));
+                ChatHelper.toPlayer(player, "You aborted the challenge!");
+            }
         }
         return super.onItemRightClick(stack, world, player);
     }
