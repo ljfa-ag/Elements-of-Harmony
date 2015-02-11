@@ -30,18 +30,19 @@ public class DecorationPoisonJoke {
             return;
         LogHelper.debug("Attempting to generate Poison Joke at (%d, %d)", xGen, zGen);
         
-        double xSize = LjfaMathHelper.triangularDouble(rand, 2.0, 6.0);
-        double zSize = LjfaMathHelper.triangularDouble(rand, 2.0, 6.0);
+        double xSize = LjfaMathHelper.triangularDouble(rand, 2.0, 5.0);
+        double zSize = LjfaMathHelper.triangularDouble(rand, 2.0, 5.0);
         
         int yGen = event.world.getTopSolidOrLiquidBlock(xGen, zGen);
         
         // Bounding box of the patch
-        int minX = (int)Math.floor(xGen - xSize);
-        int maxX = (int)Math.ceil(xGen + xSize);
+        // Add one to account for the random distortion
+        int minX = (int)Math.floor(xGen - xSize) - 1;
+        int maxX = (int)Math.ceil(xGen + xSize) + 1;
         int minY = yGen - 2;
         int maxY = yGen + 2;
-        int minZ = (int)Math.floor(zGen - zSize);
-        int maxZ = (int)Math.ceil(zGen + zSize);
+        int minZ = (int)Math.floor(zGen - zSize) - 1;
+        int maxZ = (int)Math.ceil(zGen + zSize) + 1;
         
         for(int x = minX; x <= maxX; x++)
             for(int z = minZ; z <= maxZ; z++) {
