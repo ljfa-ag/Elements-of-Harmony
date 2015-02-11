@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
     public BlockRitualTable() {
         super("ritual_table", Material.wood);
+        setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.75f, 1.0f);
         setHardness(2.0f);
         setResistance(20.0f);
         setStepSound(soundTypeWood);
