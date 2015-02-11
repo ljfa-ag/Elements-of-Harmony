@@ -49,6 +49,9 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         tess.startDrawingQuads();
         GL11.glDisable(GL11.GL_LIGHTING);
         
+        if(tile.hasChallenge())
+            tess.setColorOpaque(255, 200, 200);
+        
         //Y-
         tess.addVertexWithUV(0, 0, 0, minU, minV);
         tess.addVertexWithUV(1, 0, 0, maxU, minV);

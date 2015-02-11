@@ -109,6 +109,7 @@ public class TileRitualTable extends TileInventoryBase {
     
     public void endChallenge() {
         hasChallenge = false;
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
     @Override
