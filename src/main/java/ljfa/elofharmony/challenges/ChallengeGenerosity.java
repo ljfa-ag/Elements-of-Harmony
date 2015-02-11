@@ -16,7 +16,7 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public boolean checkStartingCondition(EntityPlayerMP player, TileRitualTable tile) {
+    public boolean checkStartingCondition() {
         return true;
     }
 
@@ -49,7 +49,14 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
+    public void onTick() { }
+    
+    @Override
+    public void onAbort() { }
+    
+    @Override
     public void onComplete() {
         table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
     }
+    
 }

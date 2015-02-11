@@ -24,23 +24,17 @@ public class ItemTwilicane extends Item {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable)
             return ((TileRitualTable)tile).startChallenge(player);
-        else {
-            abortChallenge(player);
-            return true;
-        }
+        else
+            return false;
     }
     
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        abortChallenge(player);
-        return super.onItemRightClick(stack, world, player);
-    }
-    
-    private void abortChallenge(EntityPlayer player) {
-        if(ChallengeHandler.hasChallengeRunning(player)) {
-            NBTTagCompound data = ChallengeHandler.getChallengeData(player);
-            ChallengeHandler.abortChallenge(ChallengeHandler.getCurrentChallenge(player, data), player, data);
-            ChatHelper.toPlayer(player, "You aborted the challenge!");
+        if(!world.isRemote && player.isSneaking()) {
+            ChallengeHandler handler = ChallengeHandler.getInstance();
+            if(handler.hasChallengeRunning(player))
+                handler.abortChallenge(handler.getChallenge(player));
         }
+        return super.onItemRightClick(stack, world, player);
     }
 }

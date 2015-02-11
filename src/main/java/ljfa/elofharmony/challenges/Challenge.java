@@ -16,7 +16,7 @@ public abstract class Challenge {
     }
     
     /** @return if the challenge is ready to be started on the player */
-    public abstract boolean checkStartingCondition(EntityPlayerMP player, TileRitualTable tile);
+    public abstract boolean checkStartingCondition();
     
     /** @return true if the challenge's restriction is met */
     public abstract boolean checkRestriction();
@@ -25,17 +25,22 @@ public abstract class Challenge {
     public abstract boolean checkCondition();
     
     /** Called when a challenge is about to start for the player. */
-    public void onStart() {}
+    public abstract void onStart();
     
     /** Called each tick during the challenge */
-    public void onTick() {}
-    
-    ///** Called when the player dies during the challenge */
-    //public void onPlayerDeath(EntityPlayer player, NBTTagCompound data) {}
+    public abstract void onTick();
     
     /** Called when the challenge should be aborted */
-    public void onAbort() {}
+    public abstract void onAbort();
     
     /** Called when the challenge is completed */
-    public void onComplete() {}
+    public abstract void onComplete();
+    
+    public EntityPlayerMP getPlayer() {
+        return player;
+    }
+
+    public TileRitualTable getTable() {
+        return table;
+    }
 }

@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.UUID;
 
 import ljfa.elofharmony.challenges.Challenge;
-import ljfa.elofharmony.challenges.ChallengeRegistry;
+import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -79,17 +80,18 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     public boolean startChallenge(EntityPlayer player) {
-        if(!ChallengeHandler.hasChallengeRunning(player)) {
+        ChallengeHandler handler = ChallengeHandler.getInstance();
+        if(!handler.hasChallengeRunning(player)) {
             if(inv[0] == null)
                 return false;
             Item item = inv[0].getItem();
             Challenge challenge;
             if(item == Items.diamond)
-                challenge = ChallengeRegistry.generosity;
+                challenge = new ChallengeGenerosity((EntityPlayerMP)player, this);
             else
                 return false;
             
-            if(ChallengeHandler.startChallenge(player, challenge, this)) {
+            if(handler.tryStartChallenge(challenge)) {
                 setInventorySlotContents(0, null);
                 challengerUUID = player.getUniqueID();
                 return true;
