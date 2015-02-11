@@ -23,7 +23,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class TileRitualTable extends TileInventoryBase {
-    public UUID challengerUUID = null;
+    private boolean hasChallenge = false;
     
     public TileRitualTable() {
         super(1);
@@ -43,6 +43,8 @@ public class TileRitualTable extends TileInventoryBase {
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         if(stack == null)
             return true;
+        else if(hasChallenge)
+            return false;
         Item item = stack.getItem();
         return item == ModItems.elementOfHarmony
             || item == Items.apple
@@ -79,6 +81,10 @@ public class TileRitualTable extends TileInventoryBase {
         }
     }
     
+    public boolean hasChallenge() {
+        return hasChallenge;
+    }
+    
     public boolean startChallenge(EntityPlayer player) {
         ChallengeHandler handler = ChallengeHandler.getInstance();
         if(!handler.hasChallengeRunning(player)) {
@@ -93,7 +99,7 @@ public class TileRitualTable extends TileInventoryBase {
             
             if(handler.tryStartChallenge(challenge)) {
                 setInventorySlotContents(0, null);
-                challengerUUID = player.getUniqueID();
+                this.hasChallenge = true;
                 return true;
             } else
                 return false;
@@ -102,24 +108,19 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     public void endChallenge() {
-        challengerUUID = null;
+        hasChallenge = false;
     }
     
     @Override
     public void writeCustomNBT(NBTTagCompound tag) {
         super.writeCustomNBT(tag);
-        if(challengerUUID != null) {
-            tag.setLong("challengerMost", challengerUUID.getMostSignificantBits());
-            tag.setLong("challengerLeast", challengerUUID.getLeastSignificantBits());
-        }
+        tag.setBoolean("hasChallenge", hasChallenge);
     }
     
     @Override
     public void readCustomNBT(NBTTagCompound tag) {
         super.readCustomNBT(tag);
-        if(tag.hasKey("challengerMost")) {
-            challengerUUID = new UUID(tag.getLong("challengerMost"), tag.getLong("challengerLeast"));
-        }
+        hasChallenge = tag.getBoolean("hasChallenge");
     }
     
     @Override
