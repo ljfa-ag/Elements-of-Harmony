@@ -1,16 +1,15 @@
 package ljfa.elofharmony.blocks;
 
-import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
     public BlockRitualTable() {
@@ -48,7 +47,7 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
         }
     }
     
-    /*public boolean isOpaqueCube() {
+    public boolean isOpaqueCube() {
         return false;
     }
     
@@ -61,6 +60,6 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     @Override
     public int getRenderType() {
-        return 0;
-    }*/
+        return -1;
+    }
 }
