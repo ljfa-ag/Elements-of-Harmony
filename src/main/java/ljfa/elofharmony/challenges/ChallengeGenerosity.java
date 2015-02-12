@@ -45,8 +45,9 @@ public class ChallengeGenerosity extends Challenge {
         int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
         
         float yaw = 360.0f * world.rand.nextFloat();
-        
+
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
+        world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
         //player.worldObj.setWorldTime(18000);
     }
     
