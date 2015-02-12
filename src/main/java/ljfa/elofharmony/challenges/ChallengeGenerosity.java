@@ -44,7 +44,9 @@ public class ChallengeGenerosity extends Challenge {
         int tpz = (int)(player.posZ + dist * Math.sin(angle));
         int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
         
-        player.setPositionAndUpdate(tpx + 0.5, tpy, tpz + 0.5);
+        float yaw = 360.0f * world.rand.nextFloat();
+        
+        player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         //player.worldObj.setWorldTime(18000);
     }
     
