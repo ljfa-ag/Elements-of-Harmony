@@ -64,10 +64,9 @@ public class PoisonJokeHandler {
     private static boolean isSquid(Entity entity) {
         if(entity instanceof EntitySquid)
             return true;
-        else if(entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer)entity;
-            return player.getCommandSenderName().equals("TheCrazyBoy321");
-        } else
+        else if(entity instanceof EntityPlayer)
+            return ((EntityPlayer)entity).getCommandSenderName().toLowerCase().contains("squid");
+        else
             return false;
     }
     
