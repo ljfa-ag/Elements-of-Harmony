@@ -34,28 +34,28 @@ public class Config {
     }
     
     public static void loadValues() {
-        pjPlayersOnly = conf.get(CAT_POISONJOKE, "onlyAffectPlayers", true, "Only players get effects from Poison Joke").getBoolean();
-        pjPotionIDs = conf.get(CAT_POISONJOKE, "potionIDs",
+        pjPlayersOnly = conf.get(CAT_POISONJOKE, "Only affect players", true, "Only players get effects from Poison Joke").getBoolean();
+        pjPotionIDs = conf.get(CAT_POISONJOKE, "Applicable potion effects",
                 new int[] {Potion.moveSlowdown.id, Potion.digSlowdown.id, Potion.confusion.id,
                 Potion.blindness.id, Potion.hunger.id, Potion.weakness.id, Potion.poison.id, Potion.wither.id},
                 "List of potion effects that can be applied\n" +
                 "Default: Slowness, Mining Fatigue, Nausea, Blindness, Hunger, Weakness, Poison, Wither", 0, 32).getIntList();
-        pjAvgDurations = conf.get(CAT_POISONJOKE, "meanDurations",
+        pjAvgDurations = conf.get(CAT_POISONJOKE, "Mean effect durations",
                 new int[] {360, 400, 240, 200, 320, 400, 160, 180},
                 "Average durations in ticks of the effect\n" +
-                "These entries correspond to the potion IDs specified in the I:potionIDs option.", 0, Integer.MAX_VALUE).getIntList();
-        pjMaxLevels = conf.get(CAT_POISONJOKE, "maxLevels",
+                "These entries correspond to the potion IDs specified above.", 0, Integer.MAX_VALUE).getIntList();
+        pjMaxLevels = conf.get(CAT_POISONJOKE, "Maximum effect levels",
                 new int[] {2, 3, 2, 1, 2, 2, 1, 1},
                 "Maximum level of the effects\n" +
-                "These entries correspond to the potion IDs specified in the I:potionIDs option.", 1, 5).getIntList();
+                "These entries correspond to the potion IDs specified above.", 1, 5).getIntList();
         pjNumEffects = pjPotionIDs.length;
         if(pjAvgDurations.length != pjNumEffects || pjMaxLevels.length != pjNumEffects) {
             LogHelper.error("The length of the lists for potion IDs, durations and levels should be the same");
             pjNumEffects = Math.min(pjNumEffects, Math.min(pjAvgDurations.length, pjMaxLevels.length));
         }
         
-        pjIncubationTime = conf.get(CAT_POISONJOKE, "incubationTime", 100, "Time in ticks between touching the plant and application of the effect").getInt();
-        pjSpawnChance = conf.get(CAT_POISONJOKE, "spawnChance", 16, "Chance out of 256 that a chunk will generate Poison Joke", 0, 256).getInt();
+        pjIncubationTime = conf.get(CAT_POISONJOKE, "Incubation time", 100, "Time in ticks between touching the plant and application of the effect").getInt();
+        pjSpawnChance = conf.get(CAT_POISONJOKE, "Spawn chance", 16, "Chance out of 256 that a chunk will generate Poison Joke", 0, 256).getInt();
    
         if(conf.hasChanged())
             conf.save();
