@@ -2,6 +2,7 @@ package ljfa.elofharmony;
 
 import java.io.File;
 
+import ljfa.elofharmony.exception.InvalidConfigValueException;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.config.Configuration;
@@ -50,8 +51,9 @@ public class Config {
                 "These entries correspond to the potion IDs specified above.", 1, 5).getIntList();
         pjNumEffects = pjPotionIDs.length;
         if(pjAvgDurations.length != pjNumEffects || pjMaxLevels.length != pjNumEffects) {
-            LogHelper.error("The length of the lists for potion IDs, durations and levels should be the same");
+            //The exception can be caught, as is the case when using config GUIs
             pjNumEffects = Math.min(pjNumEffects, Math.min(pjAvgDurations.length, pjMaxLevels.length));
+            throw new InvalidConfigValueException("The length of the lists for potion IDs, durations and levels must be the same");
         }
         
         pjIncubationTime = conf.get(CAT_POISONJOKE, "Incubation time", 100, "Time in ticks between touching the plant and application of the effect").getInt();
