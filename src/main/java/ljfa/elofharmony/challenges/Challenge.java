@@ -8,11 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
     protected EntityPlayerMP player;
-    protected TileRitualTable table;
     
-    public Challenge(EntityPlayerMP player, TileRitualTable tile) {
+    public Challenge(EntityPlayerMP player) {
         this.player = player;
-        this.table = tile;
     }
     
     /** @return if the challenge is ready to be started on the player */
@@ -38,9 +36,5 @@ public abstract class Challenge {
     
     public EntityPlayerMP getPlayer() {
         return player;
-    }
-
-    public TileRitualTable getTable() {
-        return table;
     }
 }

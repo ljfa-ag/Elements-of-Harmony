@@ -88,13 +88,11 @@ public class ChallengeHandler {
     
     public void abortChallenge(Challenge ch) {
         ch.onAbort();
-        ch.getTable().endChallenge();
         challenges.remove(ch.getPlayer());
     }
     
     private void endChallenge(Challenge ch) {
         ch.onComplete();
-        ch.getTable().endChallenge();
         challenges.remove(ch.getPlayer());
     }
 

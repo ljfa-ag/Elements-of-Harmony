@@ -12,7 +12,8 @@ import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
-        super(player, tile);
+        super(player);
+        this.table = tile;
     }
     
     @Override
@@ -55,11 +56,15 @@ public class ChallengeGenerosity extends Challenge {
     public void onTick() { }
     
     @Override
-    public void onAbort() { }
+    public void onAbort() {
+        table.endChallenge();
+    }
     
     @Override
     public void onComplete() {
         table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
+        table.endChallenge();
     }
     
+    private TileRitualTable table;
 }
