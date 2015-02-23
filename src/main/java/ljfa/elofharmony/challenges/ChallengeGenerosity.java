@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
@@ -47,9 +49,11 @@ public class ChallengeGenerosity extends Challenge {
         
         float yaw = 360.0f * world.rand.nextFloat();
 
+        player.worldObj.setWorldTime(14000);
+        player.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+        player.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 2));
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
-        //player.worldObj.setWorldTime(18000);
     }
     
     @Override
