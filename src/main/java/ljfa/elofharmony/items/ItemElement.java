@@ -24,9 +24,9 @@ public class ItemElement extends Item {
         GENEROSITY("generosity"),
         MAGIC("magic");
         
-        private String subname;
-        private String unlocalizedName;
-        private String textureName;
+        private final String subname;
+        private final String unlocalizedName;
+        private final String textureName;
         
         private ElementType(String subname) {
             this.subname = subname;

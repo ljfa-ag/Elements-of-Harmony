@@ -20,9 +20,9 @@ public class ChallengeHandler {
         return instance;
     }
     
-    private Map<EntityPlayerMP, Challenge> challenges = new HashMap<EntityPlayerMP, Challenge>();
+    private final Map<EntityPlayerMP, Challenge> challenges = new HashMap<EntityPlayerMP, Challenge>();
     
-    private ChallengeHandler() {}
+    private ChallengeHandler() { }
     
     @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event) {

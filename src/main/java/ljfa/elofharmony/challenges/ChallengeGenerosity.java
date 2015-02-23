@@ -70,5 +70,5 @@ public class ChallengeGenerosity extends Challenge {
         table.endChallenge();
     }
     
-    private TileRitualTable table;
+    private final TileRitualTable table;
 }

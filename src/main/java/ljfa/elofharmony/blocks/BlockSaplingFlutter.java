@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockSaplingFlutter extends BlockSapling {
     private final String name = "sapling_flutter";
     
-    private FluttertreeGenerator treeGen;
+    private final FluttertreeGenerator treeGen;
     
     @SideOnly(Side.CLIENT)
     private IIcon texture;

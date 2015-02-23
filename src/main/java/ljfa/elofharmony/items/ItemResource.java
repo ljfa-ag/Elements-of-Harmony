@@ -18,9 +18,9 @@ public class ItemResource extends Item {
     public enum ResourceType {
         YELLOW_FEATHER("yellow_feather");
         
-        private String name;
-        private String unlocalizedName;
-        private String textureName;
+        private final String name;
+        private final String unlocalizedName;
+        private final String textureName;
         
         private ResourceType(String name) {
             this.name = name;

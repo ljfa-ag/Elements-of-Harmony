@@ -19,8 +19,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
-    private Tessellator tess;
-    private RenderItem renderItem;
+    private final Tessellator tess;
+    private final RenderItem renderItem;
     private double minU, maxU, minV, maxV;
     
     public TileRitualTableRenderer() {
