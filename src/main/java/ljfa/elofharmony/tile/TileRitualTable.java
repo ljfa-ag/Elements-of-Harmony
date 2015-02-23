@@ -92,7 +92,7 @@ public class TileRitualTable extends TileInventoryBase {
         return challenge;
     }
     
-    public boolean startChallenge(EntityPlayerMP player) {
+    public boolean tryStartChallenge(EntityPlayerMP player) {
         ChallengeHandler handler = ChallengeHandler.getInstance();
         if(!handler.hasChallengeRunning(player)) {
             if(inv[0] == null)
