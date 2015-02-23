@@ -35,5 +35,7 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.ritual_table, "OYP", "###", "LWV",
                 'O', "dyeOrange", 'Y', "dyeYellow", 'P', "dyePink", 'L', "dyeLightBlue",
                 'W', "dyeWhite", 'V', "dyePurple", '#', ModBlocks.planks_flutter).setMirrored(false));
+        GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.twilicane, " gG", " gg", "g  ",
+                'g', "nuggetGold", 'G', "ingotGold"));
     }
 }
