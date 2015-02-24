@@ -3,15 +3,22 @@ package ljfa.elofharmony.inventory;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
+/** Default implementation of an inventory restriction which checks every slot */
 public class PlayerInvRestriction {
+    /** @param slotRestr the slot restriction */
     public PlayerInvRestriction(SlotRestriction slotRestr) {
         this.slotRestr = slotRestr;
     }
     
+    /** @return the slot restriction */
     public SlotRestriction getSlotRestr() {
         return slotRestr;
     }
 
+    /** Checks if the player inventory follows the restriction.
+     * @param inv the inventory to check
+     * @return true if the restriction is being followed
+     */
     public boolean check(InventoryPlayer inv) {
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
             if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot]))
@@ -24,6 +31,10 @@ public class PlayerInvRestriction {
         return true;
     }
     
+    /** Ejects all item stacks onto the ground that do not follow the restriction.
+     * @param inv the inventory to check
+     * @return true if the restriction is being followed
+     */
     public boolean checkAndEject(InventoryPlayer inv) {
         boolean ret = true;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
@@ -43,9 +54,11 @@ public class PlayerInvRestriction {
         return ret;
     }
     
+    /** @return true if the player is allowed to pick up this item */
     public boolean mayPickUp(ItemStack stack) {
         return slotRestr.check(SlotType.NONE, 0, stack);
     }
     
+    /** the slot restriction */
     protected final SlotRestriction slotRestr;
 }
