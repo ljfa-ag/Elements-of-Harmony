@@ -104,6 +104,7 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
             renderItem.doRender(shownItem, 0, 0, 0, 0, 0);
         }
         
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 
