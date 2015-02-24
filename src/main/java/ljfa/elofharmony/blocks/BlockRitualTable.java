@@ -1,6 +1,5 @@
 package ljfa.elofharmony.blocks;
 
-import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.block.Block;

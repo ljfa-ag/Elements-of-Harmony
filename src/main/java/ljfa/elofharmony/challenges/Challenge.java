@@ -1,10 +1,6 @@
 package ljfa.elofharmony.challenges;
 
-import ljfa.elofharmony.tile.TileRitualTable;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
     protected final EntityPlayerMP player;
