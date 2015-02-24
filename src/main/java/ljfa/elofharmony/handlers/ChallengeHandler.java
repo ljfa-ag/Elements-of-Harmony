@@ -8,6 +8,7 @@ import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -24,10 +25,10 @@ public class ChallengeHandler {
     
     private ChallengeHandler() { }
     
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOW)
     public void onPlayerTick(PlayerTickEvent event) {
         World world = event.player.worldObj;
-        if(world.isRemote || event.phase != Phase.END)
+        if(world.isRemote || event.phase != Phase.START)
             return;
         EntityPlayerMP player = (EntityPlayerMP)event.player;
 
