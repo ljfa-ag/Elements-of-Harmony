@@ -65,8 +65,8 @@ public class ChallengeGenerosity extends Challenge {
         }
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
-        ChatHelper.toPlayer(player, "You have to go " + getCompassDirection(angle + Math.PI) + " in order to find back.");
-        ChatHelper.toPlayer(player, "The moon rises in the East. Use it to ortientate yourself!");
+        /*ChatHelper.toPlayer(player, "You have to go " + getCompassDirection(angle + Math.PI) + " in order to find back.");
+        ChatHelper.toPlayer(player, "The moon rises in the East. Use it to ortientate yourself!");*/
     }
     
     @Override
@@ -88,7 +88,7 @@ public class ChallengeGenerosity extends Challenge {
         table.endChallenge();
     }
     
-    private static String getCompassDirection(double angle) {
+    /*private static String getCompassDirection(double angle) {
         angle %= 2* Math.PI;
         if(angle < 0.125 * Math.PI)
             return "East";
@@ -108,9 +108,9 @@ public class ChallengeGenerosity extends Challenge {
             return "Northeast";
         else
             return "East";
-    }
+    }*/
     
-    private static final boolean DEBUG_MODE = true;
+    private static final boolean DEBUG_MODE = false;
     
     private final TileRitualTable table;
     private final PlayerInvRestriction invRestr;
