@@ -33,7 +33,7 @@ public class ChallengeGenerosity extends Challenge {
 
     @Override
     public boolean checkRestriction() {
-        return !player.isDead;
+        return !player.isDead && invRestr.check(player.inventory);
     }
     
     @Override
@@ -65,9 +65,7 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public void onTick() {
-        invRestr.checkAndEject(player.inventory);
-    }
+    public void onTick() { }
     
     @Override
     public boolean mayPickUp(ItemStack stack) {
