@@ -65,7 +65,7 @@ public class ChallengeGenerosity extends Challenge {
         }
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
-        ChatHelper.toPlayer(player, "You have to go " + getCompassDirection(2*Math.PI - angle) + " in order to find back.");
+        ChatHelper.toPlayer(player, "You have to go " + getCompassDirection(angle + Math.PI) + " in order to find back.");
         ChatHelper.toPlayer(player, "The moon rises in the East. Use it to ortientate yourself!");
     }
     
@@ -89,6 +89,7 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     private static String getCompassDirection(double angle) {
+        angle %= 2* Math.PI;
         if(angle < 0.125 * Math.PI)
             return "East";
         else if(angle < 0.375 * Math.PI)
