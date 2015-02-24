@@ -1,5 +1,8 @@
 package ljfa.elofharmony.challenges;
 
+import ljfa.elofharmony.inventory.PlayerInvRestriction;
+import ljfa.elofharmony.inventory.SlotRestriction;
+import ljfa.elofharmony.inventory.SlotType;
 import ljfa.elofharmony.items.ItemElement.ElementType;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
@@ -14,11 +17,18 @@ public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player);
         this.table = tile;
+        
+        this.invRestr = new PlayerInvRestriction(new SlotRestriction() {
+            @Override
+            public boolean check(SlotType type, int slot, ItemStack stack) {
+                return stack == null || stack.getItem() == ModItems.twilicane;
+            }
+        });
     }
     
     @Override
     public boolean checkStartingCondition() {
-        return true;
+        return invRestr.check(player.inventory);
     }
 
     @Override
@@ -55,7 +65,9 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
-    public void onTick() { }
+    public void onTick() {
+        invRestr.checkAndEject(player.inventory);
+    }
     
     @Override
     public void onAbort() {
@@ -69,4 +81,5 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     private final TileRitualTable table;
+    private final PlayerInvRestriction invRestr;
 }
