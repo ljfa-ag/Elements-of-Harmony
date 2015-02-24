@@ -14,8 +14,7 @@ public class PlayerInvRestriction {
 
     public boolean check(InventoryPlayer inv) {
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
-            SlotType type = slot < inv.getHotbarSize() ? SlotType.HOTBAR : SlotType.NORMAL;
-            if(!slotRestr.check(type, slot, inv.mainInventory[slot]))
+            if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot]))
                 return false;
         }
         for(int slot = 0; slot < inv.armorInventory.length; slot++) {
@@ -28,8 +27,7 @@ public class PlayerInvRestriction {
     public boolean checkAndEject(InventoryPlayer inv) {
         boolean ret = true;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
-            SlotType type = slot < inv.getHotbarSize() ? SlotType.HOTBAR : SlotType.NORMAL;
-            if(!slotRestr.check(type, slot, inv.mainInventory[slot])) {
+            if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot])) {
                 inv.player.entityDropItem(inv.mainInventory[slot], 0.0f);
                 inv.mainInventory[slot] = null;
                 ret = false;
