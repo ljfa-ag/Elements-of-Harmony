@@ -1,6 +1,7 @@
 package ljfa.elofharmony.challenges;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 
 public abstract class Challenge {
     protected final EntityPlayerMP player;
@@ -23,6 +24,9 @@ public abstract class Challenge {
     
     /** Called each tick during the challenge */
     public abstract void onTick();
+    
+    /** @return true if the player is allowed to pick up this stack into the inventory */
+    public abstract boolean mayPickUp(ItemStack stack);
     
     /** Called when the challenge should be aborted */
     public abstract void onAbort();

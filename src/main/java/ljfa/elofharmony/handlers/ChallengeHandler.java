@@ -5,9 +5,12 @@ import java.util.Map;
 
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.util.ChatHelper;
+import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -46,6 +49,18 @@ public class ChallengeHandler {
                     endChallenge(ch);
                     ChatHelper.toPlayer(event.player, "You completed the challenge!");
                 }
+            }
+        }
+    }
+    
+    @SubscribeEvent
+    public void onItemPickup(EntityItemPickupEvent event) {
+        LogHelper.info("Event triggered");
+        EntityPlayerMP player = (EntityPlayerMP)event.entityPlayer;
+        if(hasChallengeRunning(player)) {
+            if(!challenges.get(player).mayPickUp(event.item.getEntityItem())) {
+                event.item.delayBeforeCanPickup = 10;
+                event.setCanceled(true);
             }
         }
     }

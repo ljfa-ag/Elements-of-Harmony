@@ -70,6 +70,11 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     @Override
+    public boolean mayPickUp(ItemStack stack) {
+        return invRestr.mayPickUp(stack);
+    }
+    
+    @Override
     public void onAbort() {
         table.endChallenge();
     }

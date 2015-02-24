@@ -1,6 +1,7 @@
 package ljfa.elofharmony.inventory;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 
 public class PlayerInvRestriction {
     public PlayerInvRestriction(SlotRestriction slotRestr) {
@@ -42,6 +43,10 @@ public class PlayerInvRestriction {
             }
         }
         return ret;
+    }
+    
+    public boolean mayPickUp(ItemStack stack) {
+        return slotRestr.check(SlotType.NONE, 0, stack);
     }
     
     protected final SlotRestriction slotRestr;

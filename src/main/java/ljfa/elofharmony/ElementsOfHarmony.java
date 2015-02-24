@@ -43,6 +43,7 @@ public class ElementsOfHarmony {
         if(Config.pjSpawnChance != 0)
             MinecraftForge.TERRAIN_GEN_BUS.register(new DecorationPoisonJoke());
         FMLCommonHandler.instance().bus().register(ChallengeHandler.getInstance());
+        MinecraftForge.EVENT_BUS.register(ChallengeHandler.getInstance());
         
         ModRecipes.addOredict();
         ModRecipes.addRecipes();
