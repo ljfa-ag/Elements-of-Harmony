@@ -92,19 +92,19 @@ public class ChallengeGenerosity extends Challenge {
         if(angle < 0.125 * Math.PI)
             return "East";
         else if(angle < 0.375 * Math.PI)
-            return "Northeast";
+            return "Southeast";
         else if(angle < 0.625 * Math.PI)
-            return "North";
+            return "South";
         else if(angle < 0.875 * Math.PI)
-            return "Northwest";
+            return "Southwest";
         else if(angle < 1.125 * Math.PI)
             return "West";
         else if(angle < 1.375 * Math.PI)
-            return "Southwest";
+            return "Northwest";
         else if(angle < 1.625 * Math.PI)
-            return "South";
+            return "North";
         else if(angle < 1.875 * Math.PI)
-            return "Southeast";
+            return "Northeast";
         else
             return "East";
     }

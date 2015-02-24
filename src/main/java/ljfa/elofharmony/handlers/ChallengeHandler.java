@@ -43,8 +43,7 @@ public class ChallengeHandler {
                 abortChallenge(ch);
                 ChatHelper.toPlayer(event.player, "You failed the challenge!");
             }
-            if((world.getWorldTime() & 31) == 0) {
-                ChatHelper.toPlayer(event.player, "The challenge is running");
+            if((world.getWorldTime() & 15) == 0) {
                 if(ch.checkCondition()) {
                     endChallenge(ch);
                     ChatHelper.toPlayer(event.player, "You completed the challenge!");
