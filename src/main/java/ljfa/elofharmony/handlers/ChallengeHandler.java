@@ -54,7 +54,6 @@ public class ChallengeHandler {
     
     @SubscribeEvent
     public void onItemPickup(EntityItemPickupEvent event) {
-        LogHelper.info("Event triggered");
         EntityPlayerMP player = (EntityPlayerMP)event.entityPlayer;
         if(hasChallengeRunning(player)) {
             if(!challenges.get(player).mayPickUp(event.item.getEntityItem())) {
