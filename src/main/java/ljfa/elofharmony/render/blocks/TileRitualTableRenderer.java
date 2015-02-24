@@ -96,7 +96,7 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         
         if(tile.getStackInSlot(0) != null) {
             World world = tile.getWorldObj();
-            GL11.glTranslated(0.5, 0.65, 0.5);
+            GL11.glTranslated(0.5, 0.63, 0.5);
             EntityItem shownItem = new EntityItem(world);
             shownItem.setEntityItemStack(tile.getStackInSlot(0));
             //shownItem.hoverStart = (System.currentTimeMillis() % 8192) * (2.0f*(float)Math.PI/8192.0f);
