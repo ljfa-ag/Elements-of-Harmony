@@ -45,8 +45,8 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onStart() {
         World world = player.getEntityWorld();
-        //double mean = 300.0, sigma = 20.0;
-        double mean = 30.0, sigma = 2.0;
+        double mean = DEBUG_MODE ? 30.0 : 300.0;
+        double sigma = DEBUG_MODE ? 20.0 : 2.0;
         
         double dist = mean + sigma * LjfaMathHelper.stdTriangular(world.rand);
         double angle = 2 * Math.PI * world.rand.nextDouble();
@@ -57,9 +57,11 @@ public class ChallengeGenerosity extends Challenge {
         
         float yaw = 360.0f * world.rand.nextFloat();
 
-        player.worldObj.setWorldTime(14000);
-        player.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
-        player.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 2));
+        if(!DEBUG_MODE) {
+            player.worldObj.setWorldTime(14000);
+            player.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+            player.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 2));
+        }
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
     }
@@ -82,6 +84,8 @@ public class ChallengeGenerosity extends Challenge {
         table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
         table.endChallenge();
     }
+    
+    private static final boolean DEBUG_MODE = false;
     
     private final TileRitualTable table;
     private final PlayerInvRestriction invRestr;
