@@ -30,7 +30,13 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean checkStartingCondition() {
-        return invRestr.check(player.inventory);
+        if(invRestr.check(player.inventory)) {
+            return true;
+        } else {
+            ChatHelper.toPlayer(player, "In order to start the Generosity challenge you're not allowed "
+                + "to have any items on you besides the Twilicane");
+            return false;
+        }
     }
 
     @Override
@@ -47,8 +53,8 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onStart() {
         World world = player.getEntityWorld();
-        //double mean = 300.0, sigma = 20.0;
-        double mean = 30.0, sigma = 2.0;
+        double mean = 300.0, sigma = 20.0;
+        //double mean = 30.0, sigma = 2.0;
         
         double dist = mean + sigma * LjfaMathHelper.stdTriangular(world.rand);
         double angle = 2 * Math.PI * world.rand.nextDouble();
@@ -64,8 +70,10 @@ public class ChallengeGenerosity extends Challenge {
         player.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 2));
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
-        /*ChatHelper.toPlayer(player, "You have to go " + getCompassDirection(angle + Math.PI) + " in order to find back.");
-        ChatHelper.toPlayer(player, "The moon rises in the East. Use it to orientate yourself!");*/
+        
+        ChatHelper.toPlayer(player, "The Generosity challenge is on!");
+        ChatHelper.toPlayer(player, "You have to return to the Harmony Table without dying.");
+        ChatHelper.toPlayer(player, "You cannot pick up any items during the challenge.");
     }
     
     @Override
@@ -78,36 +86,16 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public void onAbort() {
+        ChatHelper.toPlayer(player, "You failed the challenge!");
         table.endChallenge();
     }
     
     @Override
     public void onComplete() {
+        ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
         table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
         table.endChallenge();
     }
-    
-    /*private static String getCompassDirection(double angle) {
-        angle %= 2* Math.PI;
-        if(angle < 0.125 * Math.PI)
-            return "East";
-        else if(angle < 0.375 * Math.PI)
-            return "Southeast";
-        else if(angle < 0.625 * Math.PI)
-            return "South";
-        else if(angle < 0.875 * Math.PI)
-            return "Southwest";
-        else if(angle < 1.125 * Math.PI)
-            return "West";
-        else if(angle < 1.375 * Math.PI)
-            return "Northwest";
-        else if(angle < 1.625 * Math.PI)
-            return "North";
-        else if(angle < 1.875 * Math.PI)
-            return "Northeast";
-        else
-            return "East";
-    }*/
     
     private final TileRitualTable table;
     private final PlayerInvRestriction invRestr;

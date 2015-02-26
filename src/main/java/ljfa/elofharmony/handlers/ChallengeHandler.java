@@ -41,12 +41,10 @@ public class ChallengeHandler {
             ch.onTick();
             if(!ch.checkRestriction()) {
                 abortChallenge(ch);
-                ChatHelper.toPlayer(event.player, "You failed the challenge!");
             }
             if((world.getWorldTime() & 15) == 0) {
                 if(ch.checkCondition()) {
                     endChallenge(ch);
-                    ChatHelper.toPlayer(event.player, "You completed the challenge!");
                 }
             }
         }
@@ -79,12 +77,9 @@ public class ChallengeHandler {
     public boolean tryStartChallenge(Challenge ch) {
         if(ch.checkStartingCondition()) {
             startChallenge(ch);
-            ChatHelper.toPlayer(ch.getPlayer(), "The challenge is on");
             return true;
-        } else {
-            ChatHelper.toPlayer(ch.getPlayer(), "You're not quite ready for the challenge");
+        } else
             return false;
-        }
     }
     
     public void startChallenge(Challenge ch) {
@@ -96,7 +91,6 @@ public class ChallengeHandler {
         if(hasChallengeRunning(player)) {
             Challenge ch = challenges.get(player);
             abortChallenge(ch);
-            ChatHelper.toPlayer(player, "You aborted the challenge!");
         }
     }
     

@@ -124,7 +124,6 @@ public class TileRitualTable extends TileInventoryBase {
     @Override
     public void spillItems() {
         if(challenge != null) {
-            ChatHelper.toPlayer(challenge.getPlayer(), "The challenge has been aborted as the table was broken!");
             ChallengeHandler.getInstance().abortChallenge(challenge);
         }
         super.spillItems();
