@@ -1,5 +1,7 @@
 package ljfa.elofharmony.items;
 
+import java.util.List;
+
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemTwilicane extends Item {
     public ItemTwilicane() {
@@ -33,5 +37,11 @@ public class ItemTwilicane extends Item {
             ChallengeHandler.getInstance().tryAbortChallenge(player);
         }
         return super.onItemRightClick(stack, world, player);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean par4) {
+        info.add("Sneak+Right click to abort the current challenge");
     }
 }
