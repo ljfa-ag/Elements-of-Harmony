@@ -1,11 +1,9 @@
 package ljfa.elofharmony.blocks;
 
-import ljfa.elofharmony.CreativeTabEoh;
 import ljfa.elofharmony.Reference;
 import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

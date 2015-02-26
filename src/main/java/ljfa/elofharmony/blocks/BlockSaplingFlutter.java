@@ -3,7 +3,6 @@ package ljfa.elofharmony.blocks;
 import java.util.List;
 import java.util.Random;
 
-import ljfa.elofharmony.CreativeTabEoh;
 import ljfa.elofharmony.Reference;
 import ljfa.elofharmony.worldgen.FluttertreeGenerator;
 import net.minecraft.block.BlockSapling;
@@ -13,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

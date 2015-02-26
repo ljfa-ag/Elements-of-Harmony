@@ -1,6 +1,6 @@
 package ljfa.elofharmony.proxy;
 
-import ljfa.elofharmony.tile.*;
+import ljfa.elofharmony.tile.TileRitualTable;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

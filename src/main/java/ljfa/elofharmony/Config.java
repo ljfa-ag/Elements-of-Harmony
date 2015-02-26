@@ -3,7 +3,6 @@ package ljfa.elofharmony;
 import java.io.File;
 
 import ljfa.elofharmony.exception.InvalidConfigValueException;
-import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;

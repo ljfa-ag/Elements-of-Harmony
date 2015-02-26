@@ -3,7 +3,6 @@ package ljfa.elofharmony.blocks;
 import java.util.Random;
 
 import ljfa.elofharmony.Config;
-import ljfa.elofharmony.CreativeTabEoh;
 import ljfa.elofharmony.Reference;
 import ljfa.elofharmony.handlers.PoisonJokeHandler;
 import net.minecraft.block.BlockBush;
@@ -16,7 +15,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

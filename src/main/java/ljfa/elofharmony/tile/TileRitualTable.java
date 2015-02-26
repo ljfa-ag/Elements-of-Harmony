@@ -8,7 +8,6 @@ import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemResource;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
-import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;

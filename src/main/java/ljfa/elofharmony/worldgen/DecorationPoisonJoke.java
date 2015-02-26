@@ -1,6 +1,5 @@
 package ljfa.elofharmony.worldgen;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import ljfa.elofharmony.Config;
