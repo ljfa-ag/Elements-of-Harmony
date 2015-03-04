@@ -1,10 +1,11 @@
 package ljfa.elofharmony.inventory;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
 /** Default implementation of an inventory restriction which checks every slot */
-public class PlayerInvRestriction {
+public class PlayerInvRestriction implements InventoryRestriction {
     /** @param slotRestr the slot restriction */
     public PlayerInvRestriction(SlotRestriction slotRestr) {
         this.slotRestr = slotRestr;
@@ -19,7 +20,9 @@ public class PlayerInvRestriction {
      * @param inv the inventory to check
      * @return true if the restriction is being followed
      */
-    public boolean check(InventoryPlayer inv) {
+    @Override
+    public boolean check(EntityPlayer player) {
+        InventoryPlayer inv = player.inventory;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
             if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot]))
                 return false;
@@ -35,7 +38,9 @@ public class PlayerInvRestriction {
      * @param inv the inventory to check
      * @return true if the restriction is being followed
      */
-    public boolean checkAndEject(InventoryPlayer inv) {
+    @Override
+    public boolean checkAndEject(EntityPlayer player) {
+        InventoryPlayer inv = player.inventory;
         boolean ret = true;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
             if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot])) {
@@ -55,7 +60,8 @@ public class PlayerInvRestriction {
     }
     
     /** @return true if the player is allowed to pick up this item */
-    public boolean mayPickUp(ItemStack stack) {
+    @Override
+    public boolean mayPickUp(EntityPlayer player, ItemStack stack) {
         return slotRestr.check(SlotType.NONE, 0, stack);
     }
     

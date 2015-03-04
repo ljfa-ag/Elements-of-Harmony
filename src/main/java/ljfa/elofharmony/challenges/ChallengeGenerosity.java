@@ -29,7 +29,7 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean checkStartingCondition() {
-        if(invRestr.check(player.inventory)) {
+        if(invRestr.check(player)) {
             return true;
         } else {
             ChatHelper.toPlayer(player, "In order to start the Generosity challenge you're not allowed "
@@ -40,7 +40,7 @@ public class ChallengeGenerosity extends Challenge {
 
     @Override
     public boolean checkRestriction() {
-        return !player.isDead && invRestr.check(player.inventory);
+        return !player.isDead && invRestr.check(player);
     }
     
     @Override
@@ -80,7 +80,7 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean mayPickUp(ItemStack stack) {
-        return invRestr.mayPickUp(stack);
+        return invRestr.mayPickUp(player, stack);
     }
     
     @Override
