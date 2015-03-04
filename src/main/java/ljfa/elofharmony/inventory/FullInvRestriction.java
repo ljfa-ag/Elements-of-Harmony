@@ -5,9 +5,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
 /** Default implementation of an inventory restriction which checks every slot */
-public class PlayerInvRestriction implements InventoryRestriction {
+public class FullInvRestriction implements InventoryRestriction {
     /** @param slotRestr the slot restriction */
-    public PlayerInvRestriction(SlotRestriction slotRestr) {
+    public FullInvRestriction(SlotRestriction slotRestr) {
         this.slotRestr = slotRestr;
     }
     

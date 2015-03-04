@@ -1,6 +1,6 @@
 package ljfa.elofharmony.challenges;
 
-import ljfa.elofharmony.inventory.PlayerInvRestriction;
+import ljfa.elofharmony.inventory.FullInvRestriction;
 import ljfa.elofharmony.inventory.SlotRestriction;
 import ljfa.elofharmony.inventory.SlotType;
 import ljfa.elofharmony.items.ItemElement.ElementType;
@@ -19,7 +19,7 @@ public class ChallengeGenerosity extends Challenge {
         super(player);
         this.table = tile;
         
-        this.invRestr = new PlayerInvRestriction(new SlotRestriction() {
+        this.invRestr = new FullInvRestriction(new SlotRestriction() {
             @Override
             public boolean check(SlotType type, int slot, ItemStack stack) {
                 return stack == null || stack.getItem() == ModItems.twilicane;
@@ -97,5 +97,5 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     private final TileRitualTable table;
-    private final PlayerInvRestriction invRestr;
+    private final FullInvRestriction invRestr;
 }
