@@ -16,8 +16,8 @@ public class DimPos {
         this.dim = dim;
     }
     
-    public DimPos(TileEntity tile) {
-        this(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
+    public static DimPos fromTile(TileEntity tile) {
+        return new DimPos(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
     }
     
     public World getWorld() {

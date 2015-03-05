@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player);
-        this.tablePos = new DimPos(tile);
+        this.tablePos = DimPos.fromTile(tile);
     }
     
     @Override
