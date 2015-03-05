@@ -7,17 +7,20 @@ import ljfa.elofharmony.items.ItemElement.ElementType;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
+import ljfa.elofharmony.util.DimPos;
 import ljfa.elofharmony.util.LjfaMathHelper;
+import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player);
-        this.table = tile;
+        this.tablePos = new DimPos(tile);
     }
     
     @Override
@@ -38,8 +41,8 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public boolean checkCondition() {
-        return player.worldObj == table.getWorldObj()
-            && LjfaMathHelper.dist2sq(player, table.xCoord+0.5, table.yCoord+0.5, table.zCoord+0.5) <= 25.0;
+        return player.worldObj.provider.dimensionId == tablePos.dim
+            && LjfaMathHelper.dist2sq(player, tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5) <= 25.0;
     }
     
     @Override
@@ -79,17 +82,25 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayer(player, "You failed the challenge!");
-        table.endChallenge();
+        getTable().endChallenge();
     }
     
     @Override
     public void onComplete() {
         ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
-        table.setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
-        table.endChallenge();
+        getTable().setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
+        getTable().endChallenge();
     }
     
-    private final TileRitualTable table;
+    private TileRitualTable getTable() {
+        TileEntity tile = tablePos.getTile();
+        if(tile instanceof TileRitualTable)
+            return (TileRitualTable)tile;
+        else
+            throw new RuntimeException("Missing or wrong tile entity at " + tablePos);
+    }
+    
+    private final DimPos tablePos;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
         @Override
