@@ -1,6 +1,6 @@
 package ljfa.elofharmony.util;
 
-/** Represents a coordinate in a specific dimension */
+/** Represents a position in a specific dimension */
 public class DimPos {
     public int x, y, z, dim;
     
@@ -19,17 +19,18 @@ public class DimPos {
     public boolean equals(Object obj) {
         if(this == obj)
             return true;
-        if(obj == null || this.getClass() != obj.getClass())
+        if(obj == null)
+            return false;
+        if(this.getClass() != obj.getClass())
             return false;
         DimPos other = (DimPos)obj;
-        return x == other.x && y == other.y && z == other.z && dim == other.dim;
+        return dim == other.dim && x == other.x && z == other.z && y == other.y;
     }
     
     @Override
     public int hashCode() {
-        final int prime = 31;
+        final int prime = 37;
         int result = 1;
-        result = prime * result + dim;
         result = prime * result + x;
         result = prime * result + y;
         result = prime * result + z;
