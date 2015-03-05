@@ -11,16 +11,14 @@ import net.minecraftforge.common.util.Constants;
 
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
     protected ItemStack[] inv;
-    protected final int size;
     
     public TileInventoryBase(int size) {
         inv = new ItemStack[size];
-        this.size = size;
     }
     
     @Override
     public int getSizeInventory() {
-        return size;
+        return inv.length;
     }
     
     public ItemStack[] getSlots() {
@@ -89,7 +87,9 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     public void closeInventory() {}
 
     @Override
-    public abstract boolean isItemValidForSlot(int slot, ItemStack stack);
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        return true;
+    }
     
     public void writeCustomNBT(NBTTagCompound tag) {
         NBTTagList invList = new NBTTagList();
@@ -140,6 +140,6 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     }
     
     public void clear() {
-        inv = new ItemStack[size];
+        inv = new ItemStack[inv.length];
     }
 }
