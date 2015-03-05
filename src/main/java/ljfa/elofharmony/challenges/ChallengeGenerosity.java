@@ -18,13 +18,6 @@ public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player);
         this.table = tile;
-        
-        this.invRestr = new FullInvRestriction(new SlotRestriction() {
-            @Override
-            public boolean check(SlotType type, int slot, ItemStack stack) {
-                return stack == null || stack.getItem() == ModItems.twilicane;
-            }
-        });
     }
     
     @Override
@@ -97,5 +90,11 @@ public class ChallengeGenerosity extends Challenge {
     }
     
     private final TileRitualTable table;
-    private final FullInvRestriction invRestr;
+    
+    private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
+        @Override
+        public boolean check(SlotType type, int slot, ItemStack stack) {
+            return stack == null || stack.getItem() == ModItems.twilicane;
+        }
+    });
 }
