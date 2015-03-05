@@ -24,11 +24,17 @@ public class ItemTwilicane extends Item {
             World world, int x, int y, int z, int side, float fx, float fy, float fz) {
         if(world.isRemote)
             return true;
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if(tile instanceof TileRitualTable)
-            return ((TileRitualTable)tile).tryStartChallenge((EntityPlayerMP)player);
-        else
-            return false;
+        if(player.isSneaking()) {
+            ChallengeHandler.getInstance().tryAbortChallenge(player);
+            return true;
+        }
+        else {
+            TileEntity tile = world.getTileEntity(x, y, z);
+            if(tile instanceof TileRitualTable)
+                return ((TileRitualTable)tile).tryStartChallenge((EntityPlayerMP)player);
+            else
+                return false;
+        }
     }
     
     @Override
