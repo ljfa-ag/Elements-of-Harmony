@@ -25,7 +25,6 @@ import net.minecraft.potion.PotionEffect;
 
 public class TileRitualTable extends TileInventoryBase {
     private boolean hasChallenge = false;
-    private Challenge challenge = null;
     
     public TileRitualTable() {
         super(1);
@@ -88,10 +87,6 @@ public class TileRitualTable extends TileInventoryBase {
         return hasChallenge;
     }
     
-    public Challenge getChallenge() {
-        return challenge;
-    }
-    
     public boolean tryStartChallenge(EntityPlayerMP player) {
         ChallengeHandler handler = ChallengeHandler.getInstance();
         if(!handler.hasChallengeRunning(player)) {
@@ -107,7 +102,6 @@ public class TileRitualTable extends TileInventoryBase {
             if(handler.tryStartChallenge(challenge)) {
                 setInventorySlotContents(0, null);
                 this.hasChallenge = true;
-                this.challenge = challenge;
                 return true;
             } else
                 return false;
@@ -117,19 +111,12 @@ public class TileRitualTable extends TileInventoryBase {
     
     public void onChallengeEnded() {
         hasChallenge = false;
-        challenge = null;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
     @Override
     public void spillItems() {
-        if(challenge != null) {
-            ChallengeHandler.getInstance().abortChallenge(challenge);
-            LogHelper.info("challenge was not null; sucessfully aborted");
-        }
-        else if(hasChallenge)
-            LogHelper.warn("challenge was null; could not abort");
-        
+        //TODO: Implementation
         super.spillItems();
     }
     
