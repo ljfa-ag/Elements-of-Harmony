@@ -82,14 +82,14 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayer(player, "You failed the challenge!");
-        getTable().endChallenge();
+        getTable().onChallengeEnded();
     }
     
     @Override
     public void onComplete() {
         ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
         getTable().setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
-        getTable().endChallenge();
+        getTable().onChallengeEnded();
     }
     
     private TileRitualTable getTable() {

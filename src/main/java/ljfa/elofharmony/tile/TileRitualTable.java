@@ -8,6 +8,7 @@ import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemResource;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,6 +29,7 @@ public class TileRitualTable extends TileInventoryBase {
     
     public TileRitualTable() {
         super(1);
+        LogHelper.trace("TileRitualTable constructed");
     }
     
     @Override
@@ -114,7 +116,7 @@ public class TileRitualTable extends TileInventoryBase {
         return false;
     }
     
-    public void endChallenge() {
+    public void onChallengeEnded() {
         hasChallenge = false;
         challenge = null;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -124,7 +126,11 @@ public class TileRitualTable extends TileInventoryBase {
     public void spillItems() {
         if(challenge != null) {
             ChallengeHandler.getInstance().abortChallenge(challenge);
+            LogHelper.info("challenge was not null; sucessfully aborted");
         }
+        else if(hasChallenge)
+            LogHelper.warn("challenge was null; could not abort");
+        
         super.spillItems();
     }
     
@@ -132,12 +138,20 @@ public class TileRitualTable extends TileInventoryBase {
     public void writeCustomNBT(NBTTagCompound tag) {
         super.writeCustomNBT(tag);
         tag.setBoolean("hasChallenge", hasChallenge);
+        LogHelper.trace("TileRitualTable serialized");
     }
     
     @Override
     public void readCustomNBT(NBTTagCompound tag) {
         super.readCustomNBT(tag);
         hasChallenge = tag.getBoolean("hasChallenge");
+        LogHelper.trace("TileRitualTable unserialized");
+    }
+    
+    @Override
+    public void onChunkUnload() {
+        super.onChunkUnload();
+        LogHelper.info("TileRitualTable unloaded");
     }
     
     @Override
