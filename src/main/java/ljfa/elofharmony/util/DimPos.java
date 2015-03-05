@@ -1,5 +1,10 @@
 package ljfa.elofharmony.util;
 
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+
 /** Represents a position in a specific dimension */
 public class DimPos {
     public int x, y, z, dim;
@@ -13,6 +18,22 @@ public class DimPos {
     
     public DimPos(int x, int y, int z) {
         this(x, y, z, 0);
+    }
+    
+    public World getWorld() {
+        return WorldProvider.getProviderForDimension(dim).worldObj;
+    }
+    
+    public Block getBlock() {
+        return getWorld().getBlock(x, y, z);
+    }
+    
+    public int getMeta() {
+        return getWorld().getBlockMetadata(x, y, z);
+    }
+    
+    public TileEntity getTile() {
+        return getWorld().getTileEntity(x, y, z);
     }
     
     @Override
