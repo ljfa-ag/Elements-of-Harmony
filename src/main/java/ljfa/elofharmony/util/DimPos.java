@@ -3,7 +3,7 @@ package ljfa.elofharmony.util;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
+import net.minecraftforge.common.DimensionManager;
 
 /** Represents a position in a specific dimension */
 public class DimPos {
@@ -21,7 +21,7 @@ public class DimPos {
     }
     
     public World getWorld() {
-        return WorldProvider.getProviderForDimension(dim).worldObj;
+        return DimensionManager.getWorld(dim);
     }
     
     public Block getBlock() {
