@@ -29,7 +29,6 @@ public class TileRitualTable extends TileInventoryBase {
     
     public TileRitualTable() {
         super(1);
-        LogHelper.trace("TileRitualTable constructed");
     }
     
     @Override
@@ -138,20 +137,18 @@ public class TileRitualTable extends TileInventoryBase {
     public void writeCustomNBT(NBTTagCompound tag) {
         super.writeCustomNBT(tag);
         tag.setBoolean("hasChallenge", hasChallenge);
-        LogHelper.trace("TileRitualTable serialized");
     }
     
     @Override
     public void readCustomNBT(NBTTagCompound tag) {
         super.readCustomNBT(tag);
         hasChallenge = tag.getBoolean("hasChallenge");
-        LogHelper.trace("TileRitualTable unserialized");
     }
     
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        LogHelper.info("TileRitualTable unloaded");
+        LogHelper.trace("TileRitualTable unloaded");
     }
     
     @Override
@@ -166,7 +163,7 @@ public class TileRitualTable extends TileInventoryBase {
         readCustomNBT(packet.func_148857_g());
     }
     
-    private boolean isPotionOfType(Item item, int damage, int potionID) {
+    private static boolean isPotionOfType(Item item, int damage, int potionID) {
         if(!(item instanceof ItemPotion))
             return false;
         ItemPotion potion = (ItemPotion)item;
