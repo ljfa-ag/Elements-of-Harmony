@@ -25,12 +25,7 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     
     public TileRitualTableRenderer() {
         tess = Tessellator.instance;
-        renderItem = new RenderItem() {
-            @Override
-            public boolean shouldBob() {
-                return false;
-            }
-        };
+        renderItem = new RenderItem();
         renderItem.setRenderManager(RenderManager.instance);
         
         IIcon icon = ModBlocks.planks_flutter.getIcon(0, 0);
