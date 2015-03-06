@@ -47,6 +47,7 @@ public class ElementsOfHarmony {
         
         ModRecipes.addOredict();
         ModRecipes.addRecipes();
+        ModRecipes.addSmelting();
         proxy.init(event);
     }
     

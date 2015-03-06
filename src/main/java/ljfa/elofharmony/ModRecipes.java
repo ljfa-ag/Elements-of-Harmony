@@ -38,4 +38,8 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.twilicane, " gG", " gg", "g  ",
                 'g', "nuggetGold", 'G', "ingotGold"));
     }
+    
+    public static void addSmelting() {
+        GameRegistry.addSmelting(ModBlocks.log_flutter, new ItemStack(Items.coal, 1, 1), 0.15F);
+    }
 }
