@@ -43,8 +43,6 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float par5) {
-        if(!(te instanceof TileRitualTable))
-            return;
         TileRitualTable tile = (TileRitualTable)te;
         
         bindTexture(TextureMap.locationBlocksTexture);
