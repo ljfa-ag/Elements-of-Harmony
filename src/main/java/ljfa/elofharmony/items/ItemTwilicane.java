@@ -4,6 +4,7 @@ import java.util.List;
 
 import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.tile.TileRitualTable;
+import ljfa.elofharmony.util.ChatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -25,10 +26,17 @@ public class ItemTwilicane extends Item {
         if(world.isRemote)
             return true;
         if(player.isSneaking()) {
-            ChallengeHandler.getInstance().tryAbortChallenge(player);
-            return true;
+            //Abort current challenge
+            if(ChallengeHandler.getInstance().tryAbortChallenge(player)) {
+                return true;
+            }
+            else {
+                ChatHelper.toPlayer(player, "You have no challenge running at the moment.");
+                return false;
+            }
         }
         else {
+            //Start challenge if used on ritual table
             TileEntity tile = world.getTileEntity(x, y, z);
             if(tile instanceof TileRitualTable)
                 return ((TileRitualTable)tile).tryStartChallenge((EntityPlayerMP)player);
@@ -40,7 +48,9 @@ public class ItemTwilicane extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if(!world.isRemote && player.isSneaking()) {
-            ChallengeHandler.getInstance().tryAbortChallenge(player);
+            //Abort current challenge
+            if(!ChallengeHandler.getInstance().tryAbortChallenge(player))
+                ChatHelper.toPlayer(player, "You have no challenge running at the moment.");
         }
         return super.onItemRightClick(stack, world, player);
     }

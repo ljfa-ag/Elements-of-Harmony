@@ -84,11 +84,13 @@ public class ChallengeHandler {
         ch.onStart();
     }
     
-    public void tryAbortChallenge(EntityPlayer player) {
+    public boolean tryAbortChallenge(EntityPlayer player) {
         if(hasChallengeRunning(player)) {
-            Challenge ch = challenges.get(player);
-            abortChallenge(ch);
+            abortChallenge(getChallenge(player));
+            return true;
         }
+        else
+            return false;
     }
     
     public void abortChallenge(Challenge ch) {
