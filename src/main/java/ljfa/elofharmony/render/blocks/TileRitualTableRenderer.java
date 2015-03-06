@@ -21,16 +21,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     private final Tessellator tess;
     private final RenderItem renderItem;
-    private double minU, maxU, minV, maxV;
+    private final double minU, maxU, minV, maxV, halfV;
     
     public TileRitualTableRenderer() {
         tess = Tessellator.instance;
-        renderItem = new RenderItem() {
-            @Override
-            public boolean shouldBob() {
-                return false;
-            }
-        };
+        renderItem = new RenderItem();
         renderItem.setRenderManager(RenderManager.instance);
         
         IIcon icon = ModBlocks.planks_flutter.getIcon(0, 0);
@@ -38,12 +33,11 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         maxU = icon.getMaxU();
         minV = icon.getMinV();
         maxV = icon.getMaxV();
+        halfV = 0.5*(minV + maxV);
     }
     
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float par5) {
-        if(!(te instanceof TileRitualTable))
-            return;
         TileRitualTable tile = (TileRitualTable)te;
         
         bindTexture(TextureMap.locationBlocksTexture);
@@ -70,26 +64,26 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         
         //Z-
         tess.addVertexWithUV(0, 0,   0, minU, minV);
-        tess.addVertexWithUV(0, 0.5, 0, minU, maxV);
-        tess.addVertexWithUV(1, 0.5, 0, maxU, maxV);
+        tess.addVertexWithUV(0, 0.5, 0, minU, halfV);
+        tess.addVertexWithUV(1, 0.5, 0, maxU, halfV);
         tess.addVertexWithUV(1, 0,   0, maxU, minV);
         
         //Z+
         tess.addVertexWithUV(0, 0,   1, minU, minV);
         tess.addVertexWithUV(1, 0,   1, maxU, minV);
-        tess.addVertexWithUV(1, 0.5, 1, maxU, maxV);
-        tess.addVertexWithUV(0, 0.5, 1, minU, maxV);
+        tess.addVertexWithUV(1, 0.5, 1, maxU, halfV);
+        tess.addVertexWithUV(0, 0.5, 1, minU, halfV);
         
         //X-
         tess.addVertexWithUV(0, 0,   0, minU, minV);
         tess.addVertexWithUV(0, 0,   1, maxU, minV);
-        tess.addVertexWithUV(0, 0.5, 1, maxU, maxV);
-        tess.addVertexWithUV(0, 0.5, 0, minU, maxV);
+        tess.addVertexWithUV(0, 0.5, 1, maxU, halfV);
+        tess.addVertexWithUV(0, 0.5, 0, minU, halfV);
         
         //X+
         tess.addVertexWithUV(1, 0,   0, minU, minV);
-        tess.addVertexWithUV(1, 0.5, 0, minU, maxV);
-        tess.addVertexWithUV(1, 0.5, 1, maxU, maxV);
+        tess.addVertexWithUV(1, 0.5, 0, minU, halfV);
+        tess.addVertexWithUV(1, 0.5, 1, maxU, halfV);
         tess.addVertexWithUV(1, 0,   1, maxU, minV);
         
         tess.draw();
