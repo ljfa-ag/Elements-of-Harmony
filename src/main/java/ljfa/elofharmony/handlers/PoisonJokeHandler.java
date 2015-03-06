@@ -3,7 +3,7 @@ package ljfa.elofharmony.handlers;
 import java.util.Random;
 
 import ljfa.elofharmony.Config;
-import ljfa.elofharmony.util.LjfaMathHelper;
+import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,7 +50,7 @@ public class PoisonJokeHandler {
         
         int minDuration = (int)(0.4 * Config.pjAvgDurations[index]);
         int maxDuration = (int)(1.6 * Config.pjAvgDurations[index]);
-        int duration = LjfaMathHelper.triangularInt(rand, minDuration, maxDuration);
+        int duration = MathHelper.triangularInt(rand, minDuration, maxDuration);
         if(isSquid(entity))
             duration *= 1.1;
         

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 
-public class LjfaMathHelper {
+public class MathHelper {
     /** Generates a symmetrically triangular distributed integer between min and max (inclusive).
      * The expected value is (min+max)/2.
      */

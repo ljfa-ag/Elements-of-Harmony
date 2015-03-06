@@ -4,7 +4,7 @@ import java.util.Random;
 
 import ljfa.elofharmony.Config;
 import ljfa.elofharmony.blocks.ModBlocks;
-import ljfa.elofharmony.util.LjfaMathHelper;
+import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -29,8 +29,8 @@ public class DecorationPoisonJoke {
             return;
         LogHelper.debug("Attempting to generate Poison Joke at (%d, %d)", xGen, zGen);
         
-        double xSize = LjfaMathHelper.triangularDouble(rand, 2.0, 5.0);
-        double zSize = LjfaMathHelper.triangularDouble(rand, 2.0, 5.0);
+        double xSize = MathHelper.triangularDouble(rand, 2.0, 5.0);
+        double zSize = MathHelper.triangularDouble(rand, 2.0, 5.0);
         
         int yGen = event.world.getTopSolidOrLiquidBlock(xGen, zGen);
         

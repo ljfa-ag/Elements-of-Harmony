@@ -8,7 +8,7 @@ import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.DimPos;
-import ljfa.elofharmony.util.LjfaMathHelper;
+import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public boolean checkCondition() {
         return player.worldObj.provider.dimensionId == tablePos.dim
-            && LjfaMathHelper.dist2sq(player, tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5) <= 25.0;
+            && MathHelper.dist2sq(player, tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5) <= 25.0;
     }
     
     @Override
@@ -51,7 +51,7 @@ public class ChallengeGenerosity extends Challenge {
         double mean = 300.0, sigma = 20.0;
         //double mean = 30.0, sigma = 2.0;
         
-        double dist = mean + sigma * LjfaMathHelper.stdTriangular(world.rand);
+        double dist = mean + sigma * MathHelper.stdTriangular(world.rand);
         double angle = 2 * Math.PI * world.rand.nextDouble();
         
         int tpx = (int)(player.posX + dist * Math.cos(angle));
