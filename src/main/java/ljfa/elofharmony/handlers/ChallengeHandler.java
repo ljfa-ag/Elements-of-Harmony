@@ -79,11 +79,6 @@ public class ChallengeHandler {
             return false;
     }
     
-    public void startChallenge(Challenge ch) {
-        challenges.put(ch.getPlayer(), ch);
-        ch.onStart();
-    }
-    
     public boolean tryAbortChallenge(EntityPlayer player) {
         if(hasChallengeRunning(player)) {
             abortChallenge(getChallenge(player));
@@ -93,7 +88,12 @@ public class ChallengeHandler {
             return false;
     }
     
-    public void abortChallenge(Challenge ch) {
+    private void startChallenge(Challenge ch) {
+        challenges.put(ch.getPlayer(), ch);
+        ch.onStart();
+    }
+    
+    private void abortChallenge(Challenge ch) {
         ch.onAbort();
         challenges.remove(ch.getPlayer());
     }
@@ -102,5 +102,5 @@ public class ChallengeHandler {
         ch.onComplete();
         challenges.remove(ch.getPlayer());
     }
-
+    
 }
