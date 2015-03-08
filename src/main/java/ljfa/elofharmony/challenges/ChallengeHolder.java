@@ -34,9 +34,9 @@ public class ChallengeHolder implements IExtendedEntityProperties {
             
             String className = chTag.getString("ClassName");
             try {
-                Constructor cstr = Class.forName(className).getConstructor(EntityPlayerMP.class, NBTTagCompound.class);
-                challenge = (Challenge)cstr.newInstance(null, chTag);
+                challenge = (Challenge)Class.forName(className).newInstance();
                 LogHelper.info("Successfully created instance of %s", className);
+                challenge.readFromNBT(tag);
             }
             catch(ReflectiveOperationException ex) {
                 challenge = null;

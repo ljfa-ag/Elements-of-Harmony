@@ -11,6 +11,8 @@ public abstract class Challenge {
         this.player = player;
     }
     
+    public Challenge() { }
+    
     /** @return if the challenge is ready to be started on the player */
     public abstract boolean checkStartingCondition();
     
@@ -37,6 +39,9 @@ public abstract class Challenge {
     
     /** Writes the challenge data to NBT */
     public abstract void writeToNBT(NBTTagCompound tag);
+    
+    /** Reads the challenge data from NBT */
+    public abstract void readFromNBT(NBTTagCompound tag);
     
     public EntityPlayerMP getPlayer() {
         return player;

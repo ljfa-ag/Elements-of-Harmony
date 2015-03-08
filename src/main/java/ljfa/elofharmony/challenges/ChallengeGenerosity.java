@@ -24,14 +24,7 @@ public class ChallengeGenerosity extends Challenge {
         this.tablePos = DimPos.fromTile(tile);
     }
     
-    public ChallengeGenerosity(EntityPlayerMP player, NBTTagCompound tag) {
-        super(player);
-        int x = tag.getInteger("TableX");
-        int y = tag.getInteger("TableY");
-        int z = tag.getInteger("TableZ");
-        int dim = tag.getInteger("TableDim");
-        this.tablePos = new DimPos(x, y, z, dim);
-    }
+    public ChallengeGenerosity() { }
     
     @Override
     public boolean checkStartingCondition() {
@@ -110,6 +103,15 @@ public class ChallengeGenerosity extends Challenge {
         tag.setInteger("TableDim", tablePos.dim);
     }
     
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        int x = tag.getInteger("TableX");
+        int y = tag.getInteger("TableY");
+        int z = tag.getInteger("TableZ");
+        int dim = tag.getInteger("TableDim");
+        this.tablePos = new DimPos(x, y, z, dim);
+    }
+    
     private TileRitualTable getTable() {
         TileEntity tile = tablePos.getTile();
         if(tile instanceof TileRitualTable)
@@ -118,7 +120,7 @@ public class ChallengeGenerosity extends Challenge {
             throw new RuntimeException("Missing or wrong tile entity at " + tablePos);
     }
     
-    private final DimPos tablePos;
+    private DimPos tablePos;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
         @Override
