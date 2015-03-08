@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ljfa.elofharmony.challenges.Challenge;
+import ljfa.elofharmony.challenges.ChallengeHolder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -21,8 +25,6 @@ public class ChallengeHandler {
         return instance;
     }
     
-    private final Map<EntityPlayerMP, Challenge> challenges = new HashMap<EntityPlayerMP, Challenge>();
-    
     private ChallengeHandler() { }
     
     @SubscribeEvent(priority = EventPriority.LOW)
@@ -31,10 +33,8 @@ public class ChallengeHandler {
         if(world.isRemote || event.phase != Phase.START)
             return;
         EntityPlayerMP player = (EntityPlayerMP)event.player;
-
-        if(hasChallengeRunning(player)) {
-            Challenge ch = challenges.get(player);
-
+        Challenge ch = getChallenge(player);
+        if(ch != null) {
             ch.onTick();
             if(!ch.checkRestriction()) {
                 abortChallenge(ch);
@@ -50,25 +50,34 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onItemPickup(EntityItemPickupEvent event) {
         EntityPlayerMP player = (EntityPlayerMP)event.entityPlayer;
-        if(hasChallengeRunning(player)) {
-            if(!challenges.get(player).mayPickUp(event.item.getEntityItem())) {
-                event.item.delayBeforeCanPickup = 10;
-                event.setCanceled(true);
-            }
+        Challenge ch = getChallenge(player);
+        if(ch != null && !ch.mayPickUp(event.item.getEntityItem())) {
+            event.item.delayBeforeCanPickup = 10;
+            event.setCanceled(true);
         }
     }
     
     @SubscribeEvent
-    public void onPlayerLogout(PlayerLoggedOutEvent event) {
-        tryAbortChallenge(event.player);
+    public void onEntityConstruct(EntityConstructing event) {
+        if(event.entity instanceof EntityPlayerMP)
+            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder());
     }
     
-    public Challenge getChallenge(EntityPlayer player) {
-        return challenges.get(player);
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        event.entityPlayer.registerExtendedProperties("eoh:challenge", event.original.getExtendedProperties("eoh:challenge"));
     }
     
-    public boolean hasChallengeRunning(EntityPlayer player) {
-        return challenges.containsKey(player);
+    public ChallengeHolder getHolder(EntityPlayerMP player) {
+        return (ChallengeHolder)player.getExtendedProperties("eoh:Challenge");
+    }
+    
+    public Challenge getChallenge(EntityPlayerMP player) {
+        return getHolder(player).challenge;
+    }
+    
+    public boolean hasChallengeRunning(EntityPlayerMP player) {
+        return getChallenge(player) != null;
     }
     
     public boolean tryStartChallenge(Challenge ch) {
@@ -80,8 +89,9 @@ public class ChallengeHandler {
     }
     
     public boolean tryAbortChallenge(EntityPlayer player) {
-        if(hasChallengeRunning(player)) {
-            abortChallenge(getChallenge(player));
+        Challenge ch = getChallenge((EntityPlayerMP)player);
+        if(ch != null) {
+            abortChallenge(ch);
             return true;
         }
         else
@@ -89,18 +99,18 @@ public class ChallengeHandler {
     }
     
     private void startChallenge(Challenge ch) {
-        challenges.put(ch.getPlayer(), ch);
+        getHolder(ch.getPlayer()).challenge = ch;
         ch.onStart();
     }
     
     private void abortChallenge(Challenge ch) {
         ch.onAbort();
-        challenges.remove(ch.getPlayer());
+        getHolder(ch.getPlayer()).challenge = null;
     }
     
     private void endChallenge(Challenge ch) {
         ch.onComplete();
-        challenges.remove(ch.getPlayer());
+        getHolder(ch.getPlayer()).challenge = null;
     }
     
 }
