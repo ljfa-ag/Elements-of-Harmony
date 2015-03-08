@@ -7,8 +7,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ChallengeHolder implements IExtendedEntityProperties {
-
-    public Challenge challenge;
     
     @Override
     public void saveNBTData(NBTTagCompound tag) {
@@ -24,4 +22,14 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     public void init(Entity entity, World world) {
         LogHelper.info("Initialized challenge data");
     }
+    
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+
+    private Challenge challenge;
 }

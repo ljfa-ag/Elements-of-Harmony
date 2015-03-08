@@ -73,7 +73,7 @@ public class ChallengeHandler {
     }
     
     public Challenge getChallenge(EntityPlayerMP player) {
-        return getHolder(player).challenge;
+        return getHolder(player).getChallenge();
     }
     
     public boolean hasChallengeRunning(EntityPlayerMP player) {
@@ -99,18 +99,18 @@ public class ChallengeHandler {
     }
     
     private void startChallenge(Challenge ch) {
-        getHolder(ch.getPlayer()).challenge = ch;
+        getHolder(ch.getPlayer()).setChallenge(ch);
         ch.onStart();
     }
     
     private void abortChallenge(Challenge ch) {
         ch.onAbort();
-        getHolder(ch.getPlayer()).challenge = null;
+        getHolder(ch.getPlayer()).setChallenge(null);
     }
     
     private void endChallenge(Challenge ch) {
         ch.onComplete();
-        getHolder(ch.getPlayer()).challenge = null;
+        getHolder(ch.getPlayer()).setChallenge(null);
     }
     
 }
