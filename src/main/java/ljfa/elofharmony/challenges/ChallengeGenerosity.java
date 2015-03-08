@@ -12,6 +12,7 @@ import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -21,6 +22,15 @@ public class ChallengeGenerosity extends Challenge {
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player);
         this.tablePos = DimPos.fromTile(tile);
+    }
+    
+    public ChallengeGenerosity(EntityPlayerMP player, NBTTagCompound tag) {
+        super(player);
+        int x = tag.getInteger("TableX");
+        int y = tag.getInteger("TableY");
+        int z = tag.getInteger("TableZ");
+        int dim = tag.getInteger("TableDim");
+        this.tablePos = new DimPos(x, y, z, dim);
     }
     
     @Override
@@ -90,6 +100,14 @@ public class ChallengeGenerosity extends Challenge {
         ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
         getTable().setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
         getTable().onChallengeEnded();
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        tag.setInteger("TableX", tablePos.x);
+        tag.setInteger("TableY", tablePos.y);
+        tag.setInteger("TableZ", tablePos.z);
+        tag.setInteger("TableDim", tablePos.dim);
     }
     
     private TileRitualTable getTable() {

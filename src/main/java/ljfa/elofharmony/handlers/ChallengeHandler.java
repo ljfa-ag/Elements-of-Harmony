@@ -1,20 +1,15 @@
 package ljfa.elofharmony.handlers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeHolder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
@@ -32,6 +27,7 @@ public class ChallengeHandler {
         World world = event.player.worldObj;
         if(world.isRemote || event.phase != Phase.START)
             return;
+        
         EntityPlayerMP player = (EntityPlayerMP)event.player;
         Challenge ch = getChallenge(player);
         if(ch != null) {
@@ -39,7 +35,7 @@ public class ChallengeHandler {
             if(!ch.checkRestriction()) {
                 abortChallenge(ch);
             }
-            if((world.getWorldTime() & 15) == 0) {
+            if(world.getWorldTime() % 16 == 0) {
                 if(ch.checkCondition()) {
                     endChallenge(ch);
                 }
@@ -60,7 +56,7 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onEntityConstruct(EntityConstructing event) {
         if(event.entity instanceof EntityPlayerMP)
-            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder());
+            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder((EntityPlayerMP)event.entity));
     }
     
     @SubscribeEvent
@@ -105,12 +101,12 @@ public class ChallengeHandler {
     
     private void abortChallenge(Challenge ch) {
         ch.onAbort();
-        getHolder(ch.getPlayer()).setChallenge(null);
+        getHolder(ch.getPlayer()).clearChallenge();
     }
     
     private void endChallenge(Challenge ch) {
         ch.onComplete();
-        getHolder(ch.getPlayer()).setChallenge(null);
+        getHolder(ch.getPlayer()).clearChallenge();
     }
     
 }

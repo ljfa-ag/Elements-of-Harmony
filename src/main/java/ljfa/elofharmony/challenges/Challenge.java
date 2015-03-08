@@ -2,6 +2,7 @@ package ljfa.elofharmony.challenges;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
     protected final EntityPlayerMP player;
@@ -33,6 +34,9 @@ public abstract class Challenge {
     
     /** Called when the challenge is completed */
     public abstract void onComplete();
+    
+    /** Writes the challenge data to NBT */
+    public abstract void writeToNBT(NBTTagCompound tag);
     
     public EntityPlayerMP getPlayer() {
         return player;
