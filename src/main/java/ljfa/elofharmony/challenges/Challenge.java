@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
-    protected final EntityPlayerMP player;
+    protected EntityPlayerMP player;
     
     public Challenge(EntityPlayerMP player) {
         this.player = player;
@@ -40,5 +40,9 @@ public abstract class Challenge {
     
     public EntityPlayerMP getPlayer() {
         return player;
+    }
+    
+    public void setPlayer(EntityPlayerMP player) {
+        this.player = player;
     }
 }

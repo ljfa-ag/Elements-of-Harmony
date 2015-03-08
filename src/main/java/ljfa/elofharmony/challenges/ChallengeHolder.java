@@ -15,10 +15,6 @@ import net.minecraftforge.common.util.Constants;
 
 public class ChallengeHolder implements IExtendedEntityProperties {
     
-    public ChallengeHolder(EntityPlayerMP player) {
-        this.player = player;
-    }
-    
     @Override
     public void saveNBTData(NBTTagCompound tag) {
         if(challenge != null) {
@@ -39,7 +35,7 @@ public class ChallengeHolder implements IExtendedEntityProperties {
             String className = chTag.getString("ClassName");
             try {
                 Constructor cstr = Class.forName(className).getConstructor(EntityPlayerMP.class, NBTTagCompound.class);
-                challenge = (Challenge)cstr.newInstance(player, chTag);
+                challenge = (Challenge)cstr.newInstance(null, chTag);
                 LogHelper.info("Successfully created instance of %s", className);
             }
             catch(ReflectiveOperationException ex) {
@@ -51,7 +47,8 @@ public class ChallengeHolder implements IExtendedEntityProperties {
 
     @Override
     public void init(Entity entity, World world) {
-        
+        if(challenge != null)
+            challenge.setPlayer((EntityPlayerMP)entity);
     }
     
     public Challenge getChallenge() {
@@ -66,6 +63,5 @@ public class ChallengeHolder implements IExtendedEntityProperties {
         this.challenge = null;
     }
 
-    private final EntityPlayerMP player;
     private Challenge challenge;
 }
