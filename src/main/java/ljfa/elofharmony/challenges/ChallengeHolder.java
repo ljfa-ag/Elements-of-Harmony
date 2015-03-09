@@ -40,7 +40,7 @@ public class ChallengeHolder implements IExtendedEntityProperties {
                 challenge = (Challenge)Class.forName(className).newInstance();
                 LogHelper.info("Successfully created instance of %s", className);
                 challenge.setPlayer(player);
-                challenge.readFromNBT(tag);
+                challenge.readFromNBT(chTag);
             }
             catch(ClassNotFoundException ex) {
                 challenge = null;
