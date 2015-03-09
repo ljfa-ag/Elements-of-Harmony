@@ -1,14 +1,23 @@
 package ljfa.elofharmony.challenges;
 
+import java.util.Objects;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
-    protected final EntityPlayerMP player;
+
+    protected EntityPlayerMP player;
     
     public Challenge(EntityPlayerMP player) {
         this.player = player;
     }
+    
+    public Challenge() { }
     
     /** @return if the challenge is ready to be started on the player */
     public abstract boolean checkStartingCondition();
@@ -34,7 +43,17 @@ public abstract class Challenge {
     /** Called when the challenge is completed */
     public abstract void onComplete();
     
+    /** Writes the challenge data to NBT */
+    public abstract void writeToNBT(NBTTagCompound tag);
+    
+    /** Reads the challenge data from NBT */
+    public abstract void readFromNBT(NBTTagCompound tag);
+    
     public EntityPlayerMP getPlayer() {
         return player;
+    }
+    
+    public void setPlayer(EntityPlayerMP player) {
+        this.player = Objects.requireNonNull(player);
     }
 }

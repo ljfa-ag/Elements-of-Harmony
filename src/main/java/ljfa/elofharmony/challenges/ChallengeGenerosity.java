@@ -12,6 +12,7 @@ import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -22,6 +23,8 @@ public class ChallengeGenerosity extends Challenge {
         super(player);
         this.tablePos = DimPos.fromTile(tile);
     }
+    
+    public ChallengeGenerosity() { }
     
     @Override
     public boolean checkStartingCondition() {
@@ -92,6 +95,17 @@ public class ChallengeGenerosity extends Challenge {
         getTable().onChallengeEnded();
     }
     
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        tag.setIntArray("TablePos", new int[] {tablePos.x, tablePos.y, tablePos.z, tablePos.dim});
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        int[] arr = tag.getIntArray("TablePos");
+        this.tablePos = new DimPos(arr[0], arr[1], arr[2], arr[3]);
+    }
+    
     private TileRitualTable getTable() {
         TileEntity tile = tablePos.getTile();
         if(tile instanceof TileRitualTable)
@@ -100,7 +114,7 @@ public class ChallengeGenerosity extends Challenge {
             throw new RuntimeException("Missing or wrong tile entity at " + tablePos);
     }
     
-    private final DimPos tablePos;
+    private DimPos tablePos;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
         @Override
