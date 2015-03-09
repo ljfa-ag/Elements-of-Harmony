@@ -7,13 +7,18 @@ import net.minecraftforge.common.DimensionManager;
 
 /** Represents a position in a specific dimension */
 public class DimPos {
-    public int x, y, z, dim;
+    public final int x, y, z, dim;
     
     public DimPos(int x, int y, int z, int dim) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.dim = dim;
+    }
+    
+    /** Creates a DimPos from an {x, y, z, dim} array of coordinates. */
+    public static DimPos fromArray(int[] arr) {
+        return new DimPos(arr[0], arr[1], arr[2], arr[3]);
     }
     
     public static DimPos fromTile(TileEntity tile) {
@@ -34,6 +39,10 @@ public class DimPos {
     
     public TileEntity getTile() {
         return getWorld().getTileEntity(x, y, z);
+    }
+    
+    public int[] toArray() {
+        return new int[] {x, y, z, dim};
     }
     
     @Override
