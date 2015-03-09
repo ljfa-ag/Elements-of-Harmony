@@ -1,10 +1,16 @@
 package ljfa.elofharmony.challenges;
 
+import java.util.Objects;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class Challenge {
+
     protected EntityPlayerMP player;
     
     public Challenge(EntityPlayerMP player) {
@@ -48,6 +54,6 @@ public abstract class Challenge {
     }
     
     public void setPlayer(EntityPlayerMP player) {
-        this.player = player;
+        this.player = Objects.requireNonNull(player);
     }
 }

@@ -2,8 +2,12 @@ package ljfa.elofharmony.challenges;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 import org.apache.logging.log4j.Level;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.Entity;
@@ -15,6 +19,14 @@ import net.minecraftforge.common.util.Constants;
 
 public class ChallengeHolder implements IExtendedEntityProperties {
     
+    private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
+    
+    public static void register(String name, Class<? extends Challenge> clazz) {
+        if(registry.containsKey(name))
+            throw new RuntimeException("Duplicate entry for challenge ID " + name);
+        registry.put(name, clazz);
+    }
+    
     public ChallengeHolder(EntityPlayerMP player) {
         this.player = player;
     }
@@ -22,11 +34,12 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     @Override
     public void saveNBTData(NBTTagCompound tag) {
         if(challenge != null) {
+            String chName = registry.inverse().get(challenge.getClass());
+            if(chName == null)
+                throw new RuntimeException("The class " + challenge.getClass() + " has not been registered as challenge!");
             NBTTagCompound chTag = new NBTTagCompound();
-            
+            chTag.setString("ID", chName);
             challenge.writeToNBT(chTag);
-            chTag.setString("ClassName", challenge.getClass().getName());
-            
             tag.setTag("eoh:Challenge", chTag);
         }
     }
@@ -35,30 +48,29 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     public void loadNBTData(NBTTagCompound tag) {
         if(tag.hasKey("eoh:Challenge", Constants.NBT.TAG_COMPOUND)) {
             NBTTagCompound chTag = tag.getCompoundTag("eoh:Challenge");
-            String className = chTag.getString("ClassName");
-            try {
-                challenge = (Challenge)Class.forName(className).newInstance();
-                LogHelper.info("Successfully created instance of %s", className);
-                challenge.setPlayer(player);
-                challenge.readFromNBT(chTag);
+            String chName = chTag.getString("ID");
+            Class<? extends Challenge> clazz = registry.get(chName);
+            if(clazz != null) {
+                try {
+                    challenge = clazz.newInstance();
+                    challenge.setPlayer(player);
+                    challenge.readFromNBT(chTag);
+                }
+                catch(Exception e) {
+                    LogHelper.log(Level.ERROR, e, "Failed to create challenge instance for " + chName);
+                    challenge = null;
+                }
+                player = null;
             }
-            catch(ClassNotFoundException ex) {
-                challenge = null;
-                LogHelper.log(Level.ERROR, ex, "Could not instatiante %s", className);
-            }
-            catch(InstantiationException | IllegalAccessException ex) {
-                challenge = null;
-                LogHelper.log(Level.ERROR, ex, "Could not instatiante %s: No accessible default constructor", className);
-            }
+            else
+                LogHelper.warn("Unknown challenge ID: %s", chName);
         }
     }
 
     @Override
     public void init(Entity entity, World world) {
-        if(challenge != null) {
-            this.player = (EntityPlayerMP)entity;
-            challenge.setPlayer(player);
-        }
+        if(challenge != null) 
+            challenge.setPlayer((EntityPlayerMP)entity);
     }
     
     public Challenge getChallenge() {
@@ -73,6 +85,6 @@ public class ChallengeHolder implements IExtendedEntityProperties {
         this.challenge = null;
     }
 
-    private EntityPlayerMP player;
+    private EntityPlayerMP player; //This field is only used for loading challenges
     private Challenge challenge;
 }

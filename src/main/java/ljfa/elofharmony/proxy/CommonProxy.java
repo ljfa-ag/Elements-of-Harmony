@@ -1,5 +1,7 @@
 package ljfa.elofharmony.proxy;
 
+import ljfa.elofharmony.challenges.ChallengeGenerosity;
+import ljfa.elofharmony.challenges.ChallengeHolder;
 import ljfa.elofharmony.tile.TileRitualTable;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -13,6 +15,8 @@ public class CommonProxy {
     
     public void init(FMLInitializationEvent event) {
         registerTileEntities();
+        
+        ChallengeHolder.register("Generosity", ChallengeGenerosity.class);
     }
     
     public void postInit(FMLPostInitializationEvent event) {
