@@ -97,19 +97,13 @@ public class ChallengeGenerosity extends Challenge {
     
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        tag.setInteger("TableX", tablePos.x);
-        tag.setInteger("TableY", tablePos.y);
-        tag.setInteger("TableZ", tablePos.z);
-        tag.setInteger("TableDim", tablePos.dim);
+        tag.setIntArray("TablePos", new int[] {tablePos.x, tablePos.y, tablePos.z, tablePos.dim});
     }
     
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        int x = tag.getInteger("TableX");
-        int y = tag.getInteger("TableY");
-        int z = tag.getInteger("TableZ");
-        int dim = tag.getInteger("TableDim");
-        this.tablePos = new DimPos(x, y, z, dim);
+        int[] arr = tag.getIntArray("TablePos");
+        this.tablePos = new DimPos(arr[0], arr[1], arr[2], arr[3]);
     }
     
     private TileRitualTable getTable() {
