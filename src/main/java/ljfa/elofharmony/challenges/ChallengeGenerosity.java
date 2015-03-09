@@ -69,9 +69,9 @@ public class ChallengeGenerosity extends Challenge {
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
         
-        ChatHelper.toPlayer(player, "The Generosity challenge is on!");
-        ChatHelper.toPlayer(player, "You have to return to the Harmony Table without dying.");
-        ChatHelper.toPlayer(player, "You cannot pick up any items during the challenge.");
+        ChatHelper.toPlayerLines(player, "The Generosity challenge is on!\n"
+            + "You have to return to the Harmony Table without dying.\n"
+            + "You cannot pick up any items during the challenge.");
     }
     
     @Override

@@ -1,24 +1,44 @@
 package ljfa.elofharmony.util;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 
 public class ChatHelper {
+    /** Sends an unlocalized chat message to a player. */
     public static void toPlayer(ICommandSender player, String msg) {
         player.addChatMessage(new ChatComponentText(msg));
     }
     
-    public static void toPlayerLocalized(ICommandSender player, String key, Object... args) {
+    /** Sends an unlocalized chat message which can contain multiple lines to a player. */
+    public static void toPlayerLines(ICommandSender player, String msg) {
+        for(String line: patNewline.split(msg))
+            toPlayer(player, line);
+    }
+    
+    /** Sends a localized chat message to a player. */
+    public static void toPlayerLoc(ICommandSender player, String key, Object... args) {
         player.addChatMessage(new ChatComponentTranslation(key, args));
     }
     
+    /** Broadcasts an unlocalized chat message. */
     public static void broadcast(String msg) {
         MinecraftServer.getServer().addChatMessage(new ChatComponentText(msg));
     }
     
-    public static void broadcastLocalized(String key, Object... args) {
+    /** Broadcasts an unlocalized chat message which can contain multiple lines. */
+    public static void broadcastLines(String msg) {
+        for(String line: patNewline.split(msg))
+            broadcast(line);
+    }
+    
+    /** Broadcasts a localized chat message. */
+    public static void broadcastLoc(String key, Object... args) {
         MinecraftServer.getServer().addChatMessage(new ChatComponentTranslation(key, args));
     }
+    
+    private static final Pattern patNewline = Pattern.compile("\\r?\\n");
 }
