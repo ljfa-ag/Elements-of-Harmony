@@ -1,0 +1,22 @@
+elofharmony.configgui.ctgy.general.tooltip=Options générales
+elofharmony.configgui.ctgy.poisonjoke.tooltip=L'usine de plaisanterie douteuse
+
+itemGroup.elofharmony=Elements of Harmony
+
+tile.elofharmony:poisonjoke.name=Plaisanterie douteuse
+tile.elofharmony:log_flutter.name=Rontin de flottement
+tile.elofharmony:leaves_flutter.name=Feuilles de flottement
+tile.elofharmony:sapling_flutter.name=Pousse de flottement
+tile.elofharmony:planks_flutter.name=Plaches de flottement
+tile.elofharmony:slab_flutter.name=Dalle de flottement
+tile.elofharmony:stairs_flutter.name=Escaliers de flottement
+tile.elofharmony:ritual_table.name=Table d'harmonie
+
+item.elofharmony:element_honesty.name=Élément d'honnêteté
+item.elofharmony:element_kindness.name=Élément de bonté
+item.elofharmony:element_laughter.name=Élément de rire
+item.elofharmony:element_loyalty.name=Élément de loyauté
+item.elofharmony:element_generosity.name=Élément de générosité
+item.elofharmony:element_magic.name=Élément de magie
+item.elofharmony:twilicane.name=Canne de crépuscule
+item.elofharmony:yellow_feather.name=Plume jaune
