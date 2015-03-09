@@ -56,7 +56,7 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onEntityConstruct(EntityConstructing event) {
         if(event.entity instanceof EntityPlayerMP)
-            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder());
+            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder((EntityPlayerMP)event.entity));
     }
     
     public ChallengeHolder getHolder(EntityPlayerMP player) {

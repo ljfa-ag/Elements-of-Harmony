@@ -15,6 +15,10 @@ import net.minecraftforge.common.util.Constants;
 
 public class ChallengeHolder implements IExtendedEntityProperties {
     
+    public ChallengeHolder(EntityPlayerMP player) {
+        this.player = player;
+    }
+    
     @Override
     public void saveNBTData(NBTTagCompound tag) {
         if(challenge != null) {
@@ -31,24 +35,30 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     public void loadNBTData(NBTTagCompound tag) {
         if(tag.hasKey("eoh:Challenge", Constants.NBT.TAG_COMPOUND)) {
             NBTTagCompound chTag = tag.getCompoundTag("eoh:Challenge");
-            
             String className = chTag.getString("ClassName");
             try {
                 challenge = (Challenge)Class.forName(className).newInstance();
                 LogHelper.info("Successfully created instance of %s", className);
+                challenge.setPlayer(player);
                 challenge.readFromNBT(tag);
             }
-            catch(ReflectiveOperationException ex) {
+            catch(ClassNotFoundException ex) {
                 challenge = null;
-                LogHelper.log(Level.ERROR, ex, "Failed to create instance of %s", className);
+                LogHelper.log(Level.ERROR, ex, "Could not instatiante %s", className);
+            }
+            catch(InstantiationException | IllegalAccessException ex) {
+                challenge = null;
+                LogHelper.log(Level.ERROR, ex, "Could not instatiante %s: No accessible default constructor", className);
             }
         }
     }
 
     @Override
     public void init(Entity entity, World world) {
-        if(challenge != null)
-            challenge.setPlayer((EntityPlayerMP)entity);
+        if(challenge != null) {
+            this.player = (EntityPlayerMP)entity;
+            challenge.setPlayer(player);
+        }
     }
     
     public Challenge getChallenge() {
@@ -63,5 +73,6 @@ public class ChallengeHolder implements IExtendedEntityProperties {
         this.challenge = null;
     }
 
+    private EntityPlayerMP player;
     private Challenge challenge;
 }
