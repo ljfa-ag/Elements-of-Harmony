@@ -1,5 +1,6 @@
 package ljfa.elofharmony.blocks;
 
+import ljfa.elofharmony.Reference;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.block.Block;
@@ -18,6 +19,7 @@ public class BlockRitualTable extends EohBlock implements ITileEntityProvider {
         setHardness(2.0f);
         setResistance(20.0f);
         setStepSound(soundTypeWood);
+        setBlockTextureName(Reference.MODID + ":planks_flutter");
     }
 
     @Override
