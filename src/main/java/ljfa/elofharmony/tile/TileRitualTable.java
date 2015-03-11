@@ -61,8 +61,13 @@ public class TileRitualTable extends TileInventoryBase {
         InventoryPlayer playerInv = player.inventory;
         int playerSlot = playerInv.currentItem;
         ItemStack playerStack = playerInv.getCurrentItem();
-        if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane)
-            return false;
+        
+        if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane) {
+            if(player.worldObj.isRemote)
+                return true;
+            else
+                return tryStartChallenge((EntityPlayerMP)player);
+        }
         
         ItemStack tableStack = getStackInSlot(0);
         if(tableStack != null) {

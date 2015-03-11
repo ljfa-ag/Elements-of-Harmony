@@ -35,14 +35,8 @@ public class ItemTwilicane extends Item {
                 return false;
             }
         }
-        else {
-            //Start challenge if used on ritual table
-            TileEntity tile = world.getTileEntity(x, y, z);
-            if(tile instanceof TileRitualTable)
-                return ((TileRitualTable)tile).tryStartChallenge((EntityPlayerMP)player);
-            else
-                return false;
-        }
+        else
+            return false;
     }
     
     @Override
