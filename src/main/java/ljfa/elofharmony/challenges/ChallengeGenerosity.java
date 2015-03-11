@@ -8,21 +8,18 @@ import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.DimPos;
-import ljfa.elofharmony.util.LogHelper;
 import ljfa.elofharmony.util.MathHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class ChallengeGenerosity extends Challenge {
+public class ChallengeGenerosity extends TableChallenge {
+
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
-        super(player);
-        this.tablePos = DimPos.fromTile(tile);
+        super(player, tile);
     }
     
     public ChallengeGenerosity() { }
@@ -86,49 +83,19 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayer(player, "You failed the challenge!");
-        TileRitualTable table = getTable();
-        if(table != null)
-            table.onChallengeEnded();
+        super.onAbort();
     }
     
     @Override
     public void onComplete() {
         ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
-        TileRitualTable table = getTable();
-        ItemStack result = new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
-        if(table != null) {
-            //Put item into table
-            table.setInventorySlotContents(0, result);
-            table.onChallengeEnded();
-        }
-        else {
-            //Drop item on ground if table is not present
-            EntityItem entity = new EntityItem(tablePos.getWorld(), tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, result);
-            tablePos.getWorld().spawnEntityInWorld(entity);
-        }
+        super.onComplete();
     }
     
     @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        tag.setIntArray("TablePos", tablePos.toArray());
+    protected ItemStack getResult() {
+        return new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
     }
-    
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        this.tablePos = DimPos.fromArray(tag.getIntArray("TablePos"));
-    }
-    
-    private TileRitualTable getTable() {
-        TileEntity tile = tablePos.getTile();
-        if(tile instanceof TileRitualTable)
-            return (TileRitualTable)tile;
-        else {
-            LogHelper.warn("Missing or wrong tile entity at " + tablePos);
-            return null;
-        }
-    }
-    
-    private DimPos tablePos;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
         @Override
