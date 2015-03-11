@@ -35,7 +35,9 @@ public abstract class Challenge {
     public abstract void onTick();
     
     /** @return true if the player is allowed to pick up this stack into the inventory */
-    public abstract boolean mayPickUp(ItemStack stack);
+    public boolean mayPickUp(ItemStack stack) {
+        return true;
+    }
     
     /** Called when the challenge should be aborted */
     public abstract void onAbort();
