@@ -120,12 +120,6 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     @Override
-    public void spillItems() {
-        //TODO: Implementation
-        super.spillItems();
-    }
-    
-    @Override
     public void writeCustomNBT(NBTTagCompound tag) {
         super.writeCustomNBT(tag);
         tag.setBoolean("hasChallenge", hasChallenge);

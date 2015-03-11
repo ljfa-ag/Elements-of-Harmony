@@ -8,8 +8,9 @@ import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
 import ljfa.elofharmony.util.ChatHelper;
 import ljfa.elofharmony.util.DimPos;
-import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
+import ljfa.elofharmony.util.MathHelper;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -85,14 +86,26 @@ public class ChallengeGenerosity extends Challenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayer(player, "You failed the challenge!");
-        getTable().onChallengeEnded();
+        TileRitualTable table = getTable();
+        if(table != null)
+            table.onChallengeEnded();
     }
     
     @Override
     public void onComplete() {
         ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
-        getTable().setInventorySlotContents(0, new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal()));
-        getTable().onChallengeEnded();
+        TileRitualTable table = getTable();
+        ItemStack result = new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
+        if(table != null) {
+            //Put item into table
+            table.setInventorySlotContents(0, result);
+            table.onChallengeEnded();
+        }
+        else {
+            //Drop item on ground if table is not present
+            EntityItem entity = new EntityItem(tablePos.getWorld(), tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, result);
+            tablePos.getWorld().spawnEntityInWorld(entity);
+        }
     }
     
     @Override
@@ -109,8 +122,10 @@ public class ChallengeGenerosity extends Challenge {
         TileEntity tile = tablePos.getTile();
         if(tile instanceof TileRitualTable)
             return (TileRitualTable)tile;
-        else
-            throw new RuntimeException("Missing or wrong tile entity at " + tablePos);
+        else {
+            LogHelper.warn("Missing or wrong tile entity at " + tablePos);
+            return null;
+        }
     }
     
     private DimPos tablePos;
