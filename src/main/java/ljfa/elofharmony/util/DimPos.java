@@ -1,8 +1,9 @@
 package ljfa.elofharmony.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 /** Represents a position in a specific dimension */
@@ -25,8 +26,13 @@ public class DimPos {
         return new DimPos(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
     }
     
-    public World getWorld() {
-        return DimensionManager.getWorld(dim);
+    public WorldServer getWorld() {
+        WorldServer world = DimensionManager.getWorld(dim);
+        if (world == null) {
+            DimensionManager.initDimension(dim);
+            world = DimensionManager.getWorld(dim);
+        }
+        return world;
     }
     
     public Block getBlock() {
