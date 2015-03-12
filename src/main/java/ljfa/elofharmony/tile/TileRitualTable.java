@@ -129,12 +129,6 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     @Override
-    public void onChunkUnload() {
-        super.onChunkUnload();
-        LogHelper.trace("TileRitualTable unloaded");
-    }
-    
-    @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();
         writeCustomNBT(tag);
