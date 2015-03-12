@@ -3,14 +3,14 @@ package ljfa.elofharmony.handlers;
 import java.util.Random;
 
 import ljfa.elofharmony.Config;
-import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
+import ljfa.elofharmony.util.MathHelper;
+import ljfa.elofharmony.util.PotionHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -56,7 +56,7 @@ public class PoisonJokeHandler {
         
         int level = rand.nextInt(Config.pjMaxLevels[index]);
         
-        entity.addPotionEffect(new PotionEffect(id, duration, level, false));
+        PotionHelper.addEffect(entity, id, duration, level);
         return duration;
     }
     

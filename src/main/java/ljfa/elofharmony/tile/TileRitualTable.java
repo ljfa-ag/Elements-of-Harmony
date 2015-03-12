@@ -1,7 +1,5 @@
 package ljfa.elofharmony.tile;
 
-import java.util.List;
-
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
@@ -9,19 +7,18 @@ import ljfa.elofharmony.items.ItemResource;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.util.LogHelper;
+import ljfa.elofharmony.util.PotionHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 public class TileRitualTable extends TileInventoryBase {
     private boolean hasChallenge = false;
@@ -54,7 +51,7 @@ public class TileRitualTable extends TileInventoryBase {
             || item == Items.cake
             || item == Items.diamond
             || item == Items.nether_star
-            || isPotionOfType(item, meta, Potion.moveSpeed.id);
+            || PotionHelper.isPotionOfType(item, meta, Potion.moveSpeed.id);
     }
     
     public boolean onPlayerInteract(EntityPlayer player) {
@@ -147,19 +144,5 @@ public class TileRitualTable extends TileInventoryBase {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
         readCustomNBT(packet.func_148857_g());
-    }
-    
-    private static boolean isPotionOfType(Item item, int damage, int potionID) {
-        if(!(item instanceof ItemPotion))
-            return false;
-        ItemPotion potion = (ItemPotion)item;
-        List<PotionEffect> effectList = potion.getEffects(damage);
-        if(effectList == null)
-            return false;
-        for(PotionEffect eff: effectList) {
-            if(eff != null && eff.getPotionID() == potionID)
-                return true;
-        }
-        return false;
     }
 }
