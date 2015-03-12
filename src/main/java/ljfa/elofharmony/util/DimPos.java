@@ -1,7 +1,6 @@
 package ljfa.elofharmony.util;
 
 import net.minecraft.block.Block;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;

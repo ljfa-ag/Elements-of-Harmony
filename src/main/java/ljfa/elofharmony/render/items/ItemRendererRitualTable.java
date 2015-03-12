@@ -1,6 +1,5 @@
 package ljfa.elofharmony.render.items;
 
-import ljfa.elofharmony.render.blocks.TileRitualTableRenderer;
 import ljfa.elofharmony.tile.TileRitualTable;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;

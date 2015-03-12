@@ -1,14 +1,5 @@
 package ljfa.elofharmony.challenges;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-
-import org.apache.logging.log4j.Level;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,6 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.common.util.Constants;
+
+import org.apache.logging.log4j.Level;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 public class ChallengeHolder implements IExtendedEntityProperties {
     

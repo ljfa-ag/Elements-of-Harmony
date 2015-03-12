@@ -2,9 +2,6 @@ package ljfa.elofharmony.challenges;
 
 import java.util.Objects;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

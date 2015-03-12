@@ -4,8 +4,8 @@ import java.util.Random;
 
 import ljfa.elofharmony.Config;
 import ljfa.elofharmony.blocks.ModBlocks;
-import ljfa.elofharmony.util.MathHelper;
 import ljfa.elofharmony.util.LogHelper;
+import ljfa.elofharmony.util.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
