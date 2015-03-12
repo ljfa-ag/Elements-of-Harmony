@@ -3,10 +3,9 @@ package ljfa.elofharmony.tile;
 import ljfa.elofharmony.challenges.Challenge;
 import ljfa.elofharmony.challenges.ChallengeGenerosity;
 import ljfa.elofharmony.handlers.ChallengeHandler;
-import ljfa.elofharmony.items.ItemResource;
+import ljfa.elofharmony.items.ItemResource.ResourceType;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
-import ljfa.elofharmony.util.LogHelper;
 import ljfa.elofharmony.util.PotionHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -47,7 +46,7 @@ public class TileRitualTable extends TileInventoryBase {
         int meta = stack.getItemDamage();
         return item == ModItems.elementOfHarmony
             || item == Items.apple
-            || item == ModItems.resource && meta == ItemResource.ResourceType.YELLOW_FEATHER.ordinal()
+            || item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal()
             || item == Items.cake
             || item == Items.diamond
             || item == Items.nether_star
