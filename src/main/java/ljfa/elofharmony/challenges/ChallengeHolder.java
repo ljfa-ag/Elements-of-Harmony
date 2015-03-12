@@ -17,7 +17,7 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     
     private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
     
-    public static void register(String name, Class<? extends Challenge> clazz) {
+    public static void register(Class<? extends Challenge> clazz, String name) {
         if(registry.containsKey(name))
             throw new RuntimeException("Duplicate entry for challenge ID " + name);
         registry.put(name, clazz);

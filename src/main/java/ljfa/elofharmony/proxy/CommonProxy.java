@@ -16,7 +16,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event) {
         registerTileEntities();
         
-        ChallengeHolder.register("Generosity", ChallengeGenerosity.class);
+        ChallengeHolder.register(ChallengeGenerosity.class, "Generosity");
     }
     
     public void postInit(FMLPostInitializationEvent event) {
