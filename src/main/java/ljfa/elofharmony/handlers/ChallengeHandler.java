@@ -13,14 +13,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ChallengeHandler {
-    private static ChallengeHandler instance = new ChallengeHandler();
-    
-    public static ChallengeHandler getInstance() {
-        return instance;
-    }
-    
-    private ChallengeHandler() { }
-    
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onPlayerTick(PlayerTickEvent event) {
         World world = event.player.worldObj;
@@ -32,11 +25,11 @@ public class ChallengeHandler {
         if(ch != null) {
             ch.onTick();
             if(!ch.checkRestriction()) {
-                abortChallenge(ch);
+                ChallengeHandler.abortChallenge(ch);
             }
             if(world.getWorldTime() % 16 == 0) {
                 if(ch.checkCondition()) {
-                    endChallenge(ch);
+                    ChallengeHandler.endChallenge(ch);
                 }
             }
         }
@@ -55,30 +48,19 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onEntityConstruct(EntityConstructing event) {
         if(event.entity instanceof EntityPlayerMP)
-            event.entity.registerExtendedProperties("eoh:Challenge", new ChallengeHolder((EntityPlayerMP)event.entity));
+            ChallengeHolder.initPlayer((EntityPlayerMP)event.entity);
     }
     
-    public ChallengeHolder getHolder(EntityPlayerMP player) {
-        return (ChallengeHolder)player.getExtendedProperties("eoh:Challenge");
-    }
-    
-    public Challenge getChallenge(EntityPlayerMP player) {
-        return getHolder(player).getChallenge();
-    }
-    
-    public boolean hasChallengeRunning(EntityPlayerMP player) {
-        return getChallenge(player) != null;
-    }
-    
-    public boolean tryStartChallenge(Challenge ch) {
+    public static boolean tryStartChallenge(Challenge ch) {
         if(ch.checkStartingCondition()) {
             startChallenge(ch);
             return true;
-        } else
+        }
+        else
             return false;
     }
     
-    public boolean tryAbortChallenge(EntityPlayer player) {
+    public static boolean tryAbortChallenge(EntityPlayer player) {
         Challenge ch = getChallenge((EntityPlayerMP)player);
         if(ch != null) {
             abortChallenge(ch);
@@ -88,19 +70,26 @@ public class ChallengeHandler {
             return false;
     }
     
-    private void startChallenge(Challenge ch) {
-        getHolder(ch.getPlayer()).setChallenge(ch);
+    public static Challenge getChallenge(EntityPlayerMP player) {
+        return ChallengeHolder.get(player).getChallenge();
+    }
+    
+    public static boolean hasChallenge(EntityPlayerMP player) {
+        return getChallenge(player) != null;
+    }
+    
+    private static void startChallenge(Challenge ch) {
+        ChallengeHolder.get(ch.getPlayer()).setChallenge(ch);
         ch.onStart();
     }
     
-    private void abortChallenge(Challenge ch) {
+    private static void abortChallenge(Challenge ch) {
         ch.onAbort();
-        getHolder(ch.getPlayer()).clearChallenge();
+        ChallengeHolder.get(ch.getPlayer()).clearChallenge();
     }
     
-    private void endChallenge(Challenge ch) {
+    private static void endChallenge(Challenge ch) {
         ch.onComplete();
-        getHolder(ch.getPlayer()).clearChallenge();
+        ChallengeHolder.get(ch.getPlayer()).clearChallenge();
     }
-    
 }

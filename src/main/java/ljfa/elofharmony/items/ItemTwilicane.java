@@ -24,7 +24,7 @@ public class ItemTwilicane extends Item {
             return true;
         if(player.isSneaking()) {
             //Abort current challenge
-            if(ChallengeHandler.getInstance().tryAbortChallenge(player)) {
+            if(ChallengeHandler.tryAbortChallenge(player)) {
                 return true;
             }
             else {
@@ -40,7 +40,7 @@ public class ItemTwilicane extends Item {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if(!world.isRemote && player.isSneaking()) {
             //Abort current challenge
-            if(!ChallengeHandler.getInstance().tryAbortChallenge(player))
+            if(!ChallengeHandler.tryAbortChallenge(player))
                 ChatHelper.toPlayer(player, "You have no challenge running at the moment.");
         }
         return super.onItemRightClick(stack, world, player);

@@ -8,7 +8,6 @@ import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.util.GameUtils;
 import ljfa.elofharmony.util.PotionHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -93,8 +92,7 @@ public class TileRitualTable extends TileInventoryBase {
     }
     
     private boolean tryStartChallenge(EntityPlayerMP player) {
-        ChallengeHandler handler = ChallengeHandler.getInstance();
-        if(!handler.hasChallengeRunning(player)) {
+        if(!ChallengeHandler.hasChallenge(player)) {
             if(inv[0] == null)
                 return false;
             Item item = inv[0].getItem();
@@ -104,7 +102,7 @@ public class TileRitualTable extends TileInventoryBase {
             else
                 return false;
             
-            if(handler.tryStartChallenge(challenge)) {
+            if(ChallengeHandler.tryStartChallenge(challenge)) {
                 setInventorySlotContents(0, null);
                 this.hasChallenge = true;
                 return true;

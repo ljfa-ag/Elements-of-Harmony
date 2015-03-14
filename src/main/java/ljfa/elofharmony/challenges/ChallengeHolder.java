@@ -13,18 +13,42 @@ import org.apache.logging.log4j.Level;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+/** This is a wrapper class for Challenge objects. Instances of this class get saved to the
+ * ExtendedEntityProperties of each player.
+ * Challenges have to be registered with the register method.
+ */
 public class ChallengeHolder implements IExtendedEntityProperties {
-    
-    private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
-    
+
+    /** Registers a Challenge class. The challenge must have a no-arguments constructor. */
     public static void register(Class<? extends Challenge> clazz, String name) {
         if(registry.containsKey(name))
             throw new RuntimeException("Duplicate entry for challenge ID " + name);
         registry.put(name, clazz);
     }
     
-    public ChallengeHolder(EntityPlayerMP player) {
-        this.player = player;
+    /** @return the ChallengeHolder for the player. */
+    public static ChallengeHolder get(EntityPlayerMP player) {
+        return (ChallengeHolder)player.getExtendedProperties("eoh:Challenge");
+    }
+    
+    /** Initializes the player with a ChallengeHolder. Gets called when the player entity gets constructed. */
+    public static void initPlayer(EntityPlayerMP player) {
+        player.registerExtendedProperties("eoh:Challenge", new ChallengeHolder(player));
+    }
+    
+    /** @return the Challenge inside this holder */
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
+    /** Sets the challenge for this holder. */
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+    
+    /** Removes the challenge from this holder. */
+    public void clearChallenge() {
+        this.challenge = null;
     }
     
     @Override
@@ -69,18 +93,12 @@ public class ChallengeHolder implements IExtendedEntityProperties {
             challenge.setPlayer((EntityPlayerMP)entity);
     }
     
-    public Challenge getChallenge() {
-        return challenge;
-    }
-
-    public void setChallenge(Challenge challenge) {
-        this.challenge = challenge;
+    private ChallengeHolder(EntityPlayerMP player) {
+        this.player = player;
     }
     
-    public void clearChallenge() {
-        this.challenge = null;
-    }
-
+    private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
+    
     private EntityPlayerMP player; //This field is only used for loading challenges
     private Challenge challenge;
 }
