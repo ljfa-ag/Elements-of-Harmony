@@ -1,5 +1,6 @@
 package ljfa.elofharmony.worldgen;
 
+import java.util.Objects;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -12,10 +13,8 @@ public class FluttertreeGenerator extends WorldGenAbstractTree {
     
     public FluttertreeGenerator(boolean notify, Block log, Block leaves) {
         super(notify);
-        if(log == null || leaves == null)
-            throw new NullPointerException("Null passed as log or leaf block to FluttertreeGenerator");
-        this.log = log;
-        this.leaves = leaves;
+        this.log = Objects.requireNonNull(log, "The log must not be null");
+        this.leaves = Objects.requireNonNull(leaves, "The leaves must not be null");
     }
     
     @Override
