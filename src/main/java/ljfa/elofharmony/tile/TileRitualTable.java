@@ -6,7 +6,9 @@ import ljfa.elofharmony.handlers.ChallengeHandler;
 import ljfa.elofharmony.items.ItemResource.ResourceType;
 import ljfa.elofharmony.items.ItemTwilicane;
 import ljfa.elofharmony.items.ModItems;
+import ljfa.elofharmony.util.GameUtils;
 import ljfa.elofharmony.util.PotionHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,6 +20,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileRitualTable extends TileInventoryBase {
     private boolean hasChallenge = false;
@@ -137,5 +141,11 @@ public class TileRitualTable extends TileInventoryBase {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
         readCustomNBT(packet.func_148857_g());
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public double getMaxRenderDistanceSquared() {
+        return GameUtils.getRenderDistanceSq();
     }
 }
