@@ -39,7 +39,7 @@ public abstract class TableChallenge extends Challenge {
             EntityItem entity = new EntityItem(tablePos.getWorld(), tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, result);
             tablePos.getWorld().spawnEntityInWorld(entity);
         }
-        table.getWorldObj().playSoundEffect(tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, "random.levelup", 1.0f, 1.0f);
+        tablePos.getWorld().playSoundEffect(tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, "random.levelup", 1.0f, 1.0f);
     }
     
     @Override
