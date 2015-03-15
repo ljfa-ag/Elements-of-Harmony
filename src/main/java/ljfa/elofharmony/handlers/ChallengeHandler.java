@@ -7,14 +7,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ChallengeHandler {
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent event) {
         World world = event.player.worldObj;
         if(world.isRemote || event.phase != Phase.START)
