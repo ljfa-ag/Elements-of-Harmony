@@ -27,8 +27,7 @@ public class ChallengeGenerosity extends TableChallenge {
         if(invRestr.check(player)) {
             return true;
         } else {
-            ChatHelper.toPlayer(player, "In order to start the Generosity challenge you're not allowed "
-                + "to have any items on you besides the Twilicane");
+            ChatHelper.toPlayerLoc(player, "elofharmony.challenge.generosity.no_items_allowed");
             return false;
         }
     }
@@ -65,9 +64,8 @@ public class ChallengeGenerosity extends TableChallenge {
         player.playerNetServerHandler.setPlayerLocation(tpx + 0.5, tpy, tpz + 0.5, yaw, 0.0f);
         world.playSoundEffect(tpx + 0.5, tpy + 0.5, tpz + 0.5, "mob.endermen.portal", 1.0f, 1.0f);
         
-        ChatHelper.toPlayerLines(player, "The Generosity challenge is on!\n"
-            + "You have to return to the Harmony Table without dying.\n"
-            + "You cannot pick up any items during the challenge.");
+        for(int i = 0; i < 3; i++)
+            ChatHelper.toPlayerLoc(player, "elofharmony.challenge.generosity.start" + i);
     }
     
     @Override
@@ -80,13 +78,13 @@ public class ChallengeGenerosity extends TableChallenge {
     
     @Override
     public void onAbort() {
-        ChatHelper.toPlayer(player, "You failed the challenge!");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
         super.onAbort();
     }
     
     @Override
     public void onComplete() {
-        ChatHelper.toPlayer(player, "Congratulations, you completed the challenge!");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
         super.onComplete();
     }
     
