@@ -57,13 +57,14 @@ public class ChallengeKindness extends TableChallenge {
     @Override
     public void onPlayerHurt(LivingHurtEvent event) {
         if(event.source == DamageSource.fall && player.fallDistance >= 39.5f && MetricHelper.distInf(player, tablePos) <= 3.5) {
-            double offsetH = 0.5, offsetV = 0.2;
+            double minDistH = 0.25, offsetV = 0.2;
             List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
-                    AxisAlignedBB.getBoundingBox(player.posX-offsetH, player.posY-offsetV, player.posZ-offsetH, player.posX+offsetH, player.posY+offsetV, player.posZ+offsetH));
+                    AxisAlignedBB.getBoundingBox(player.posX-minDistH, player.posY-offsetV, player.posZ-minDistH, player.posX+minDistH, player.posY+offsetV, player.posZ+minDistH));
             
             if(list.size() == 1) {
                 Entity ent = list.get(0);
-                if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= 0.05*0.05) {
+                double threshold = 0.1;
+                if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= threshold*threshold) {
                     event.setCanceled(true);
                     complete = true;
                 }
