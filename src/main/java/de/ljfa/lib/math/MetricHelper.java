@@ -13,6 +13,11 @@ public class MetricHelper {
         return dist1(ent.posX, ent.posY, ent.posZ, x2, y2, z2);
     }
     
+    /** Computes the Manhattan distance between the entities */
+    public static double dist1(Entity ent1, Entity ent2) {
+        return dist1(ent1.posX, ent1.posY, ent1.posZ, ent2.posX, ent2.posY, ent2.posZ);
+    }
+    
     /** Computes the entity's Manhattan distance from the DimPos, or Infinity if different dimension */
     public static double dist1(Entity ent, DimPos pos) {
         if(ent.dimension == pos.dim) 
@@ -29,6 +34,11 @@ public class MetricHelper {
     /** Computes the entity's squared euclidean distance from the point */
     public static double dist2sq(Entity ent, double x2, double y2, double z2) {
         return dist2sq(ent.posX, ent.posY, ent.posZ, x2, y2, z2);
+    }
+    
+    /** Computes the squared euclidean distance between the entities */
+    public static double dist2sq(Entity ent1, Entity ent2) {
+        return dist2sq(ent1.posX, ent1.posY, ent1.posZ, ent2.posX, ent2.posY, ent2.posZ);
     }
     
     /** Computes the entity's squared euclidean distance from the DimPos, or Infinity if different dimension */
@@ -49,6 +59,11 @@ public class MetricHelper {
         return dist2(ent.posX, ent.posY, ent.posZ, x2, y2, z2);
     }
     
+    /** Computes the euclidean distance between the entities */
+    public static double dist2(Entity ent1, Entity ent2) {
+        return dist2(ent1.posX, ent1.posY, ent1.posZ, ent2.posX, ent2.posY, ent2.posZ);
+    }
+    
     /** Computes the entity's euclidean distance from the point, or Infinity if different dimension */
     public static double dist2(Entity ent, DimPos pos) {
         if(ent.dimension == pos.dim) 
@@ -65,6 +80,11 @@ public class MetricHelper {
     /** Computes the entity's maximum norm distance from the point */
     public static double distInf(Entity ent, double x2, double y2, double z2) {
         return distInf(ent.posX, ent.posY, ent.posZ, x2, y2, z2);
+    }
+    
+    /** Computes the maximum norm distance between the entities */
+    public static double distInf(Entity ent1, Entity ent2) {
+        return distInf(ent1.posX, ent1.posY, ent1.posZ, ent2.posX, ent2.posY, ent2.posZ);
     }
     
     /** Computes the entity's maximum norm distance from the DimPos, or Infinity if different dimension */
