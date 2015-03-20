@@ -1,4 +1,4 @@
-package ljfa.elofharmony.util;
+package de.ljfa.lib.chat;
 
 import java.util.regex.Pattern;
 

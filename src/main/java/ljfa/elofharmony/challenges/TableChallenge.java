@@ -1,7 +1,7 @@
 package ljfa.elofharmony.challenges;
 
+import de.ljfa.lib.math.DimPos;
 import ljfa.elofharmony.tile.TileRitualTable;
-import ljfa.elofharmony.util.DimPos;
 import ljfa.elofharmony.util.LogHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;

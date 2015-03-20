@@ -1,13 +1,13 @@
 package ljfa.elofharmony.challenges;
 
+import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.math.MathHelper;
 import ljfa.elofharmony.inventory.FullInvRestriction;
 import ljfa.elofharmony.inventory.SlotRestriction;
 import ljfa.elofharmony.inventory.SlotType;
 import ljfa.elofharmony.items.ItemElement.ElementType;
 import ljfa.elofharmony.items.ModItems;
 import ljfa.elofharmony.tile.TileRitualTable;
-import ljfa.elofharmony.util.ChatHelper;
-import ljfa.elofharmony.util.MathHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;

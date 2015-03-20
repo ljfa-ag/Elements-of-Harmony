@@ -1,4 +1,4 @@
-package ljfa.elofharmony.util;
+package de.ljfa.lib.util;
 
 import java.util.List;
 

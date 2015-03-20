@@ -1,4 +1,4 @@
-package ljfa.elofharmony.util;
+package de.ljfa.lib.math;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;

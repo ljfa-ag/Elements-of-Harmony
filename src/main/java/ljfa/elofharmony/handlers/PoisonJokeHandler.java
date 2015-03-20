@@ -4,8 +4,6 @@ import java.util.Random;
 
 import ljfa.elofharmony.Config;
 import ljfa.elofharmony.util.LogHelper;
-import ljfa.elofharmony.util.MathHelper;
-import ljfa.elofharmony.util.PotionHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySquid;
@@ -14,6 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.util.PotionHelper;
 
 /** Event handler for the delayed effects originating from Poison Joke */
 public class PoisonJokeHandler {

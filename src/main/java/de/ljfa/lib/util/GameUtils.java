@@ -1,4 +1,4 @@
-package ljfa.elofharmony.util;
+package de.ljfa.lib.util;
 
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.relauncher.Side;

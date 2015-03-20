@@ -5,7 +5,6 @@ import java.util.Random;
 import ljfa.elofharmony.Config;
 import ljfa.elofharmony.blocks.ModBlocks;
 import ljfa.elofharmony.util.LogHelper;
-import ljfa.elofharmony.util.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -14,6 +13,7 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import de.ljfa.lib.math.MathHelper;
 
 public class DecorationPoisonJoke {
     @SubscribeEvent(priority = EventPriority.LOWEST)
