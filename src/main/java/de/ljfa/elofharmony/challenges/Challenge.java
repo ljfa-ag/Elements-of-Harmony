@@ -5,7 +5,7 @@ import java.util.Objects;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public abstract class Challenge {
 
@@ -44,7 +44,7 @@ public abstract class Challenge {
     public abstract void onComplete();
     
     /** Called when the player takes damage */
-    public void onPlayerHurt(DamageSource src, float amount) { }
+    public void onPlayerHurt(LivingHurtEvent event) { }
     
     /** Writes the challenge data to NBT */
     public abstract void writeToNBT(NBTTagCompound tag);

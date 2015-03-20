@@ -50,7 +50,7 @@ public class ChallengeHandler {
         if(event.entity instanceof EntityPlayerMP) {
             Challenge ch = getChallenge((EntityPlayerMP)event.entity);
             if(ch != null)
-                ch.onPlayerHurt(event.source, event.ammount);
+                ch.onPlayerHurt(event);
         }
     }
     

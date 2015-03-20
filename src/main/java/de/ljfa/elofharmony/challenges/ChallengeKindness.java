@@ -1,11 +1,13 @@
 package de.ljfa.elofharmony.challenges;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.chat.ChatHelper;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 
 public class ChallengeKindness extends TableChallenge {
 
@@ -32,7 +34,7 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public boolean checkCondition() {
-        return true;
+        return complete;
     }
 
     @Override
@@ -42,7 +44,17 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public void onTick() {
-
+        
+    }
+    
+    @Override
+    public void onPlayerHurt(LivingHurtEvent event) {
+        if(event.source == DamageSource.fall) {
+            if(getPlayer().fallDistance > 40f) {
+                event.setCanceled(true);
+                complete = true;
+            }
+        }
     }
     
     @Override
@@ -62,4 +74,5 @@ public class ChallengeKindness extends TableChallenge {
         return false;
     }
 
+    private boolean complete = false;
 }
