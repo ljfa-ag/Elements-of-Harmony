@@ -15,7 +15,7 @@ public class ChatHelper {
     
     /** Sends an unlocalized chat message which can contain multiple lines to a player. */
     public static void toPlayerLines(ICommandSender player, String msg) {
-        for(String line: patNewline.split(msg))
+        for(String line: patternNewline.split(msg))
             toPlayer(player, line);
     }
     
@@ -31,7 +31,7 @@ public class ChatHelper {
     
     /** Broadcasts an unlocalized chat message which can contain multiple lines. */
     public static void broadcastLines(String msg) {
-        for(String line: patNewline.split(msg))
+        for(String line: patternNewline.split(msg))
             broadcast(line);
     }
     
@@ -40,5 +40,5 @@ public class ChatHelper {
         MinecraftServer.getServer().addChatMessage(new ChatComponentTranslation(key, args));
     }
     
-    private static final Pattern patNewline = Pattern.compile("\\r?\\n");
+    public static final Pattern patternNewline = Pattern.compile("\\r?\\n");
 }
