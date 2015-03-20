@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -41,6 +42,15 @@ public class ChallengeHandler {
         if(ch != null && !ch.mayPickUp(event.item.getEntityItem())) {
             event.item.delayBeforeCanPickup = 10;
             event.setCanceled(true);
+        }
+    }
+    
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event) {
+        if(event.entity instanceof EntityPlayerMP) {
+            Challenge ch = getChallenge((EntityPlayerMP)event.entity);
+            if(ch != null)
+                ch.onPlayerHurt(event.source, event.ammount);
         }
     }
     
