@@ -1,8 +1,14 @@
 package de.ljfa.elofharmony.challenges;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
@@ -50,10 +56,17 @@ public class ChallengeKindness extends TableChallenge {
     
     @Override
     public void onPlayerHurt(LivingHurtEvent event) {
-        if(event.source == DamageSource.fall) {
-            if(player.fallDistance >= 39.5f && MetricHelper.distInf(player, tablePos) <= 3.5) {
-                event.setCanceled(true);
-                complete = true;
+        if(event.source == DamageSource.fall && player.fallDistance >= 39.5f && MetricHelper.distInf(player, tablePos) <= 3.5) {
+            double offsetH = 0.5, offsetV = 0.2;
+            List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
+                    AxisAlignedBB.getBoundingBox(player.posX-offsetH, player.posY-offsetV, player.posZ-offsetH, player.posX+offsetH, player.posY+offsetV, player.posZ+offsetH));
+            
+            if(list.size() == 1) {
+                Entity ent = list.get(0);
+                if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= 0.05*0.05) {
+                    event.setCanceled(true);
+                    complete = true;
+                }
             }
         }
     }
