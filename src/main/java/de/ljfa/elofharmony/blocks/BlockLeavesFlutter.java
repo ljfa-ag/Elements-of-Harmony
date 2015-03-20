@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
-import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
+import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.lib.blocks.BlockHelper;
 
 public class BlockLeavesFlutter extends BlockLeaves {

@@ -6,8 +6,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.blocks.ModBlocks;
-import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
+import de.ljfa.elofharmony.items.ModItems;
 
 public class ModRecipes {
     public static void addOredict() {

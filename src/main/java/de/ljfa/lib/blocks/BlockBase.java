@@ -1,8 +1,8 @@
 package de.ljfa.lib.blocks;
 
-import de.ljfa.elofharmony.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import de.ljfa.elofharmony.Reference;
 
 public class BlockBase extends Block {
     

@@ -1,19 +1,19 @@
 package de.ljfa.elofharmony.challenges;
 
-import de.ljfa.elofharmony.items.ModItems;
-import de.ljfa.elofharmony.items.ItemElement.ElementType;
-import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.lib.chat.ChatHelper;
-import de.ljfa.lib.inventory.FullInvRestriction;
-import de.ljfa.lib.inventory.SlotRestriction;
-import de.ljfa.lib.inventory.SlotType;
-import de.ljfa.lib.math.MetricHelper;
-import de.ljfa.lib.math.MathHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import de.ljfa.elofharmony.items.ItemElement.ElementType;
+import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.elofharmony.tile.TileRitualTable;
+import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.inventory.FullInvRestriction;
+import de.ljfa.lib.inventory.SlotRestriction;
+import de.ljfa.lib.inventory.SlotType;
+import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.MetricHelper;
 
 public class ChallengeGenerosity extends TableChallenge {
 
