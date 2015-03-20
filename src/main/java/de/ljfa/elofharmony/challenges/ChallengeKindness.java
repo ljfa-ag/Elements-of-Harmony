@@ -8,6 +8,7 @@ import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.math.MetricHelper;
 
 public class ChallengeKindness extends TableChallenge {
 
@@ -50,7 +51,7 @@ public class ChallengeKindness extends TableChallenge {
     @Override
     public void onPlayerHurt(LivingHurtEvent event) {
         if(event.source == DamageSource.fall) {
-            if(getPlayer().fallDistance > 40f) {
+            if(player.fallDistance >= 39.5f && MetricHelper.distInf(player, tablePos) <= 3.5) {
                 event.setCanceled(true);
                 complete = true;
             }

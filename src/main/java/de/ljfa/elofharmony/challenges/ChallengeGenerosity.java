@@ -40,8 +40,7 @@ public class ChallengeGenerosity extends TableChallenge {
     
     @Override
     public boolean checkCondition() {
-        return player.worldObj.provider.dimensionId == tablePos.dim
-            && MetricHelper.dist2sq(player, tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5) <= 25.0;
+        return MetricHelper.dist2sq(player, tablePos) <= 25.0;
     }
     
     @Override
