@@ -46,7 +46,7 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public void onStart() {
-        ChatHelper.toPlayer(player, "The Kindness challenge is on!");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.kindness.start");
     }
 
     @Override
