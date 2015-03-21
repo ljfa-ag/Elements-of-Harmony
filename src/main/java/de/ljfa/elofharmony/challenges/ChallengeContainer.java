@@ -18,7 +18,7 @@ import de.ljfa.elofharmony.util.LogHelper;
  * ExtendedEntityProperties of each player.
  * Challenges have to be registered with the register method.
  */
-public class ChallengeHolder implements IExtendedEntityProperties {
+public class ChallengeContainer implements IExtendedEntityProperties {
 
     /** Registers a Challenge class. The challenge must have a no-arguments constructor. */
     public static void register(Class<? extends Challenge> clazz, String name) {
@@ -28,13 +28,13 @@ public class ChallengeHolder implements IExtendedEntityProperties {
     }
     
     /** @return the ChallengeHolder for the player. */
-    public static ChallengeHolder get(EntityPlayerMP player) {
-        return (ChallengeHolder)player.getExtendedProperties("eoh:Challenge");
+    public static ChallengeContainer get(EntityPlayerMP player) {
+        return (ChallengeContainer)player.getExtendedProperties("eoh:Challenge");
     }
     
     /** Initializes the player with a ChallengeHolder. Gets called when the player entity gets constructed. */
     public static void initPlayer(EntityPlayerMP player) {
-        player.registerExtendedProperties("eoh:Challenge", new ChallengeHolder(player));
+        player.registerExtendedProperties("eoh:Challenge", new ChallengeContainer(player));
     }
     
     /** @return the Challenge inside this holder */
@@ -94,7 +94,7 @@ public class ChallengeHolder implements IExtendedEntityProperties {
             challenge.setPlayer((EntityPlayerMP)entity);
     }
     
-    private ChallengeHolder(EntityPlayerMP player) {
+    private ChallengeContainer(EntityPlayerMP player) {
         this.player = player;
     }
     

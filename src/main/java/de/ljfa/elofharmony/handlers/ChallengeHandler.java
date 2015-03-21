@@ -10,7 +10,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.elofharmony.challenges.ChallengeHolder;
+import de.ljfa.elofharmony.challenges.ChallengeContainer;
 
 public class ChallengeHandler {
 
@@ -57,7 +57,7 @@ public class ChallengeHandler {
     @SubscribeEvent
     public void onEntityConstruct(EntityConstructing event) {
         if(event.entity instanceof EntityPlayerMP)
-            ChallengeHolder.initPlayer((EntityPlayerMP)event.entity);
+            ChallengeContainer.initPlayer((EntityPlayerMP)event.entity);
     }
     
     public static boolean tryStartChallenge(Challenge ch) {
@@ -80,7 +80,7 @@ public class ChallengeHandler {
     }
     
     public static Challenge getChallenge(EntityPlayerMP player) {
-        return ChallengeHolder.get(player).getChallenge();
+        return ChallengeContainer.get(player).getChallenge();
     }
     
     public static boolean hasChallenge(EntityPlayerMP player) {
@@ -88,17 +88,17 @@ public class ChallengeHandler {
     }
     
     private static void startChallenge(Challenge ch) {
-        ChallengeHolder.get(ch.getPlayer()).setChallenge(ch);
+        ChallengeContainer.get(ch.getPlayer()).setChallenge(ch);
         ch.onStart();
     }
     
     private static void abortChallenge(Challenge ch) {
         ch.onAbort();
-        ChallengeHolder.get(ch.getPlayer()).clearChallenge();
+        ChallengeContainer.get(ch.getPlayer()).clearChallenge();
     }
     
     private static void endChallenge(Challenge ch) {
         ch.onComplete();
-        ChallengeHolder.get(ch.getPlayer()).clearChallenge();
+        ChallengeContainer.get(ch.getPlayer()).clearChallenge();
     }
 }
