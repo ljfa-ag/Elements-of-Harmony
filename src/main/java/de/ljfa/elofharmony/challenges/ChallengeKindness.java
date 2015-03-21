@@ -8,12 +8,15 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
+import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.inventory.FullInvRestriction;
+import de.ljfa.lib.inventory.SlotRestriction;
+import de.ljfa.lib.inventory.SlotType;
 import de.ljfa.lib.math.MetricHelper;
 
 public class ChallengeKindness extends TableChallenge {
@@ -31,12 +34,17 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public boolean checkStartingCondition() {
-        return true;
+        if(invRestr.check(player)) {
+            return true;
+        } else {
+            ChatHelper.toPlayerLoc(player, "elofharmony.challenge.kindness.no_items_allowed");
+            return false;
+        }
     }
 
     @Override
     public boolean checkRestriction() {
-        return !player.isDead;
+        return !player.isDead && invRestr.check(player);
     }
 
     @Override
@@ -90,4 +98,12 @@ public class ChallengeKindness extends TableChallenge {
     }
 
     private boolean complete = false;
+    
+    private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
+        @Override
+        public boolean check(SlotType type, int slot, ItemStack stack) {
+            return stack == null || stack.getItem() == ModItems.twilicane
+                    || (stack.getItem() == ModItems.resource && stack.getItemDamage() == ResourceType.YELLOW_FEATHER.ordinal());
+        }
+    });
 }
