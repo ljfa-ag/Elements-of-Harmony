@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeContainer;
+import de.ljfa.elofharmony.challenges.ChallengeKindness;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 
 public class CommonProxy {
@@ -17,6 +18,7 @@ public class CommonProxy {
         registerTileEntities();
         
         ChallengeContainer.register(ChallengeGenerosity.class, "Generosity");
+        ChallengeContainer.register(ChallengeKindness.class, "Kindness");
     }
     
     public void postInit(FMLPostInitializationEvent event) {
