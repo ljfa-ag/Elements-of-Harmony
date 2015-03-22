@@ -94,7 +94,7 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public boolean mayPickUp(ItemStack stack) {
-        return false;
+        return invRestr.mayPickUp(player, stack);
     }
 
     private boolean complete = false;
