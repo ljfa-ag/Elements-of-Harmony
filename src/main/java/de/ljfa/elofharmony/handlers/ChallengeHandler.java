@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -58,6 +59,20 @@ public class ChallengeHandler {
     public void onEntityConstruct(EntityConstructing event) {
         if(event.entity instanceof EntityPlayerMP)
             ChallengeContainer.initPlayer((EntityPlayerMP)event.entity);
+    }
+    
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        if(event.wasDeath) {
+            ChallengeContainer oldCont = ChallengeContainer.get((EntityPlayerMP)event.original);
+            Challenge ch = oldCont.getChallenge();
+            if(ch != null) {
+                ChallengeContainer newCont = ChallengeContainer.get((EntityPlayerMP)event.entityPlayer);
+                newCont.setChallenge(ch);
+                newCont.init(event.entityPlayer, event.entityPlayer.worldObj);
+                oldCont.clearChallenge();
+            }
+        }
     }
     
     public static boolean tryStartChallenge(Challenge ch) {
