@@ -71,7 +71,7 @@ public class ChallengeKindness extends TableChallenge {
             
             if(list.size() == 1) {
                 Entity ent = list.get(0);
-                double threshold = 0.1;
+                double threshold = 0.2;
                 if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= threshold*threshold) {
                     event.setCanceled(true);
                     complete = true;
