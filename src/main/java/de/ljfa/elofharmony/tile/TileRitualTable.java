@@ -21,7 +21,7 @@ import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ItemTwilicane;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.lib.tile.TileInventoryBase;
-import de.ljfa.lib.util.GameUtils;
+import de.ljfa.lib.util.ClientUtils;
 import de.ljfa.lib.util.PotionHelper;
 
 public class TileRitualTable extends TileInventoryBase {
@@ -149,6 +149,6 @@ public class TileRitualTable extends TileInventoryBase {
     @SideOnly(Side.CLIENT)
     @Override
     public double getMaxRenderDistanceSquared() {
-        return GameUtils.getRenderDistanceSq();
+        return ClientUtils.getRenderDistanceSq();
     }
 }
