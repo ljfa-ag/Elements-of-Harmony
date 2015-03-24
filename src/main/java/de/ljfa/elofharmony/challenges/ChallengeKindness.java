@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
@@ -35,6 +36,17 @@ public class ChallengeKindness extends TableChallenge {
     @Override
     public boolean checkStartingCondition() {
         if(invRestr.check(player)) {
+            World world = tablePos.getWorld();
+            //Check if ground around table is flat
+            for(int xo = -radius; xo <= radius; xo++)
+            for(int zo = -radius; zo <= radius; zo++) {
+                if(xo == 0 && zo == 0)
+                    continue;
+                if(!world.isAirBlock(tablePos.x+xo, tablePos.y, tablePos.z+zo)) {
+                    ChatHelper.toPlayerLoc(player, "elofharmony.challenge.kindness.flat_ground");
+                    return false;
+                }
+            }
             return true;
         } else {
             ChatHelper.toPlayerLoc(player, "elofharmony.challenge.kindness.no_items_allowed");
@@ -64,14 +76,17 @@ public class ChallengeKindness extends TableChallenge {
     
     @Override
     public void onPlayerHurt(LivingHurtEvent event) {
-        if(event.source == DamageSource.fall && player.fallDistance >= 39.5f && MetricHelper.distInf(player, tablePos) <= 3.5) {
-            double minDistH = 0.25, offsetV = 0.2;
+        final double vOffset = 0.2;
+        final double minHDist = 0.4;
+        final double threshold = 0.2;
+        
+        if(event.source == DamageSource.fall && player.fallDistance >= 39.5f //Player fell 40 blocks
+                && Math.abs(player.posY-tablePos.y) <= vOffset && MetricHelper.distInf(player, tablePos) <= radius+0.5) {
             List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
-                    AxisAlignedBB.getBoundingBox(player.posX-minDistH, player.posY-offsetV, player.posZ-minDistH, player.posX+minDistH, player.posY+offsetV, player.posZ+minDistH));
+                    AxisAlignedBB.getBoundingBox(player.posX-minHDist, player.posY-vOffset, player.posZ-minHDist, player.posX+minHDist, player.posY+vOffset, player.posZ+minHDist));
             
             if(list.size() == 1) {
                 Entity ent = list.get(0);
-                double threshold = 0.2;
                 if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= threshold*threshold) {
                     event.setCanceled(true);
                     complete = true;
@@ -98,6 +113,8 @@ public class ChallengeKindness extends TableChallenge {
     }
 
     private boolean complete = false;
+    
+    private static final int radius = 3;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
         @Override
