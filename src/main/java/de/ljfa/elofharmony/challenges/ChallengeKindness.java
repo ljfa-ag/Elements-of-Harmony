@@ -81,7 +81,8 @@ public class ChallengeKindness extends TableChallenge {
         final double threshold = 0.2;
         
         if(event.source == DamageSource.fall && player.fallDistance >= 39.5f //Player fell 40 blocks
-                && Math.abs(player.posY-tablePos.y) <= vOffset && MetricHelper.distInf(player, tablePos) <= radius+0.5) {
+                && Math.abs(player.posY-tablePos.y) <= vOffset //Player is at the same y-level as the table
+                && MetricHelper.distInf(player, tablePos) <= radius+0.5) { //Player is not too far away
             List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
                     AxisAlignedBB.getBoundingBox(player.posX-minHDist, player.posY-vOffset, player.posZ-minHDist, player.posX+minHDist, player.posY+vOffset, player.posZ+minHDist));
             
