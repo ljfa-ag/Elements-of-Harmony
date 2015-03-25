@@ -18,6 +18,7 @@ import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.SlotRestriction;
 import de.ljfa.lib.inventory.SlotType;
+import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
 public class ChallengeKindness extends TableChallenge {
@@ -82,13 +83,13 @@ public class ChallengeKindness extends TableChallenge {
         
         if(event.source == DamageSource.fall && player.fallDistance >= 39.5f //Player fell 40 blocks
                 && Math.abs(player.posY-tablePos.y) <= vOffset //Player is at the same y-level as the table
-                && MetricHelper.distInf(player, tablePos) <= radius+0.5) { //Player is not too far away
+                && MetricHelper.d(Metric.lInf, player, tablePos) <= radius+0.5) { //Player is not too far away
             List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
                     AxisAlignedBB.getBoundingBox(player.posX-minHDist, player.posY-vOffset, player.posZ-minHDist, player.posX+minHDist, player.posY+vOffset, player.posZ+minHDist));
             
             if(list.size() == 1) {
                 Entity ent = list.get(0);
-                if(ent instanceof EntityAnimal && MetricHelper.dist2sq(player, ent) <= threshold*threshold) {
+                if(ent instanceof EntityAnimal && MetricHelper.d(Metric.l2sq, player, ent) <= threshold*threshold) {
                     event.setCanceled(true);
                     complete = true;
                 }

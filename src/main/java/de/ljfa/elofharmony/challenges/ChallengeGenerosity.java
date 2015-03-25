@@ -13,6 +13,7 @@ import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.SlotRestriction;
 import de.ljfa.lib.inventory.SlotType;
 import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
 public class ChallengeGenerosity extends TableChallenge {
@@ -40,7 +41,7 @@ public class ChallengeGenerosity extends TableChallenge {
     
     @Override
     public boolean checkCondition() {
-        return MetricHelper.dist2sq(player, tablePos) <= 25.0;
+        return MetricHelper.d(Metric.l2sq, player, tablePos) <= 25.0;
     }
     
     @Override
