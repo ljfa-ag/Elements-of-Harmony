@@ -77,9 +77,9 @@ public class ChallengeKindness extends TableChallenge {
     
     @Override
     public void onPlayerHurt(LivingHurtEvent event) {
-        final double vOffset = 0.2;
-        final double minHDist = 0.4;
-        final double threshold = 0.2;
+        final double vOffset = 0.2, //maximum vertical distance to the table and the animals
+        minHDist = 0.4, //minimum horizontal distance between animals
+        threshold = 0.2; //maximum distance to an animal
         
         if(event.source == DamageSource.fall && player.fallDistance >= 39.5f //Player fell 40 blocks
                 && Math.abs(player.posY-tablePos.y) <= vOffset //Player is at the same y-level as the table
