@@ -1,4 +1,4 @@
-package de.ljfa.elofharmony.render.blocks;
+package de.ljfa.elofharmony.render.tile;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
