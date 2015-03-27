@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
+import de.ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ModItems;
 
@@ -24,7 +25,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     private IIcon texture_opaque;
     
     public BlockLeavesFlutter() {
-        BlockHelper.register(this, name);
+        BlockHelper.register(this, ItemBlockLeavesFlutter.class, name);
     }
     
     @Override
