@@ -10,7 +10,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.handlers.ChallengeHandler;
 import de.ljfa.lib.chat.ChatHelper;
-import de.ljfa.lib.items.ItemHelper;
 
 public class ItemTwilicane extends Item {
     public ItemTwilicane() {

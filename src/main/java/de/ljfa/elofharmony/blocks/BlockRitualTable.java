@@ -11,7 +11,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.elofharmony.util.LogHelper;
-import de.ljfa.lib.blocks.BlockBase;
 
 public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     public BlockRitualTable() {

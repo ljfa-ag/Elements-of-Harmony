@@ -2,7 +2,6 @@ package de.ljfa.elofharmony.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import de.ljfa.lib.blocks.BlockBase;
 
 public final class ModBlocks {
     public static BlockPoisonJoke poisonjoke;

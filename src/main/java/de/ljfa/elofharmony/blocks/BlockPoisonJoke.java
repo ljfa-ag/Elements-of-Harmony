@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
-import de.ljfa.lib.blocks.BlockHelper;
 
 public class BlockPoisonJoke extends BlockBush implements IGrowable {
     private final String name = "poisonjoke";

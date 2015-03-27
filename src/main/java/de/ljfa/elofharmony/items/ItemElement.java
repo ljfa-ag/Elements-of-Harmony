@@ -11,7 +11,6 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
-import de.ljfa.lib.items.ItemHelper;
 
 public class ItemElement extends Item {
     @SideOnly(Side.CLIENT)

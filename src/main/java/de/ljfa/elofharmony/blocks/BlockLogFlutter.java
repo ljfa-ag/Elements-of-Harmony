@@ -6,7 +6,6 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
-import de.ljfa.lib.blocks.BlockHelper;
 
 public class BlockLogFlutter extends BlockLog {
     private final String name = "log_flutter";

@@ -8,7 +8,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.ljfa.lib.blocks.BlockHelper;
 
 public class BlockSlabFlutter extends BlockSlab {
     private final String name = "slab_flutter";

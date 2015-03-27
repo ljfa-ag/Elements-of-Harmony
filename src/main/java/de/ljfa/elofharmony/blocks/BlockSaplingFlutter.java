@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.worldgen.FluttertreeGenerator;
-import de.ljfa.lib.blocks.BlockHelper;
 
 public class BlockSaplingFlutter extends BlockSapling {
     private final String name = "sapling_flutter";
