@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "0.1-prealpha"
 group= "de.ljfa.elofharmony" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "elofharmony"
+archivesBaseName = "Elements-of-Harmony"
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
