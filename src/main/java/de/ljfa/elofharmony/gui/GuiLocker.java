@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony.gui;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -18,4 +19,10 @@ public class GuiLocker extends GuiBase {
         ySize = 226;
     }
 
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        String name = "Locker";
+        this.fontRendererObj.drawString(name, 30, 6, 0x404040);
+        this.fontRendererObj.drawString(I18n.format("container.inventory"), 30, 97, 0x404040);
+    }
 }
