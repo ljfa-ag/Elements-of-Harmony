@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -20,4 +21,10 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
         return new TileLocker();
     }
 
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        if(!world.isRemote)
+            BlockHelper.spillInventory(world, x, y, z);
+        super.breakBlock(world, x, y, z, block, meta);
+    }
 }

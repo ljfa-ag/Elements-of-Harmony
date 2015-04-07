@@ -29,14 +29,8 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if(!world.isRemote) {
-            if(tile instanceof TileRitualTable) {
-                TileRitualTable te = (TileRitualTable)tile;
-                te.spillItems();
-            }
-        }
-        world.removeTileEntity(x, y, z);
+        if(!world.isRemote)
+            BlockHelper.spillInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, block, meta);
     }
     

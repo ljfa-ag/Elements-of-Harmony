@@ -2,9 +2,12 @@ package de.ljfa.elofharmony.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.CreativeTabEoh;
 import de.ljfa.elofharmony.Reference;
+import de.ljfa.lib.tile.TileInventoryBase;
 
 public class BlockHelper {
 
@@ -24,4 +27,9 @@ public class BlockHelper {
         return block;
     }
 
+    public static void spillInventory(World world, int x, int y, int z) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if(tile instanceof TileInventoryBase)
+            ((TileInventoryBase)tile).spillItems();
+    }
 }
