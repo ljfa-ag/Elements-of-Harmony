@@ -12,6 +12,7 @@ public final class ModBlocks {
     public static BlockSlabFlutter slab_flutter;
     public static BlockStairsFlutter stairs_flutter;
     public static BlockRitualTable ritual_table;
+    public static BlockLocker locker;
     
     public static void init() {
         poisonjoke = new BlockPoisonJoke();
@@ -22,5 +23,6 @@ public final class ModBlocks {
         slab_flutter = new BlockSlabFlutter();
         stairs_flutter = new BlockStairsFlutter(planks_flutter, 0);
         ritual_table = new BlockRitualTable();
+        locker = new BlockLocker();
     }
 }

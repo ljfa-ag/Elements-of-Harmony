@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.challenges.ChallengeContainer;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeKindness;
+import de.ljfa.elofharmony.tile.TileLocker;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 
 public class CommonProxy {
@@ -27,5 +28,6 @@ public class CommonProxy {
     
     protected void registerTileEntities() {
         GameRegistry.registerTileEntity(TileRitualTable.class, "ritual_table");
+        GameRegistry.registerTileEntity(TileLocker.class, "locker");
     }
 }
