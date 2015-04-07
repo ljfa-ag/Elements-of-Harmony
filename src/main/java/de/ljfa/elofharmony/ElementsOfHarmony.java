@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import de.ljfa.elofharmony.blocks.ModBlocks;
+import de.ljfa.elofharmony.gui.EohGuiHandler;
 import de.ljfa.elofharmony.handlers.ChallengeHandler;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 import de.ljfa.elofharmony.items.ModItems;
@@ -33,6 +34,7 @@ public class ElementsOfHarmony {
         ModBlocks.init();
         ModItems.init();
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new EohGuiHandler());
         proxy.preInit(event);
     }
     
