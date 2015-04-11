@@ -41,18 +41,27 @@ public class ContainerLocker extends ContainerBase {
         Slot slot = (Slot)inventorySlots.get(slotInd);
         
         if(slot != null && slot.getHasStack()) {
-            int corrSlotInd;
+            ItemStack stack = slot.getStack();
+            int destSlotInd;
+            //The preferred destination is the one at the same position on the other inventory
             if(slotInd < lockerHotbarStart)
-                corrSlotInd = slotInd + lockerHotbarStart;
+                destSlotInd = slotInd + lockerHotbarStart;
             else
-                corrSlotInd = slotInd - lockerHotbarStart;
+                destSlotInd = slotInd - lockerHotbarStart;
             
-            Slot corrSlot = (Slot)inventorySlots.get(corrSlotInd);
-            if(corrSlot != null && !corrSlot.getHasStack()) {
-                ItemStack stackToTr = slot.getStack();
+            if(!mergeItemStack(stack, destSlotInd, destSlotInd+1, false))
+                return null;
+            
+            if(stack.stackSize == 0) {
                 slot.putStack(null);
-                corrSlot.putStack(stackToTr);
+                stack = null;
             }
+            else {
+                slot.onSlotChanged();
+            }
+            
+            slot.onPickupFromSlot(player, stack);
+            return stack;
         }
         return null;
     }
