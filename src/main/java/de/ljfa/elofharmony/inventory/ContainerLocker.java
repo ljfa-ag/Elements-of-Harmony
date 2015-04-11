@@ -9,8 +9,8 @@ import de.ljfa.lib.inventory.ContainerBase;
 
 public class ContainerLocker extends ContainerBase {
 
-    private static final int playerHotbarStart = 0, playerInvStart = 9, playerArmorStart = 36;
-    private static final int lockerHotbarStart = 40, lockerInvStart = 49, lockerArmorStart = 76, endSlots = 80;
+    private static final int playerInvStart = 0, playerHotbarStart = 27, playerArmorStart = 36;
+    private static final int lockerInvStart = 40, lockerHotbarStart = 67, lockerArmorStart = 76, endSlots = 80;
     
     private final TileLocker tile;
     
@@ -38,32 +38,33 @@ public class ContainerLocker extends ContainerBase {
     
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotInd) {
+        ItemStack copyStack = null;
         Slot slot = (Slot)inventorySlots.get(slotInd);
         
         if(slot != null && slot.getHasStack()) {
-            ItemStack stack = slot.getStack();
-            int destSlotInd;
-            //The preferred destination is the one at the same position on the other inventory
-            if(slotInd < lockerHotbarStart)
-                destSlotInd = slotInd + lockerHotbarStart;
-            else
-                destSlotInd = slotInd - lockerHotbarStart;
+            ItemStack stackInSlot = slot.getStack();
+            copyStack = stackInSlot.copy();
+            boolean isInPlayerInv = slotInd < lockerInvStart;
             
-            if(!mergeItemStack(stack, destSlotInd, destSlotInd+1, false))
+            int corrSlotInd = slotInd + (isInPlayerInv ? lockerInvStart : -lockerInvStart);
+            if(!mergeItemStack(stackInSlot, corrSlotInd, corrSlotInd+1, false)) {
+                int invStart = isInPlayerInv ? lockerInvStart : playerInvStart;
+                int invEnd = isInPlayerInv ? lockerArmorStart : playerArmorStart;
+                if(!mergeItemStack(stackInSlot, invStart, invEnd, true))
+                    return null;
+            }
+            
+            if(stackInSlot.stackSize == 0)
+                slot.putStack(null);
+            else
+                slot.onSlotChanged();
+            
+            if(copyStack.stackSize == stackInSlot.stackSize)
                 return null;
             
-            if(stack.stackSize == 0) {
-                slot.putStack(null);
-                stack = null;
-            }
-            else {
-                slot.onSlotChanged();
-            }
-            
-            slot.onPickupFromSlot(player, stack);
-            return stack;
+            slot.onPickupFromSlot(player, stackInSlot);
         }
-        return null;
+        return copyStack;
     }
     
     @Override
