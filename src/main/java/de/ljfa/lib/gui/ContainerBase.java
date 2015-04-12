@@ -52,6 +52,7 @@ public abstract class ContainerBase extends Container {
     
     /**
      * Does the actual transferring of the stack in the slot to somewhere else.
+     * TODO: Provide a default implementation (which assumes that the player slots got added last)
      * @return true if the stack could be transferred at least partially
      */
     protected abstract boolean doTransferStack(ItemStack stack, int slot);
