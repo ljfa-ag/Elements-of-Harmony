@@ -1,8 +1,8 @@
 package de.ljfa.elofharmony.tile;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import de.ljfa.lib.items.ItemHelper;
 import de.ljfa.lib.tile.TileInventoryBase;
 
 public class TileLocker extends TileInventoryBase {
@@ -26,11 +26,7 @@ public class TileLocker extends TileInventoryBase {
         if(slot < armorInvStart)
             return true;
         else {
-            Item item = stack.getItem();
-            if(item instanceof ItemArmor)
-                return ((ItemArmor)item).armorType == slot-armorInvStart;
-            else
-                return false;
+            return ItemHelper.isItemArmor(stack.getItem(), slot-armorInvStart);
         }
     }
 }
