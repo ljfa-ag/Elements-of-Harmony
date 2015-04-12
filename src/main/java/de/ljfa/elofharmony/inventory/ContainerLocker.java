@@ -6,6 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import de.ljfa.elofharmony.tile.TileLocker;
 import de.ljfa.lib.gui.ContainerBase;
+import de.ljfa.lib.gui.SlotArmor;
 
 public class ContainerLocker extends ContainerBase {
 
@@ -28,14 +29,14 @@ public class ContainerLocker extends ContainerBase {
         
         //Locker armor slots
         for(int i = 0; i < 4; i++)
-            addSlotToContainer(new Slot(tile, 36 + i, 8, 20 + 18*i));
+            addSlotToContainer(new SlotArmor(tile, 36 + i, 8, 20 + 18*i, i));
         
         //Player inventory and hotbar slots
         addPlayerInv(invPlayer, 30, 108);
         
         //Player armor slots
         for(int i = 0; i < 4; i++)
-            addSlotToContainer(new Slot(invPlayer, 39 - i, 8, 110 + 18*i));
+            addSlotToContainer(new SlotArmor(invPlayer, 39 - i, 8, 110 + 18*i, i));
     }
     
     @Override
