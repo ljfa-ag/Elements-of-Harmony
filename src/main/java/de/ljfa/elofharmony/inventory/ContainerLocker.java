@@ -9,18 +9,13 @@ import de.ljfa.lib.inventory.ContainerBase;
 
 public class ContainerLocker extends ContainerBase {
 
-    private static final int playerInvStart = 0, playerHotbarStart = 27, playerArmorStart = 36;
-    private static final int lockerInvStart = 40, lockerHotbarStart = 67, lockerArmorStart = 76, endSlots = 80;
+    private static final int lockerInvStart = 0, lockerHotbarStart = 27, lockerArmorStart = 36, endSlots = 80;
+    private static final int playerInvStart = 40, playerHotbarStart = 67, playerArmorStart = 76;
     
     private final TileLocker tile;
     
     public ContainerLocker(InventoryPlayer invPlayer, TileLocker tile) {
         this.tile = tile;
-        addPlayerInv(invPlayer, 30, 108);
-        
-        //Player armor slots
-        for(int i = 0; i < 4; i++)
-            addSlotToContainer(new Slot(invPlayer, 39 - i, 8, 110 + 18*i));
         
         //Locker inventory slots
         for(int i = 0; i < 3; i++)
@@ -34,6 +29,13 @@ public class ContainerLocker extends ContainerBase {
         //Locker armor slots
         for(int i = 0; i < 4; i++)
             addSlotToContainer(new Slot(tile, 36 + i, 8, 20 + 18*i));
+        
+        //Player inventory slots
+        addPlayerInv(invPlayer, 30, 108);
+        
+        //Player armor slots
+        for(int i = 0; i < 4; i++)
+            addSlotToContainer(new Slot(invPlayer, 39 - i, 8, 110 + 18*i));
     }
     
     @Override
@@ -45,11 +47,11 @@ public class ContainerLocker extends ContainerBase {
             ItemStack stackInSlot = slot.getStack();
             copyStack = stackInSlot.copy();
             
-            boolean isInPlayerInv = slotInd < lockerInvStart;
-            int corrSlotInd = slotInd + (isInPlayerInv ? lockerInvStart : -lockerInvStart);
+            boolean isInLockerInv = slotInd < playerInvStart;
+            int corrSlotInd = slotInd + (isInLockerInv ? playerInvStart : -playerInvStart);
             if(!mergeItemStack(stackInSlot, corrSlotInd, corrSlotInd+1, false)) {
-                int invStart = isInPlayerInv ? lockerInvStart : playerInvStart;
-                int invEnd = isInPlayerInv ? lockerArmorStart : playerArmorStart;
+                int invStart = isInLockerInv ? playerInvStart : lockerInvStart;
+                int invEnd = isInLockerInv ? playerArmorStart : lockerArmorStart;
                 if(!mergeItemStack(stackInSlot, invStart, invEnd, true))
                     return null;
             }
