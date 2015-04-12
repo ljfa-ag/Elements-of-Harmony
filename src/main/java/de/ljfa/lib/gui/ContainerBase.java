@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 
 /** Base class for GUI containers */
 public abstract class ContainerBase extends Container {
-
     /**
      * Called when a player shift-clicks on a slot.
      * It is called repeatedly until it returns null.
