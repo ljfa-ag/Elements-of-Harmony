@@ -44,8 +44,8 @@ public class ContainerLocker extends ContainerBase {
         if(slot != null && slot.getHasStack()) {
             ItemStack stackInSlot = slot.getStack();
             copyStack = stackInSlot.copy();
-            boolean isInPlayerInv = slotInd < lockerInvStart;
             
+            boolean isInPlayerInv = slotInd < lockerInvStart;
             int corrSlotInd = slotInd + (isInPlayerInv ? lockerInvStart : -lockerInvStart);
             if(!mergeItemStack(stackInSlot, corrSlotInd, corrSlotInd+1, false)) {
                 int invStart = isInPlayerInv ? lockerInvStart : playerInvStart;

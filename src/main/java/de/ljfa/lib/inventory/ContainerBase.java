@@ -8,6 +8,13 @@ import net.minecraft.item.ItemStack;
 
 public abstract class ContainerBase extends Container {
 
+    /**
+     * Called when a player shift-clicks on a slot.
+     * It is called repeatedly until it returns null.
+     * 
+     * @return null if nothing has happened, e.g. the stack could not be transferred.
+     * Else, a copy of the stack that was originally in the slot.
+     */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
         return null;
