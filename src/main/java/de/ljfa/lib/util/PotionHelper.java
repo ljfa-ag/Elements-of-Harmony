@@ -8,15 +8,17 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.PotionEffect;
 
 public class PotionHelper {
-
+    /** Adds a potion effect to the entity */
     public static void addEffect(EntityLivingBase entity, int id, int duration, int strength, boolean ambient) {
         entity.addPotionEffect(new PotionEffect(id, duration, strength, false));
     }
     
+    /** Adds a potion effect to the entity */
     public static void addEffect(EntityLivingBase entity, int id, int duration, int strength) {
         addEffect(entity, id, duration, strength, false);
     }
     
+    /** @return true if this item is a potion which has the specified potion effect ID */
     public static boolean isPotionOfType(Item item, int damage, int potionID) {
         if(!(item instanceof ItemPotion))
             return false;

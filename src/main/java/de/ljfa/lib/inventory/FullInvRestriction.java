@@ -5,14 +5,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
 /** Default implementation of an inventory restriction which checks every slot */
-public class FullInvRestriction implements InventoryRestriction {
+public class FullInvRestriction implements PlayerInventoryRestriction {
     /** @param slotRestr the slot restriction */
-    public FullInvRestriction(SlotRestriction slotRestr) {
+    public FullInvRestriction(PlayerSlotRestriction slotRestr) {
         this.slotRestr = slotRestr;
     }
     
     /** @return the slot restriction */
-    public SlotRestriction getSlotRestr() {
+    public PlayerSlotRestriction getSlotRestr() {
         return slotRestr;
     }
 
@@ -24,11 +24,11 @@ public class FullInvRestriction implements InventoryRestriction {
     public boolean check(EntityPlayer player) {
         InventoryPlayer inv = player.inventory;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
-            if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot]))
+            if(!slotRestr.check(PlayerSlotType.NORMAL, slot, inv.mainInventory[slot]))
                 return false;
         }
         for(int slot = 0; slot < inv.armorInventory.length; slot++) {
-            if(!slotRestr.check(SlotType.ARMOR, slot, inv.armorInventory[slot]))
+            if(!slotRestr.check(PlayerSlotType.ARMOR, slot, inv.armorInventory[slot]))
                 return false;
         }
         return true;
@@ -43,14 +43,14 @@ public class FullInvRestriction implements InventoryRestriction {
         InventoryPlayer inv = player.inventory;
         boolean ret = true;
         for(int slot = 0; slot < inv.mainInventory.length; slot++) {
-            if(!slotRestr.check(SlotType.NORMAL, slot, inv.mainInventory[slot])) {
+            if(!slotRestr.check(PlayerSlotType.NORMAL, slot, inv.mainInventory[slot])) {
                 inv.player.entityDropItem(inv.mainInventory[slot], 0.0f);
                 inv.mainInventory[slot] = null;
                 ret = false;
             }
         }
         for(int slot = 0; slot < inv.armorInventory.length; slot++) {
-            if(!slotRestr.check(SlotType.ARMOR, slot, inv.armorInventory[slot])) {
+            if(!slotRestr.check(PlayerSlotType.ARMOR, slot, inv.armorInventory[slot])) {
                 inv.player.entityDropItem(inv.armorInventory[slot], 0.0f);
                 inv.armorInventory[slot] = null;
                 ret = false;
@@ -62,9 +62,9 @@ public class FullInvRestriction implements InventoryRestriction {
     /** @return true if the player is allowed to pick up this item */
     @Override
     public boolean mayPickUp(EntityPlayer player, ItemStack stack) {
-        return slotRestr.check(SlotType.NONE, 0, stack);
+        return slotRestr.check(PlayerSlotType.NONE, 0, stack);
     }
     
     /** the slot restriction */
-    protected final SlotRestriction slotRestr;
+    protected final PlayerSlotRestriction slotRestr;
 }

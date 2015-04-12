@@ -7,6 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/** Item renderer which uses a TileEntitySpecialRenderer */
 @SideOnly(Side.CLIENT)
 public class TileItemRenderer implements IItemRenderer {
 

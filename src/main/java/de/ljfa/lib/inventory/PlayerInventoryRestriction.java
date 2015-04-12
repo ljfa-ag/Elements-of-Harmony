@@ -3,7 +3,8 @@ package de.ljfa.lib.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public interface InventoryRestriction {
+/** A restriction which can be applied to a player's inventory */
+public interface PlayerInventoryRestriction {
     /** Checks if the player's inventory follows the restriction.
      * @param player the player to check
      * @return true if the restriction is being followed

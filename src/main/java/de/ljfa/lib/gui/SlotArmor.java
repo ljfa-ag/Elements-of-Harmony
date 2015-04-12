@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.lib.items.ItemHelper;
 
+/** A slot which only accepts armor items of the specified type */
 public class SlotArmor extends Slot {
     
     public final int armorType;

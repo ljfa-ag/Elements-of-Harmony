@@ -6,6 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+/** Base class for GUI containers */
 public abstract class ContainerBase extends Container {
 
     /**

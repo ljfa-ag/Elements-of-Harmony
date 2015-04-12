@@ -40,5 +40,6 @@ public class ChatHelper {
         MinecraftServer.getServer().addChatMessage(new ChatComponentTranslation(key, args));
     }
     
+    /** Regex pattern that detects newlines (LF or CRLF) */
     public static final Pattern patternNewline = Pattern.compile("\\r?\\n");
 }

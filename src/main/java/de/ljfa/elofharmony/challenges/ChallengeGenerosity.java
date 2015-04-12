@@ -10,8 +10,8 @@ import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
-import de.ljfa.lib.inventory.SlotRestriction;
-import de.ljfa.lib.inventory.SlotType;
+import de.ljfa.lib.inventory.PlayerSlotRestriction;
+import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.math.MathHelper;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
@@ -94,9 +94,9 @@ public class ChallengeGenerosity extends TableChallenge {
         return new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
     }
     
-    private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
+    private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
-        public boolean check(SlotType type, int slot, ItemStack stack) {
+        public boolean check(PlayerSlotType type, int slot, ItemStack stack) {
             return stack == null || stack.getItem() == ModItems.twilicane;
         }
     });

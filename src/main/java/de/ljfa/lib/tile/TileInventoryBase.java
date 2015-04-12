@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
+/** Base class for tile entities with inventory */
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
     protected ItemStack[] inv;
     

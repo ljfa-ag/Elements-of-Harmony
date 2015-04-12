@@ -16,8 +16,8 @@ import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
-import de.ljfa.lib.inventory.SlotRestriction;
-import de.ljfa.lib.inventory.SlotType;
+import de.ljfa.lib.inventory.PlayerSlotRestriction;
+import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
@@ -118,9 +118,9 @@ public class ChallengeKindness extends TableChallenge {
     
     private static final int radius = 3;
     
-    private static final FullInvRestriction invRestr = new FullInvRestriction(new SlotRestriction() {
+    private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
-        public boolean check(SlotType type, int slot, ItemStack stack) {
+        public boolean check(PlayerSlotType type, int slot, ItemStack stack) {
             return stack == null || stack.getItem() == ModItems.twilicane
                     || (stack.getItem() == ModItems.resource && stack.getItemDamage() == ResourceType.YELLOW_FEATHER.ordinal());
         }
