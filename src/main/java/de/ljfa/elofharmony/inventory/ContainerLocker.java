@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import de.ljfa.elofharmony.tile.TileLocker;
-import de.ljfa.lib.inventory.ContainerBase;
+import de.ljfa.lib.gui.ContainerBase;
 
 public class ContainerLocker extends ContainerBase {
 

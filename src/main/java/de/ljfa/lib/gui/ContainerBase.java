@@ -1,4 +1,4 @@
-package de.ljfa.lib.inventory;
+package de.ljfa.lib.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
