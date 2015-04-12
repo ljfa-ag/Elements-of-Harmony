@@ -1,6 +1,5 @@
 package de.ljfa.elofharmony.tile;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import de.ljfa.lib.items.ItemHelper;
 import de.ljfa.lib.tile.TileInventoryBase;

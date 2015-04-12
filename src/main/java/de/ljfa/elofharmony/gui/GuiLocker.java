@@ -2,7 +2,6 @@ package de.ljfa.elofharmony.gui;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.inventory.ContainerLocker;

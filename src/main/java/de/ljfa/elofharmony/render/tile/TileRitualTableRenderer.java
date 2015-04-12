@@ -1,13 +1,10 @@
 package de.ljfa.elofharmony.render.tile;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -16,10 +13,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
-import de.ljfa.elofharmony.blocks.ModBlocks;
 import de.ljfa.elofharmony.render.models.ModelRitualTable;
 import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.elofharmony.util.LogHelper;
 
 @SideOnly(Side.CLIENT)
 public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
