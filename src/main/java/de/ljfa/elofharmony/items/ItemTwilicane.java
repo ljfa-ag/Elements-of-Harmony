@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,7 +29,7 @@ public class ItemTwilicane extends Item {
                 return true;
             }
             else {
-                ChatHelper.toPlayer(player, "You have no challenge running at the moment.");
+                ChatHelper.toPlayerLoc(player, "elofharmony.challenge.no_challenge");
                 return false;
             }
         }
@@ -41,7 +42,7 @@ public class ItemTwilicane extends Item {
         if(!world.isRemote && player.isSneaking()) {
             //Abort current challenge
             if(!ChallengeHandler.tryAbortChallenge(player))
-                ChatHelper.toPlayer(player, "You have no challenge running at the moment.");
+                ChatHelper.toPlayerLoc(player, "elofharmony.challenge.no_challenge");
         }
         return super.onItemRightClick(stack, world, player);
     }
@@ -49,6 +50,6 @@ public class ItemTwilicane extends Item {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean par4) {
-        info.add("Sneak+Right click to abort the current challenge");
+        info.add(StatCollector.translateToLocal("elofharmony.challenge.twilicane_tooltip"));
     }
 }
