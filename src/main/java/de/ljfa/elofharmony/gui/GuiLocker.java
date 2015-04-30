@@ -40,7 +40,7 @@ public class GuiLocker extends GuiBase {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String name = "Locker";
+        String name = I18n.format("elofharmony.container.locker");
         this.fontRendererObj.drawString(name, 30, 6, 0x404040);
         this.fontRendererObj.drawString(I18n.format("container.inventory"), 30, 101, 0x404040);
     }

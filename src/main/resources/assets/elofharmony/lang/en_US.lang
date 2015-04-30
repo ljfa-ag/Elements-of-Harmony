@@ -18,6 +18,8 @@ item.elofharmony:element_magic.name=Element of Magic
 item.elofharmony:twilicane.name=Twilicane
 item.elofharmony:yellow_feather.name=Yellow Feather
 
+elofharmony.container.locker=Locker
+
 elofharmony.challenge.failed=You failed the challenge!
 elofharmony.challenge.success=Congratulations, you completed the challenge!
 elofharmony.challenge.no_challenge=You have no challenge running at the moment.
