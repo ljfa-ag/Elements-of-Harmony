@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.client.config.GuiButtonExt;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.inventory.ContainerLocker;
@@ -24,7 +25,7 @@ public class GuiLocker extends GuiBase {
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(new GuiButton(0, guiLeft+90, guiTop+90, 30, 20, "Swap"));
+        buttonList.add(new GuiButtonExt(0, guiLeft+90, guiTop+90, 18, 18, ""));
     }
     
     @Override
