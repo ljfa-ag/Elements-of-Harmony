@@ -1,22 +1,25 @@
 package de.ljfa.elofharmony.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.inventory.ContainerLocker;
+import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
-import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.gui.GuiBase;
 
 public class GuiLocker extends GuiBase {
 
     private static final ResourceLocation texture = new ResourceLocation(Reference.MODID + ":textures/gui/locker.png");
     
+    private TileLocker tile;
+    
     public GuiLocker(InventoryPlayer invPlayer, TileLocker tile) {
         super(new ContainerLocker(invPlayer, tile), texture);
+        this.tile = tile;
         xSize = 209;
         ySize = 226;
     }
@@ -30,8 +33,7 @@ public class GuiLocker extends GuiBase {
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0) {
-            ChatHelper.toPlayer(Minecraft.getMinecraft().thePlayer, "Clicked button");
-            ((ContainerLocker)inventorySlots).swapWithPlayer(Minecraft.getMinecraft().thePlayer.inventory);
+            ElementsOfHarmony.network.sendToServer(new MessageLocker());
         }
     }
 

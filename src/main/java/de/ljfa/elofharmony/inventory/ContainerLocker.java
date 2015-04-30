@@ -2,6 +2,7 @@ package de.ljfa.elofharmony.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import de.ljfa.elofharmony.tile.TileLocker;
@@ -59,12 +60,12 @@ public class ContainerLocker extends ContainerBase {
         return tile.isUseableByPlayer(player);
     }
     
-    public void swapWithPlayer(InventoryPlayer player) {
-        for(int i = lockerInvStart; i < playerInvStart; i++)
-            swapContents(getSlot(i), getSlot(i + playerInvStart));
+    public void swapWithPlayer() {
+        for(int i = 0; i < playerInvStart; i++)
+            swapContent(getSlot(i), getSlot(i + playerInvStart));
     }
     
-    private void swapContents(Slot first, Slot second) {
+    private void swapContent(Slot first, Slot second) {
         ItemStack tmp = first.getStack();
         first.putStack(second.getStack());
         second.putStack(tmp);
