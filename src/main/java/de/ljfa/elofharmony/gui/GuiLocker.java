@@ -15,11 +15,8 @@ public class GuiLocker extends GuiBase {
 
     private static final ResourceLocation texture = new ResourceLocation(Reference.MODID + ":textures/gui/locker.png");
     
-    private TileLocker tile;
-    
     public GuiLocker(InventoryPlayer invPlayer, TileLocker tile) {
         super(new ContainerLocker(invPlayer, tile), texture);
-        this.tile = tile;
         xSize = 209;
         ySize = 226;
     }
@@ -34,6 +31,7 @@ public class GuiLocker extends GuiBase {
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0) {
             ElementsOfHarmony.network.sendToServer(new MessageLocker());
+            ((ContainerLocker)inventorySlots).swapWithPlayer();
         }
     }
 
