@@ -33,11 +33,11 @@ public class ContainerLocker extends ContainerBase {
             addSlotToContainer(new SlotArmor(tile, 36 + i, 8, 20 + 18*i, i));
         
         //Player inventory and hotbar slots
-        addPlayerInv(invPlayer, 30, 108);
+        addPlayerInv(invPlayer, 30, 112);
         
         //Player armor slots
         for(int i = 0; i < 4; i++)
-            addSlotToContainer(new SlotArmor(invPlayer, 39 - i, 8, 110 + 18*i, i));
+            addSlotToContainer(new SlotArmor(invPlayer, 39 - i, 8, 114 + 18*i, i));
     }
     
     @Override

@@ -20,8 +20,8 @@ public class GuiLocker extends GuiBase {
     
     public GuiLocker(InventoryPlayer invPlayer, TileLocker tile) {
         super(new ContainerLocker(invPlayer, tile), texture);
-        xSize = 209;
-        ySize = 226;
+        xSize = 198;
+        ySize = 194;
     }
     
     @Override
@@ -42,6 +42,6 @@ public class GuiLocker extends GuiBase {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String name = "Locker";
         this.fontRendererObj.drawString(name, 30, 6, 0x404040);
-        this.fontRendererObj.drawString(I18n.format("container.inventory"), 30, 97, 0x404040);
+        this.fontRendererObj.drawString(I18n.format("container.inventory"), 30, 101, 0x404040);
     }
 }
