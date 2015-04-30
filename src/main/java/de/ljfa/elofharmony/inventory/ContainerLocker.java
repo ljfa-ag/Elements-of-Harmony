@@ -58,5 +58,16 @@ public class ContainerLocker extends ContainerBase {
     public boolean canInteractWith(EntityPlayer player) {
         return tile.isUseableByPlayer(player);
     }
+    
+    public void swapWithPlayer(InventoryPlayer player) {
+        for(int i = lockerInvStart; i < playerInvStart; i++)
+            swapContents(getSlot(i), getSlot(i + playerInvStart));
+    }
+    
+    private void swapContents(Slot first, Slot second) {
+        ItemStack tmp = first.getStack();
+        first.putStack(second.getStack());
+        second.putStack(tmp);
+    }
 
 }
