@@ -11,14 +11,12 @@ public abstract class MessageBase<T extends MessageBase> implements IMessage, IM
 
     @Override
     public IMessage onMessage(T message, MessageContext ctx) {
-        if(ctx.side == Side.SERVER)
-            message.handleServerSide(ctx.getServerHandler().playerEntity);
-        else
-            message.handleClientSide(Minecraft.getMinecraft().thePlayer);
+        EntityPlayer player = ctx.side == Side.SERVER
+                ? ctx.getServerHandler().playerEntity
+                : Minecraft.getMinecraft().thePlayer;
+        message.process(player, ctx.side);
         return null;
     }
 
-    public abstract void handleServerSide(EntityPlayer player);
-    
-    public abstract void handleClientSide(EntityPlayer player);
+    public abstract void process(EntityPlayer player, Side side);
 }

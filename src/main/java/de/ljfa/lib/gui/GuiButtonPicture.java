@@ -8,7 +8,7 @@ import cpw.mods.fml.client.config.GuiButtonExt;
 
 public class GuiButtonPicture extends GuiButtonExt {
 
-    public final ResourceLocation picture;
+    protected final ResourceLocation picture;
     
     public GuiButtonPicture(int id, int xPos, int yPos, int width, int height, String displayString, ResourceLocation picture) {
         super(id, xPos, yPos, width, height, displayString);
