@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -37,6 +38,8 @@ public class ModRecipes {
                 'W', "dyeWhite", 'V', "dyePurple", '#', ModBlocks.planks_flutter).setMirrored(false));
         GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.twilicane, " gG", " gg", "g  ",
                 'g', "nuggetGold", 'G', "ingotGold"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.locker, "ICI", "SSS",
+                'I', "ingotIron", 'C', Blocks.chest, 'S', ModBlocks.slab_flutter));
     }
     
     public static void addSmelting() {
