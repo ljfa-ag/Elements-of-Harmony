@@ -11,10 +11,12 @@ import de.ljfa.elofharmony.inventory.ContainerLocker;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
 import de.ljfa.lib.gui.GuiBase;
+import de.ljfa.lib.gui.GuiButtonPicture;
 
 public class GuiLocker extends GuiBase {
 
     private static final ResourceLocation texture = new ResourceLocation(Reference.MODID + ":textures/gui/locker.png");
+    private static final ResourceLocation buttonSwapPic = new ResourceLocation(Reference.MODID + ":textures/gui/swap_button.png");
     
     public GuiLocker(InventoryPlayer invPlayer, TileLocker tile) {
         super(new ContainerLocker(invPlayer, tile), texture);
@@ -25,7 +27,7 @@ public class GuiLocker extends GuiBase {
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(new GuiButtonExt(0, guiLeft+90, guiTop+90, 18, 18, ""));
+        buttonList.add(new GuiButtonPicture(0, guiLeft+(xSize-16)/2, guiTop+94, 16, 16, "", buttonSwapPic));
     }
     
     @Override
