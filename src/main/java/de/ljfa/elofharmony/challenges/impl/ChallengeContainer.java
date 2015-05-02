@@ -21,6 +21,8 @@ import de.ljfa.elofharmony.util.LogHelper;
  */
 public class ChallengeContainer implements IExtendedEntityProperties {
 
+    public static final String PROPERTY_KEY = "eoh:Challenge";
+    
     /** Registers a Challenge class. The challenge must have a no-arguments constructor. */
     public static void register(Class<? extends Challenge> clazz, String name) {
         if(registry.containsKey(name))
@@ -30,12 +32,14 @@ public class ChallengeContainer implements IExtendedEntityProperties {
     
     /** @return the ChallengeHolder for the player. */
     public static ChallengeContainer get(EntityPlayerMP player) {
-        return (ChallengeContainer)player.getExtendedProperties("eoh:Challenge");
+        return (ChallengeContainer)player.getExtendedProperties(PROPERTY_KEY);
     }
     
     /** Initializes the player with a ChallengeHolder. Gets called when the player entity gets constructed. */
     public static void initPlayer(EntityPlayerMP player) {
-        player.registerExtendedProperties("eoh:Challenge", new ChallengeContainer(player));
+        String key = player.registerExtendedProperties(PROPERTY_KEY, new ChallengeContainer(player));
+        if(!PROPERTY_KEY.equals(key))
+            throw new RuntimeException("Could not register challenge property - the key " + PROPERTY_KEY + " already exists.");
     }
     
     /** @return the Challenge inside this holder */
@@ -62,14 +66,14 @@ public class ChallengeContainer implements IExtendedEntityProperties {
             NBTTagCompound chTag = new NBTTagCompound();
             chTag.setString("ID", chName);
             challenge.writeToNBT(chTag);
-            tag.setTag("eoh:Challenge", chTag);
+            tag.setTag(PROPERTY_KEY, chTag);
         }
     }
 
     @Override
     public void loadNBTData(NBTTagCompound tag) {
-        if(tag.hasKey("eoh:Challenge", Constants.NBT.TAG_COMPOUND)) {
-            NBTTagCompound chTag = tag.getCompoundTag("eoh:Challenge");
+        if(tag.hasKey(PROPERTY_KEY, Constants.NBT.TAG_COMPOUND)) {
+            NBTTagCompound chTag = tag.getCompoundTag(PROPERTY_KEY);
             String chName = chTag.getString("ID");
             Class<? extends Challenge> clazz = registry.get(chName);
             if(clazz != null) {
