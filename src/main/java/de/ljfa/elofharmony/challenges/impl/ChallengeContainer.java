@@ -105,6 +105,6 @@ public class ChallengeContainer implements IExtendedEntityProperties {
     
     private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
     
-    private EntityPlayerMP player; //This field is only used for loading challenges
+    private EntityPlayerMP player; //This field is only used when loading challenges from NBT and gets cleared after
     private Challenge challenge;
 }
