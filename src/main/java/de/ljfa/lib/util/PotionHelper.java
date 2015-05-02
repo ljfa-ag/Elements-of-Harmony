@@ -18,6 +18,11 @@ public class PotionHelper {
         addEffect(entity, id, duration, strength, false);
     }
     
+    /** Adds a potion effect to the entity */
+    public static void addEffect(EntityLivingBase entity, int id, int duration) {
+        addEffect(entity, id, duration, 0, false);
+    }
+    
     /** @return true if this item is a potion which has the specified potion effect ID */
     public static boolean isPotionOfType(Item item, int damage, int potionID) {
         if(!(item instanceof ItemPotion))
