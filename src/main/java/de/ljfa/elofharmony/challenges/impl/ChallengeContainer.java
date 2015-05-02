@@ -1,4 +1,4 @@
-package de.ljfa.elofharmony.challenges;
+package de.ljfa.elofharmony.challenges.impl;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import de.ljfa.elofharmony.challenges.Challenge;
 import de.ljfa.elofharmony.util.LogHelper;
 
 /** This is a wrapper class for Challenge objects. Instances of this class get saved to the

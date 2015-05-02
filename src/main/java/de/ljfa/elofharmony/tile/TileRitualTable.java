@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.challenges.Challenge;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeKindness;
-import de.ljfa.elofharmony.handlers.ChallengeHandler;
+import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ItemTwilicane;
 import de.ljfa.elofharmony.items.ModItems;

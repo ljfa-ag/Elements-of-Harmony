@@ -1,4 +1,4 @@
-package de.ljfa.elofharmony.handlers;
+package de.ljfa.elofharmony.challenges.impl;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,7 +11,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.elofharmony.challenges.ChallengeContainer;
 
 public class ChallengeHandler {
 

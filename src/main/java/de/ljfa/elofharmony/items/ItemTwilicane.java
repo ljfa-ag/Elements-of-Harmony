@@ -9,7 +9,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.handlers.ChallengeHandler;
+import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.lib.chat.ChatHelper;
 
 public class ItemTwilicane extends Item {
