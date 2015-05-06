@@ -51,6 +51,11 @@ public abstract class TableChallenge extends Challenge {
     public void readFromNBT(NBTTagCompound tag) {
         this.tablePos = DimPos.fromArray(tag.getIntArray("TablePos"));
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "\nTable position: " + tablePos;
+    }
 
     protected DimPos tablePos;
     
