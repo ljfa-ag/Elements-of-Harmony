@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
@@ -57,7 +58,7 @@ public class ChallengeKindness extends TableChallenge {
 
     @Override
     public boolean checkRestriction() {
-        return !player.isDead && invRestr.check(player);
+        return running && invRestr.check(player);
     }
 
     @Override
@@ -98,6 +99,11 @@ public class ChallengeKindness extends TableChallenge {
     }
     
     @Override
+    public void onPlayerDeath(LivingDeathEvent event) {
+        running = false;
+    }
+    
+    @Override
     public void onAbort() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
         super.onAbort();
@@ -114,7 +120,7 @@ public class ChallengeKindness extends TableChallenge {
         return invRestr.mayPickUp(player, stack);
     }
 
-    private boolean complete = false;
+    private boolean running = true, complete = false;
     
     private static final int radius = 3;
     

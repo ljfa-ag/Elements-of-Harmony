@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
@@ -36,7 +37,7 @@ public class ChallengeGenerosity extends TableChallenge {
 
     @Override
     public boolean checkRestriction() {
-        return !player.isDead && invRestr.check(player);
+        return running && invRestr.check(player);
     }
     
     @Override
@@ -90,9 +91,16 @@ public class ChallengeGenerosity extends TableChallenge {
     }
     
     @Override
+    public void onPlayerDeath(LivingDeathEvent event) {
+        running = false;
+    }
+    
+    @Override
     protected ItemStack getResult() {
         return new ItemStack(ModItems.elementOfHarmony, 1, ElementType.GENEROSITY.ordinal());
     }
+    
+    private boolean running = true;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
