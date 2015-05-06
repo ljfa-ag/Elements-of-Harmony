@@ -1,5 +1,8 @@
 package de.ljfa.elofharmony;
 
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -7,11 +10,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import de.ljfa.elofharmony.blocks.ModBlocks;
 import de.ljfa.elofharmony.challenges.impl.ChallengeCommonHandler;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
+import de.ljfa.elofharmony.command.CommandChallengeDebug;
 import de.ljfa.elofharmony.gui.EohGuiHandler;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 import de.ljfa.elofharmony.items.ModItems;
@@ -60,5 +65,11 @@ public class ElementsOfHarmony {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+    }
+    
+    @Mod.EventHandler
+    public void serverStarted(FMLServerStartedEvent event) {
+        ServerCommandManager commandManager = (ServerCommandManager)MinecraftServer.getServer().getCommandManager();
+        commandManager.registerCommand(new CommandChallengeDebug());
     }
 }
