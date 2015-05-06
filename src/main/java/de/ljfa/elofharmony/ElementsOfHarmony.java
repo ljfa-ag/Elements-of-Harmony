@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import de.ljfa.elofharmony.blocks.ModBlocks;
+import de.ljfa.elofharmony.challenges.impl.ChallengeCommonHandler;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.elofharmony.gui.EohGuiHandler;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
@@ -48,6 +49,7 @@ public class ElementsOfHarmony {
         ChallengeHandler chHandler = new ChallengeHandler();
         FMLCommonHandler.instance().bus().register(chHandler);
         MinecraftForge.EVENT_BUS.register(chHandler);
+        MinecraftForge.EVENT_BUS.register(new ChallengeCommonHandler());
         
         ModRecipes.addOredict();
         ModRecipes.addRecipes();
