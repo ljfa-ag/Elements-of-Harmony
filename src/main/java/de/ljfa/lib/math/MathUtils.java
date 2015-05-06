@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.AxisAlignedBB;
 
-public class MathHelper {
+public class MathUtils {
 
     /** Generates a symmetrically triangular distributed integer between min and max (inclusive).
      * The expected value is (min+max)/2.
@@ -37,6 +37,26 @@ public class MathHelper {
     /** @return an AxisAlignedBB with the specified midpoint and the specified radius in all directions */
     public static AxisAlignedBB boundingBoxAround(double xmid, double ymid, double zmid, double radius) {
         return boundingBoxAround(xmid, ymid, zmid, radius, radius, radius);
+    }
+    
+    /** @return the largest of the arguments */
+    public static int max(int arg0, int arg1, int arg2) {
+        return Math.max(arg0, Math.max(arg1, arg2));
+    }
+    
+    /** @return the smallest of the arguments */
+    public static int min(int arg0, int arg1, int arg2) {
+        return Math.min(arg0, Math.min(arg1, arg2));
+    }
+    
+    /** @return the largest of the arguments */
+    public static double max(double arg0, double arg1, double arg2) {
+        return Math.max(arg0, Math.max(arg1, arg2));
+    }
+    
+    /** @return the smallest of the arguments */
+    public static double min(double arg0, double arg1, double arg2) {
+        return Math.min(arg0, Math.min(arg1, arg2));
     }
 
 }

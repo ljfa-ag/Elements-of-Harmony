@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.util.LogHelper;
-import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.util.PotionHelper;
 
 /** Event handler for the delayed effects originating from Poison Joke */
@@ -50,7 +50,7 @@ public class PoisonJokeHandler {
         
         int minDuration = (int)(0.4 * Config.pjAvgDurations[index]);
         int maxDuration = (int)(1.6 * Config.pjAvgDurations[index]);
-        int duration = MathHelper.triangularInt(rand, minDuration, maxDuration);
+        int duration = MathUtils.triangularInt(rand, minDuration, maxDuration);
         if(isSquid(entity))
             duration *= 1.1;
         

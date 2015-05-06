@@ -33,7 +33,7 @@ public interface Metric {
     public static final Metric lInf = new Metric() {
         @Override
         public double dist(double x1, double y1, double z1, double x2, double y2, double z2) {
-            return Math.max(Math.abs(x1-x2), Math.max(Math.abs(y1-y2), Math.abs(z1-z2)));
+            return MathUtils.max(Math.abs(x1-x2), Math.abs(y1-y2), Math.abs(z1-z2));
         } 
     };
 }

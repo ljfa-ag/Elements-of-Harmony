@@ -12,7 +12,7 @@ import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.PlayerSlotRestriction;
 import de.ljfa.lib.inventory.PlayerSlotType;
-import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
@@ -50,7 +50,7 @@ public class ChallengeGenerosity extends TableChallenge {
         double mean = 300.0, sigma = 20.0;
         //double mean = 30.0, sigma = 2.0;
         
-        double dist = mean + sigma * MathHelper.stdTriangular(world.rand);
+        double dist = mean + sigma * MathUtils.stdTriangular(world.rand);
         double angle = 2 * Math.PI * world.rand.nextDouble();
         
         int tpx = (int)(player.posX + dist * Math.cos(angle));

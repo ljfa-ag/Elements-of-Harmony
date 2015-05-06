@@ -13,7 +13,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.blocks.ModBlocks;
 import de.ljfa.elofharmony.util.LogHelper;
-import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.MathUtils;
 
 public class DecorationPoisonJoke {
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -29,8 +29,8 @@ public class DecorationPoisonJoke {
             return;
         LogHelper.debug("Attempting to generate Poison Joke at (%d, %d)", xGen, zGen);
         
-        double xSize = MathHelper.triangularDouble(rand, 2.0, 5.0);
-        double zSize = MathHelper.triangularDouble(rand, 2.0, 5.0);
+        double xSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
+        double zSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
         
         int yGen = event.world.getTopSolidOrLiquidBlock(xGen, zGen);
         

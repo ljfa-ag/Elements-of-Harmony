@@ -17,7 +17,7 @@ import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.PlayerSlotRestriction;
 import de.ljfa.lib.inventory.PlayerSlotType;
-import de.ljfa.lib.math.MathHelper;
+import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
@@ -85,7 +85,7 @@ public class ChallengeKindness extends TableChallenge {
                 && Math.abs(player.posY-tablePos.y) <= vOffset //Player is at the same y-level as the table
                 && MetricHelper.d(Metric.lInf, player, tablePos) <= radius+0.5) { //Player is not too far away
             List<Entity> list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player,
-                    MathHelper.boundingBoxAround(player.posX, player.posY, player.posZ, minHDist, vOffset, minHDist));
+                    MathUtils.boundingBoxAround(player.posX, player.posY, player.posZ, minHDist, vOffset, minHDist));
             
             if(list.size() == 1) {
                 Entity ent = list.get(0);
