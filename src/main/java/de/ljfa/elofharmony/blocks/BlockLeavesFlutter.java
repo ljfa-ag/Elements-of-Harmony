@@ -39,9 +39,9 @@ public class BlockLeavesFlutter extends BlockLeaves {
         if(world.rand.nextInt(128) < 7 + 2*fortune)
             ret.add(new ItemStack(ModBlocks.sapling_flutter));
         
-        // 2.3% to 4.7% chance
-        // Expected: 1.2 to 2.5 per tree
-        if(world.rand.nextInt(128) < 3 + fortune)
+        // 3.9% to 6.3% chance
+        // Expected: 2.1 to 3.3 per tree
+        if(world.rand.nextInt(128) < 5 + fortune)
             ret.add(new ItemStack(ModItems.resource, 1, ResourceType.YELLOW_FEATHER.ordinal()));
         
         return ret;
