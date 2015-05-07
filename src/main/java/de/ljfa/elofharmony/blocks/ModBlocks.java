@@ -2,6 +2,7 @@ package de.ljfa.elofharmony.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 
 public final class ModBlocks {
     public static BlockPoisonJoke poisonjoke;
@@ -14,7 +15,7 @@ public final class ModBlocks {
     public static BlockRitualTable ritual_table;
     public static BlockLocker locker;
     
-    public static void init() {
+    public static void preInit() {
         poisonjoke = new BlockPoisonJoke();
         log_flutter = new BlockLogFlutter();
         leaves_flutter = new BlockLeavesFlutter();
@@ -24,5 +25,15 @@ public final class ModBlocks {
         stairs_flutter = new BlockStairsFlutter(planks_flutter, 0);
         ritual_table = new BlockRitualTable();
         locker = new BlockLocker();
+        
+        setFireInfo();
+    }
+    
+    private static void setFireInfo() {
+        Blocks.fire.setFireInfo(log_flutter, 5, 5);
+        Blocks.fire.setFireInfo(leaves_flutter, 30, 60);
+        Blocks.fire.setFireInfo(planks_flutter, 5, 20);
+        Blocks.fire.setFireInfo(slab_flutter, 5, 20);
+        Blocks.fire.setFireInfo(stairs_flutter, 5, 20);
     }
 }

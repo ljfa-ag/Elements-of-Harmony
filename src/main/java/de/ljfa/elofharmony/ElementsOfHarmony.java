@@ -37,7 +37,7 @@ public class ElementsOfHarmony {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Config.loadConfig(event.getSuggestedConfigurationFile());
-        ModBlocks.init();
+        ModBlocks.preInit();
         ModItems.init();
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new EohGuiHandler());
