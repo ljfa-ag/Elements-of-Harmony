@@ -28,8 +28,8 @@ public class ItemHelper {
     static {
         vanillaTools = Sets.newIdentityHashSet();
         vanillaTools.addAll(Arrays.asList(
-            Items.wooden_pickaxe, Items.stone_pickaxe, Items.iron_pickaxe, Items.diamond_pickaxe,
-            Items.wooden_shovel, Items.stone_shovel, Items.iron_shovel, Items.diamond_shovel,
-            Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.diamond_axe));
+            Items.wooden_pickaxe, Items.stone_pickaxe, Items.iron_pickaxe, Items.golden_pickaxe, Items.diamond_pickaxe,
+            Items.wooden_shovel, Items.stone_shovel, Items.iron_shovel, Items.golden_shovel, Items.diamond_shovel,
+            Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe));
     }
 }
