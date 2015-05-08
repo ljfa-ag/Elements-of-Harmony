@@ -81,7 +81,7 @@ public class ChallengeLaughter extends TableChallenge {
 
     private int stoneMined = 0;
     
-    private static final int stoneNeeded = 4*64;
+    private static final int stoneNeeded = 2*64;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
@@ -89,7 +89,7 @@ public class ChallengeLaughter extends TableChallenge {
             if(stack == null)
                 return true;
             Item item = stack.getItem();
-            if(item == ModItems.twilicane || item == Item.getItemFromBlock(Blocks.cobblestone))
+            if(item == ModItems.twilicane || item == Item.getItemFromBlock(Blocks.cobblestone) || item == Item.getItemFromBlock(Blocks.torch))
                 return true;
             else if(ItemHelper.vanillaTools.contains(item))
                 return !stack.isItemEnchanted();
