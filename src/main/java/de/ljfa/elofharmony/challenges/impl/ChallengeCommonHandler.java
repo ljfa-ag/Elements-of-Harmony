@@ -30,7 +30,7 @@ public class ChallengeCommonHandler {
     
     @SubscribeEvent
     public void onBlockBreak(BlockEvent.BreakEvent event) {
-        if(event.world.isRemote) {
+        if(event.getPlayer() instanceof EntityPlayerMP) {
             Challenge ch = ChallengeHandler.getChallenge((EntityPlayerMP)event.getPlayer());
             if(ch != null)
                 ch.onPlayerBreakBlock(event);
