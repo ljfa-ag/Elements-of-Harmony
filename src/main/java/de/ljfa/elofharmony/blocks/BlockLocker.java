@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import de.ljfa.elofharmony.ElementsOfHarmony;
@@ -38,5 +40,15 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
         if(!world.isRemote)
             BlockHelper.spillInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, block, meta);
+    }
+    
+    @Override
+    public boolean hasComparatorInputOverride() {
+        return true;
+    }
+    
+    @Override
+    public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
+        return Container.calcRedstoneFromInventory((IInventory)world.getTileEntity(x, y, z));
     }
 }
