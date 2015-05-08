@@ -4,7 +4,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.client.config.GuiButtonExt;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.inventory.ContainerLocker;

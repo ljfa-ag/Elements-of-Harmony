@@ -1,6 +1,5 @@
 package de.ljfa.elofharmony;
 
-import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
