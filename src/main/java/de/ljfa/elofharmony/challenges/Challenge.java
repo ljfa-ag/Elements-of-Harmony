@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.world.BlockEvent;
 
 public abstract class Challenge {
 
@@ -49,6 +50,9 @@ public abstract class Challenge {
     
     /** Called when the player dies */
     public void onPlayerDeath(LivingDeathEvent event) { }
+    
+    /** Called when the player breaks a block */
+    public void onPlayerBreakBlock(BlockEvent.BreakEvent event) { }
     
     /** Writes the challenge data to NBT */
     public abstract void writeToNBT(NBTTagCompound tag);
