@@ -50,7 +50,8 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public void onStart() {
-        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start0");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start1", stoneNeeded, maxTicks/20);
     }
 
     @Override
@@ -67,13 +68,14 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.mined", stoneMined);
         super.onAbort();
     }
 
     @Override
     public void onComplete() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
-        ChatHelper.toPlayer(player, "Time: " + ticks/20.0f + " s");
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.time", ticks/20.0f);
         super.onComplete();
     }
     
@@ -102,7 +104,8 @@ public class ChallengeLaughter extends TableChallenge {
     private int ticks = 0;
     
     public static final int stoneNeeded = 2*64;
-    public static final int maxTicks = 65*20;
+    public static final int maxSeconds = 65;
+    public static final int maxTicks = maxSeconds*20;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override

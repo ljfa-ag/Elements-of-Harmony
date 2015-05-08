@@ -33,3 +33,8 @@ elofharmony.challenge.generosity.start2=You cannot pick up any items during the 
 elofharmony.challenge.kindness.start=The Kindness challenge is on!
 elofharmony.challenge.kindness.no_items_allowed=In order to start the Kindness challenge you're not allowed to have any items on you besides Twilicane and yellow feathers
 elofharmony.challenge.kindness.flat_ground=In order to start the Kindness challenge the ground around the table must be flat
+
+elofharmony.challenge.laughter.start0=The Laughter challenge is on!
+elofharmony.challenge.laughter.start1=You have to mine %d cobblestone in %d seconds.
+elofharmony.challenge.laughter.time=Time: %f s
+elofharmony.challenge.laughter.mined=Cobblestone mined: %d
