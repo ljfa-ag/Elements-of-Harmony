@@ -2,10 +2,9 @@ package de.ljfa.elofharmony.challenges;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import de.ljfa.elofharmony.items.ItemElement;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
@@ -45,7 +44,7 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public boolean checkCondition() {
-        return false;
+        return stoneMined >= stoneNeeded;
     }
 
     @Override
@@ -55,6 +54,12 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public void onTick() {
+    }
+    
+    @Override
+    public void onPlayerBreakBlock(BreakEvent event) {
+        if(event.block == Blocks.stone || event.block == Blocks.cobblestone)
+            stoneMined++;
     }
 
     @Override
@@ -68,12 +73,23 @@ public class ChallengeLaughter extends TableChallenge {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
         super.onComplete();
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "\nStone mined: " + stoneMined + " / " + stoneNeeded;
+    }
 
-    public static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
+    private int stoneMined = 0;
+    
+    private static final int stoneNeeded = 4*64;
+    
+    private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
         public boolean check(PlayerSlotType type, int slot, ItemStack stack) {
+            if(stack == null)
+                return true;
             Item item = stack.getItem();
-            if(item == Item.getItemFromBlock(Blocks.cobblestone))
+            if(item == ModItems.twilicane || item == Item.getItemFromBlock(Blocks.cobblestone))
                 return true;
             else if(ItemHelper.vanillaTools.contains(item))
                 return !stack.isItemEnchanted();
