@@ -102,7 +102,7 @@ public class ChallengeLaughter extends TableChallenge {
     private int ticks = 0;
     
     public static final int stoneNeeded = 2*64;
-    public static final int maxTicks = 75*20;
+    public static final int maxTicks = 65*20;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
