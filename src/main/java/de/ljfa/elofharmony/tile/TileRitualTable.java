@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.challenges.Challenge;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeKindness;
+import de.ljfa.elofharmony.challenges.ChallengeLaughter;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ItemTwilicane;
@@ -102,6 +103,8 @@ public class TileRitualTable extends TileInventoryBase {
             Challenge challenge;
             if(item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal())
                 challenge = new ChallengeKindness(player, this);
+            else if(item == Items.cake)
+                challenge = new ChallengeLaughter(player, this);
             else if(item == Items.diamond)
                 challenge = new ChallengeGenerosity(player, this);
             else
