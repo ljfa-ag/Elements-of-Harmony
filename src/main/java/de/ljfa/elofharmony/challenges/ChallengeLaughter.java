@@ -40,7 +40,7 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public boolean checkRestriction() {
-        return invRestr.check(player);
+        return ticks < maxTicks && invRestr.check(player);
     }
 
     @Override
@@ -67,7 +67,6 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
-        ChatHelper.toPlayer(player, "Time: " + ticks/20.0f + " s");
         super.onAbort();
     }
 
@@ -96,13 +95,14 @@ public class ChallengeLaughter extends TableChallenge {
     public String toString() {
         return super.toString()
             + "\nStone mined: " + stoneMined + " / " + stoneNeeded
-            + "\nTime elapsed: " + ticks;
+            + "\nTime elapsed: " + ticks + " / " + maxTicks;
     }
 
     private int stoneMined = 0;
     private int ticks = 0;
     
-    private static final int stoneNeeded = 2*64;
+    public static final int stoneNeeded = 2*64;
+    public static final int maxTicks = 75*20;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
