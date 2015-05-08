@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
@@ -54,6 +55,7 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public void onTick() {
+        ticks++;
     }
     
     @Override
@@ -65,21 +67,40 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onAbort() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
+        ChatHelper.toPlayer(player, "Time: " + ticks/20.0f + " s");
         super.onAbort();
     }
 
     @Override
     public void onComplete() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
+        ChatHelper.toPlayer(player, "Time: " + ticks/20.0f + " s");
         super.onComplete();
     }
     
     @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        tag.setInteger("Mined", stoneMined);
+        tag.setInteger("Ticks", ticks);
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        stoneMined = tag.getInteger("Mined");
+        ticks = tag.getInteger("Ticks");
+    }
+    
+    @Override
     public String toString() {
-        return super.toString() + "\nStone mined: " + stoneMined + " / " + stoneNeeded;
+        return super.toString()
+            + "\nStone mined: " + stoneMined + " / " + stoneNeeded
+            + "\nTime elapsed: " + ticks;
     }
 
     private int stoneMined = 0;
+    private int ticks = 0;
     
     private static final int stoneNeeded = 2*64;
     
