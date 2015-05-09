@@ -21,8 +21,8 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     private final ModelRitualTable model;
     private final RenderItem renderItem;
     
-    private static final ResourceLocation texture = new ResourceLocation(Reference.MODID + ":textures/tile/ritual_table.png");
-    private static final ResourceLocation texture_running = new ResourceLocation(Reference.MODID + ":textures/tile/ritual_table_running.png");
+    private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table.png");
+    private static final ResourceLocation texture_running = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table_running.png");
     
     public TileRitualTableRenderer() {
         model = new ModelRitualTable();

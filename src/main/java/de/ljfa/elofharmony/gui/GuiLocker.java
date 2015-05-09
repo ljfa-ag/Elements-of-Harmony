@@ -14,8 +14,8 @@ import de.ljfa.lib.gui.GuiButtonPicture;
 
 public class GuiLocker extends GuiBase {
 
-    private static final ResourceLocation texture = new ResourceLocation(Reference.MODID + ":textures/gui/locker.png");
-    private static final ResourceLocation buttonSwapPic = new ResourceLocation(Reference.MODID + ":textures/gui/swap_button.png");
+    private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/locker.png");
+    private static final ResourceLocation buttonSwapPic = new ResourceLocation(Reference.MODID, "textures/gui/swap_button.png");
     
     public GuiLocker(InventoryPlayer invPlayer, TileLocker tile) {
         super(new ContainerLocker(invPlayer, tile), texture);
