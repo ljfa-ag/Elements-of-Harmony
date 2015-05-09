@@ -26,7 +26,7 @@ public class GuiLocker extends GuiBase {
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(new GuiButtonPicture(0, guiLeft+(xSize-16)/2, guiTop+94, 16, 16, "", buttonSwapPic));
+        buttonList.add(new GuiButtonPicture(0, guiLeft+(xSize-16)/2, guiTop+94, 16, 16, buttonSwapPic));
     }
     
     @Override

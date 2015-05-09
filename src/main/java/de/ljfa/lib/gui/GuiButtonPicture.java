@@ -15,6 +15,10 @@ public class GuiButtonPicture extends GuiButtonExt {
         this.picture = Objects.requireNonNull(picture);
     }
     
+    public GuiButtonPicture(int id, int xPos, int yPos, int width, int height, ResourceLocation picture) {
+        this(id, xPos, yPos, width, height, "", picture);
+    }
+    
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if(this.visible) {
