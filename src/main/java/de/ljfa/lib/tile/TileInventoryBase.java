@@ -1,6 +1,5 @@
 package de.ljfa.lib.tile;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
+import de.ljfa.lib.items.ItemHelper;
 
 /** Base class for tile entities with inventory */
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
@@ -133,10 +133,8 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     public void spillItems() {
         for(int i = 0; i < inv.length; i++) {
             ItemStack stack = getStackInSlot(i);
-            if(stack != null) {
-                EntityItem entity = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, stack);
-                worldObj.spawnEntityInWorld(entity);
-            }
+            if(stack != null)
+                ItemHelper.dropItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, stack);
         }
     }
     

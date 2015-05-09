@@ -1,12 +1,12 @@
 package de.ljfa.elofharmony.challenges;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.elofharmony.util.LogHelper;
+import de.ljfa.lib.items.ItemHelper;
 import de.ljfa.lib.math.DimPos;
 
 /** Base class for challenges that use the Ritual Table */
@@ -36,8 +36,7 @@ public abstract class TableChallenge extends Challenge {
         }
         else {
             //Drop item on ground if table is not present
-            EntityItem entity = new EntityItem(tablePos.getWorld(), tablePos.x+0.5, tablePos.y+0.5, tablePos.z+0.5, result);
-            tablePos.getWorld().spawnEntityInWorld(entity);
+            ItemHelper.dropItem(tablePos, result);
         }
         player.worldObj.playSoundAtEntity(player, "random.levelup", 1.0f, 1.0f);
     }
