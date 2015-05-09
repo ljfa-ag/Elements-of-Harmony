@@ -41,7 +41,7 @@ public class Config {
                 "List of potion effects that can be applied\n" +
                 "Default: Slowness, Mining Fatigue, Harm, Nausea, Blindness, Hunger, Weakness, Poison, Wither", 0, 32).getIntList();
         pjAvgDurations = conf.get(CAT_POISONJOKE, "Mean effect durations",
-                new int[] {360, 400, 0, 240, 200, 320, 400, 160, 180},
+                new int[] {360, 400, 1, 240, 200, 320, 400, 160, 180},
                 "Average durations in ticks of the effect\n" +
                 "These entries correspond to the potion IDs specified above.", 0, Integer.MAX_VALUE).getIntList();
         pjMaxLevels = conf.get(CAT_POISONJOKE, "Maximum effect levels",

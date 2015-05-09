@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -48,11 +49,17 @@ public class PoisonJokeHandler {
         
         int id = Config.pjPotionIDs[index];
         
-        int minDuration = (int)(0.4 * Config.pjAvgDurations[index]);
-        int maxDuration = (int)(1.6 * Config.pjAvgDurations[index]);
-        int duration = MathUtils.triangularInt(rand, minDuration, maxDuration);
-        if(isSquid(entity))
-            duration *= 1.1;
+        int duration;
+        
+        if(!Potion.potionTypes[id].isInstant()) {
+            int minDuration = (int)(0.4 * Config.pjAvgDurations[index]);
+            int maxDuration = (int)(1.6 * Config.pjAvgDurations[index]);
+            duration = MathUtils.triangularInt(rand, minDuration, maxDuration);
+            if(isSquid(entity))
+                duration *= 1.1;
+        }
+        else
+            duration = 1;
         
         int level = rand.nextInt(Config.pjMaxLevels[index]);
         
