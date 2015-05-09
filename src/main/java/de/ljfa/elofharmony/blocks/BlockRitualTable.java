@@ -50,13 +50,11 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
         return false;
     }
     
-    @SideOnly(Side.CLIENT)
     @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
     
-    @SideOnly(Side.CLIENT)
     @Override
     public int getRenderType() {
         return -1;
