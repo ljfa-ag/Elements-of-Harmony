@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import de.ljfa.lib.items.ItemHelper;
+import de.ljfa.lib.nbt.NBTCompoundListWrapper;
 
 /** Base class for tile entities with inventory */
 public abstract class TileInventoryBase extends TileEntity implements IInventory {
@@ -109,8 +110,7 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     public void readCustomNBT(NBTTagCompound tag) {
         clear();
         NBTTagList invList = tag.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
-        for(int i = 0; i < invList.tagCount(); i++) {
-            NBTTagCompound stackTag = invList.getCompoundTagAt(i);
+        for(NBTTagCompound stackTag: new NBTCompoundListWrapper(invList)) {
             int slot = stackTag.getByte("Slot");
             
             if(slot >= 0 && slot < inv.length)
