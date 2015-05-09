@@ -25,16 +25,17 @@ elofharmony.challenge.success=Congratulations, you completed the challenge!
 elofharmony.challenge.no_challenge=You have no challenge running at the moment.
 elofharmony.challenge.twilicane_tooltip=Sneak+Right click to abort the current challenge
 
-elofharmony.challenge.generosity.no_items_allowed=In order to start the Generosity challenge you're not allowed to have any items on you besides the Twilicane
+elofharmony.challenge.generosity.no_items_allowed=In order to start the Generosity challenge you're not allowed to have any items on you besides the Twilicane.
 elofharmony.challenge.generosity.start0=The Generosity challenge is on!
 elofharmony.challenge.generosity.start1=You have to return to the Harmony Table without dying.
 elofharmony.challenge.generosity.start2=You cannot pick up any items during the challenge.
 
 elofharmony.challenge.kindness.start=The Kindness challenge is on!
-elofharmony.challenge.kindness.no_items_allowed=In order to start the Kindness challenge you're not allowed to have any items on you besides Twilicane and yellow feathers
-elofharmony.challenge.kindness.flat_ground=In order to start the Kindness challenge the ground around the table must be flat
+elofharmony.challenge.kindness.no_items_allowed=In order to start the Kindness challenge you're not allowed to have any items on you besides Twilicane and yellow feathers.
+elofharmony.challenge.kindness.flat_ground=In order to start the Kindness challenge the ground around the table must be flat.
 
 elofharmony.challenge.laughter.start0=The Laughter challenge is on!
-elofharmony.challenge.laughter.start1=You have to mine %d cobblestone in %d seconds.
+elofharmony.challenge.laughter.start1=You have to mine %d cobblestone in %f seconds.
+elofharmony.challenge.laughter.no_items_allowed=In order to start the Laughter challenge you're not allowed to have any items on you besides Twilicane, a completely mundane tool and cobblestone.
 elofharmony.challenge.laughter.time=Time: %f s
 elofharmony.challenge.laughter.mined=Cobblestone mined: %d
