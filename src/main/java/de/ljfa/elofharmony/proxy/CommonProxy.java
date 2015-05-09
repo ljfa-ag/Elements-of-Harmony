@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeKindness;
+import de.ljfa.elofharmony.challenges.ChallengeLaughter;
 import de.ljfa.elofharmony.challenges.impl.ChallengeContainer;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
@@ -23,6 +24,7 @@ public class CommonProxy {
         
         ChallengeContainer.register(ChallengeGenerosity.class, "Generosity");
         ChallengeContainer.register(ChallengeKindness.class, "Kindness");
+        ChallengeContainer.register(ChallengeLaughter.class, "Laughter");
     }
     
     public void postInit(FMLPostInitializationEvent event) {
