@@ -50,7 +50,7 @@ public class TileRitualTable extends TileInventoryBase {
             return false;
         Item item = stack.getItem();
         int meta = stack.getItemDamage();
-        return item == ModItems.elementOfHarmony
+        return item == ModItems.elementOfHarmony //TODO: Not hardcode that
             || item == Items.apple
             || item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal()
             || item == Items.cake
@@ -100,7 +100,7 @@ public class TileRitualTable extends TileInventoryBase {
                 return false;
             Item item = inv[0].getItem();
             int meta = inv[0].getItemDamage();
-            Challenge challenge;
+            Challenge challenge; //TODO: Not hardcode that
             if(item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal())
                 challenge = new ChallengeKindness(player, this);
             else if(item == Items.cake)
@@ -137,6 +137,7 @@ public class TileRitualTable extends TileInventoryBase {
         hasChallenge = tag.getBoolean("hasChallenge");
     }
     
+    //TODO: Use something like FMLProxyPacket instead
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();

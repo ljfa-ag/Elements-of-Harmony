@@ -34,7 +34,7 @@ public class ElementsOfHarmony {
     public static SimpleNetworkWrapper network;
     
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) { //TODO: Cleanup the init methods
         Config.loadConfig(event.getSuggestedConfigurationFile());
         ModBlocks.preInit();
         ModItems.init();

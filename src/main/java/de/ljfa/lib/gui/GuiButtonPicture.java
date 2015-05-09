@@ -22,7 +22,7 @@ public class GuiButtonPicture extends GuiButtonExt {
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if(this.visible) {
-            super.drawButton(mc, mouseX, mouseY);
+            super.drawButton(mc, mouseX, mouseY); //TODO: Maybe implement that ourselves
             mc.getTextureManager().bindTexture(picture);
             drawTexturedModalRect(xPosition, yPosition, 0, 0, width, height);
         }

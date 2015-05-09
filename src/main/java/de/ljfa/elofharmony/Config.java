@@ -16,7 +16,7 @@ public class Config {
     public static final String CAT_POISONJOKE = "poisonjoke";
     
     public static boolean pjPlayersOnly;
-    public static int[] pjPotionIDs;
+    public static int[] pjPotionIDs; //TODO: This maybe shouldn't be configurable
     public static int[] pjAvgDurations;
     public static int[] pjMaxLevels;
     public static int pjNumEffects;

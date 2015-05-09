@@ -47,6 +47,7 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
         return true;
     }
     
+    //TODO: Take into account that armor doesn't stack
     @Override
     public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
         return Container.calcRedstoneFromInventory((IInventory)world.getTileEntity(x, y, z));
