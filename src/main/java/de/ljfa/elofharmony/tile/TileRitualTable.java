@@ -34,7 +34,7 @@ public class TileRitualTable extends TileInventoryBase {
     
     @Override
     public String getInventoryName() {
-        return "TileRitualTable";
+        return "elofharmony.container.ritual_table";
     }
     
     @Override
