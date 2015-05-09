@@ -1,5 +1,7 @@
 package de.ljfa.elofharmony.challenges;
 
+import java.util.Locale;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -52,7 +54,7 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onStart() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start0");
-        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start1", stoneNeeded, maxMillisecs/1000f);
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start1", stoneNeeded, String.format(Locale.ENGLISH, "%.0f", maxMillisecs/1000f));
     }
 
     @Override
@@ -76,7 +78,7 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onComplete() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
-        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.time", getRuntime()/1000f);
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.time", String.format(Locale.ENGLISH, "%.2f", getRuntime()/1000f));
         super.onComplete();
     }
     

@@ -35,7 +35,7 @@ elofharmony.challenge.kindness.no_items_allowed=In order to start the Kindness c
 elofharmony.challenge.kindness.flat_ground=In order to start the Kindness challenge the ground around the table must be flat.
 
 elofharmony.challenge.laughter.start0=The Laughter challenge is on!
-elofharmony.challenge.laughter.start1=You have to mine %d cobblestone in %f seconds.
+elofharmony.challenge.laughter.start1=You have to mine %d cobblestone in %s seconds.
 elofharmony.challenge.laughter.no_items_allowed=In order to start the Laughter challenge you're not allowed to have any items on you besides Twilicane, a completely mundane tool and cobblestone.
-elofharmony.challenge.laughter.time=Time: %f s
+elofharmony.challenge.laughter.time=Time: %s s
 elofharmony.challenge.laughter.mined=Cobblestone mined: %d
