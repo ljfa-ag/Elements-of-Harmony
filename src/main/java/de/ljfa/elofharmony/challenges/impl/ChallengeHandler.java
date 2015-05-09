@@ -26,10 +26,8 @@ public class ChallengeHandler {
             if(!ch.checkRestriction()) {
                 ChallengeHandler.abortChallenge(ch);
             }
-            if(world.getWorldTime() % 16 == 0) {
-                if(ch.checkCondition()) {
-                    ChallengeHandler.endChallenge(ch);
-                }
+            if(ch.checkCondition()) {
+                ChallengeHandler.endChallenge(ch);
             }
         }
     }

@@ -42,7 +42,10 @@ public class ChallengeGenerosity extends TableChallenge {
     
     @Override
     public boolean checkCondition() {
-        return MetricHelper.d(Metric.l2sq, player, tablePos) <= 25.0;
+        if(player.ticksExisted % 16 == 0)
+            return MetricHelper.d(Metric.l2sq, player, tablePos) <= 25.0;
+        else
+            return false;
     }
     
     @Override
