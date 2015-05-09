@@ -3,7 +3,7 @@ package de.ljfa.lib.math;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
+import de.ljfa.lib.util.Utils;
 
 /** Represents a position in a specific dimension */
 public class DimPos {
@@ -26,12 +26,7 @@ public class DimPos {
     }
     
     public WorldServer getWorld() {
-        WorldServer world = DimensionManager.getWorld(dim);
-        if (world == null) {
-            DimensionManager.initDimension(dim);
-            world = DimensionManager.getWorld(dim);
-        }
-        return world;
+        return Utils.getOrInitWorld(dim);
     }
     
     public Block getBlock() {
