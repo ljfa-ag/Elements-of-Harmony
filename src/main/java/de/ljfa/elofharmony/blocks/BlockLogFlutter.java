@@ -11,7 +11,9 @@ public class BlockLogFlutter extends BlockLog {
     private final String name = "log_flutter";
     
     @SideOnly(Side.CLIENT)
-    private IIcon[] textures;
+    private IIcon texture_side;
+    @SideOnly(Side.CLIENT)
+    private IIcon texture_top;
     
     public BlockLogFlutter() {
         BlockHelper.register(this, name);
@@ -19,20 +21,18 @@ public class BlockLogFlutter extends BlockLog {
     
     @SideOnly(Side.CLIENT)
     protected IIcon getSideIcon(int meta) {
-        return textures[0];
+        return texture_side;
     }
     
     @SideOnly(Side.CLIENT)
     protected IIcon getTopIcon(int meta) {
-        return textures[1];
+        return texture_top;
     }
     
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        textures = new IIcon[] {
-            iconRegister.registerIcon(Reference.MODID + ":log_flutter"),
-            iconRegister.registerIcon(Reference.MODID + ":log_flutter_top")
-        };
+        texture_side = iconRegister.registerIcon(Reference.MODID + ":log_flutter");
+        texture_top = iconRegister.registerIcon(Reference.MODID + ":log_flutter_top");
     }
 }
