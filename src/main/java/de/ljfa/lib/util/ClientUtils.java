@@ -1,6 +1,7 @@
 package de.ljfa.lib.util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,5 +20,9 @@ public class ClientUtils {
     public static int getRenderDistanceSq() {
         int dist = getRenderDistance();
         return dist*dist;
+    }
+    
+    public static EntityPlayer getPlayer() {
+        return minecraft.thePlayer;
     }
 }
