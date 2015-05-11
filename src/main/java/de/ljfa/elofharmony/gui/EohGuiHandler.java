@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import de.ljfa.elofharmony.inventory.ContainerLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
 
 public class EohGuiHandler implements IGuiHandler {

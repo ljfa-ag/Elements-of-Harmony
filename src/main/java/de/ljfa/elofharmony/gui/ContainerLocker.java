@@ -1,4 +1,4 @@
-package de.ljfa.elofharmony.inventory;
+package de.ljfa.elofharmony.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

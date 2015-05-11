@@ -6,7 +6,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
-import de.ljfa.elofharmony.inventory.ContainerLocker;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
 import de.ljfa.lib.gui.GuiBase;
