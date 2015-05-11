@@ -21,6 +21,7 @@ import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ItemTwilicane;
 import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.lib.inventory.InvUtils;
 import de.ljfa.lib.tile.TileInventoryBase;
 import de.ljfa.lib.util.ClientUtils;
 import de.ljfa.lib.util.PotionHelper;
@@ -61,9 +62,9 @@ public class TileRitualTable extends TileInventoryBase {
     
     public boolean onPlayerInteract(EntityPlayer player) {
         InventoryPlayer playerInv = player.inventory;
-        int playerSlot = playerInv.currentItem;
         ItemStack playerStack = playerInv.getCurrentItem();
         
+        //TODO: Have an interface here rather than a hardcoded class
         if(playerStack != null && playerStack.getItem() instanceof ItemTwilicane) {
             if(player.worldObj.isRemote)
                 return true;
@@ -71,23 +72,7 @@ public class TileRitualTable extends TileInventoryBase {
                 return tryStartChallenge((EntityPlayerMP)player);
         }
         
-        ItemStack tableStack = getStackInSlot(0);
-        if(tableStack != null) {
-            //Remove item from table
-            if(playerInv.addItemStackToInventory(tableStack)) {
-                setInventorySlotContents(0, null);
-                return true;
-            } else
-                return false;
-        } else {
-            //Put item in table
-            if(isItemValidForSlot(0, playerStack)) {
-                ItemStack playerSplitStack = playerInv.decrStackSize(playerSlot, 1);
-                setInventorySlotContents(0, playerSplitStack);
-                return playerSplitStack != null;
-            } else
-                return false;
-        }
+        return InvUtils.transferFromToHand(playerInv, this, 0);
     }
     
     public boolean hasChallenge() {

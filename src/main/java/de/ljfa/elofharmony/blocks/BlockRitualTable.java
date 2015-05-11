@@ -6,8 +6,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.elofharmony.util.LogHelper;
@@ -36,7 +34,7 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,
-            int side, float par7, float par8, float par9) {
+            int side, float hitX, float hitY, float hitZ) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileRitualTable) {
             return ((TileRitualTable)tile).onPlayerInteract(player);
@@ -46,6 +44,7 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
         }
     }
     
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
