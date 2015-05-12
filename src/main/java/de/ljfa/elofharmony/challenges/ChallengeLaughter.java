@@ -21,7 +21,6 @@ public class ChallengeLaughter extends TableChallenge {
 
     public ChallengeLaughter(EntityPlayerMP player, TileRitualTable tile) {
         super(player, tile);
-        startTimeMillis = System.currentTimeMillis();
     }
 
     public ChallengeLaughter() { }
@@ -43,7 +42,7 @@ public class ChallengeLaughter extends TableChallenge {
 
     @Override
     public boolean checkRestriction() {
-        return getRuntime() < maxMillisecs && invRestr.check(player);
+        return ticks < maxTicks && invRestr.check(player);
     }
 
     @Override
@@ -54,12 +53,12 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onStart() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start0");
-        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start1", stoneNeeded, String.format(Locale.ENGLISH, "%.0f", maxMillisecs/1000f));
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.start1", stoneNeeded, String.format(Locale.ENGLISH, "%.0f", maxTicks/20.0f));
     }
 
     @Override
     public void onTick() {
-        
+        ticks++;
     }
     
     @Override
@@ -78,7 +77,7 @@ public class ChallengeLaughter extends TableChallenge {
     @Override
     public void onComplete() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.success");
-        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.time", String.format(Locale.ENGLISH, "%.2f", getRuntime()/1000f));
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.time", String.format(Locale.ENGLISH, "%.2f", ticks/20.0f));
         super.onComplete();
     }
     
@@ -86,32 +85,28 @@ public class ChallengeLaughter extends TableChallenge {
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         tag.setInteger("Mined", stoneMined);
-        tag.setLong("Millisecs", getRuntime());
+        tag.setInteger("Ticks", ticks);
     }
     
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         stoneMined = tag.getInteger("Mined");
-        startTimeMillis = System.currentTimeMillis() - tag.getLong("Millisecs");
+        ticks = tag.getInteger("Ticks");
     }
     
     @Override
     public String toString() {
         return super.toString()
             + "\nStone mined: " + stoneMined + " / " + stoneNeeded
-            + "\nTime elapsed: " + getRuntime() + " / " + maxMillisecs;
-    }
-    
-    private long getRuntime() {
-        return System.currentTimeMillis() - startTimeMillis;
+            + "\nTime elapsed: " + ticks + " / " + maxTicks;
     }
 
     private int stoneMined = 0;
-    private long startTimeMillis;
+    private int ticks = 0;
     
     public static final int stoneNeeded = 2*64;
-    public static final int maxMillisecs = 65*1000;
+    public static final int maxTicks = 65*20;
     
     private static final FullInvRestriction invRestr = new FullInvRestriction(new PlayerSlotRestriction() {
         @Override
