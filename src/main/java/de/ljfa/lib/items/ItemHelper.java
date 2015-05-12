@@ -1,6 +1,5 @@
 package de.ljfa.lib.items;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import net.minecraft.entity.item.EntityItem;
@@ -11,13 +10,15 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.ImmutableSet;
 
 import de.ljfa.lib.math.DimPos;
 
 public class ItemHelper {
-
-    /** Heuristic function that doesn't detect armor that is not extending ItemArmor */
+    /**
+     * Checks if the item is an armor piece of the specified type.
+     * This is a heuristic function which cannot detect armor items that don't extend ItemArmor.
+     */
     public static boolean isItemArmor(Item item, int armorType) {
         if(item instanceof ItemArmor)
             return ((ItemArmor)item).armorType == armorType;
@@ -38,13 +39,8 @@ public class ItemHelper {
     }
     
     /** Set of all vanilla pickaxes, shovels and axes */
-    public static final Set<Item> vanillaTools;
-    
-    static {
-        vanillaTools = Sets.newIdentityHashSet();
-        vanillaTools.addAll(Arrays.asList(
+    public static final Set<Item> vanillaTools = ImmutableSet.of(
             Items.wooden_pickaxe, Items.stone_pickaxe, Items.iron_pickaxe, Items.golden_pickaxe, Items.diamond_pickaxe,
             Items.wooden_shovel, Items.stone_shovel, Items.iron_shovel, Items.golden_shovel, Items.diamond_shovel,
-            Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe));
-    }
+            Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe);
 }
