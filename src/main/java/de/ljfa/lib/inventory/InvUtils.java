@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class InvUtils {
     /**
-     * If the specified slot in the inventory is empty, puts one item of what the player holds in their hand
+     * If the specified slot in the inventory is empty, takes one item of what the player holds in their hand
      * and puts it into the slot. Otherwise, retrieves the slot's item into the player's inventory.
      * @param playerInv the player's inventory
      * @param inv the target inventory
