@@ -1,5 +1,8 @@
 package de.ljfa.elofharmony;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,6 +35,8 @@ public class ElementsOfHarmony {
     public static CommonProxy proxy;
     
     public static SimpleNetworkWrapper network;
+    
+    public static Logger logger = LogManager.getLogger(Reference.MODNAME);
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { //TODO: Cleanup the init methods

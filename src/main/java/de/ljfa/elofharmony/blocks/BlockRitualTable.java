@@ -6,9 +6,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.elofharmony.util.LogHelper;
 
 public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     public BlockRitualTable() {
@@ -39,7 +39,7 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
         if(tile instanceof TileRitualTable) {
             return ((TileRitualTable)tile).onPlayerInteract(player);
         } else {
-            LogHelper.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
+            ElementsOfHarmony.logger.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
             return false;
         }
     }

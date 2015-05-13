@@ -7,13 +7,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.common.util.Constants;
 
-import org.apache.logging.log4j.Level;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.elofharmony.util.LogHelper;
 
 /** This is a wrapper class for Challenge objects. Instances of this class get saved to the
  * ExtendedEntityProperties of each player.
@@ -83,13 +81,13 @@ public class ChallengeContainer implements IExtendedEntityProperties {
                     challenge.readFromNBT(chTag);
                 }
                 catch(Exception e) {
-                    LogHelper.log(Level.ERROR, e, "Failed to create challenge instance for " + chName);
+                    ElementsOfHarmony.logger.error("Failed to create challenge instance for " + chName, e);
                     challenge = null;
                 }
                 player = null;
             }
             else
-                LogHelper.warn("Unknown challenge ID: %s", chName);
+                ElementsOfHarmony.logger.warn("Unknown challenge ID: %s", chName);
         }
     }
 

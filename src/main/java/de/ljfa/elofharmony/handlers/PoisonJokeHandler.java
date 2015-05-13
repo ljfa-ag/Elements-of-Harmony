@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.Config;
-import de.ljfa.elofharmony.util.LogHelper;
 import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.util.PotionHelper;
 
@@ -33,7 +32,6 @@ public class PoisonJokeHandler {
                     && worldTimer >= data.getLong("eoh:poisonjoke:cooldown")) {
                 //Start incubation timer
                 data.setLong("eoh:poisonjoke:incubation", worldTimer);
-                LogHelper.trace("Incubation time started");
             }
         }
     }
@@ -91,7 +89,6 @@ public class PoisonJokeHandler {
         //If incubation time has started and is over
         if(data.hasKey("eoh:poisonjoke:incubation")
                 && worldTimer >= data.getLong("eoh:poisonjoke:incubation") + Config.pjIncubationTime) {
-            LogHelper.trace("Incubation time passed");
             int duration = applyRandomEffect(entity.getRNG(), entity);
             //Next incubation can be applied when current effect is almost over
             data.setLong("eoh:poisonjoke:cooldown", worldTimer + duration - Config.pjIncubationTime);
