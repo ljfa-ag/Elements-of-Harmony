@@ -14,7 +14,7 @@ import de.ljfa.lib.chat.ChatHelper;
 
 public class ItemTwilicane extends Item {
     public ItemTwilicane() {
-        ItemHelper.register(this, "twilicane");
+        ModItems.register(this, "twilicane");
         setMaxStackSize(1);
     }
     

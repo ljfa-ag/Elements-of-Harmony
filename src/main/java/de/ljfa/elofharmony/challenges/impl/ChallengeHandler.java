@@ -62,6 +62,7 @@ public class ChallengeHandler {
         }
     }
     
+    //TODO: Put these methods somewhere else, e.g. ChallengeContainer
     public static boolean tryStartChallenge(Challenge ch) {
         if(ch.checkStartingCondition()) {
             startChallenge(ch);

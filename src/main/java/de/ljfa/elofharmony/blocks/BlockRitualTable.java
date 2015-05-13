@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.tile.TileRitualTable;
+import de.ljfa.lib.inventory.InvUtils;
 
 public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     public BlockRitualTable() {
@@ -28,7 +29,7 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         if(!world.isRemote)
-            BlockHelper.spillInventory(world, x, y, z);
+            InvUtils.spillInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, block, meta);
     }
     

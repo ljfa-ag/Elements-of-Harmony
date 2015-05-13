@@ -12,14 +12,14 @@ public class BlockBase extends Block {
     public BlockBase(String name, Material material) {
         super(material);
         this.name = name;
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
         setBlockTextureName(Reference.MODID + ":" + name);
     }
     
     public BlockBase(String name, Class<? extends ItemBlock> itemClass, Material material) {
         super(material);
         this.name = name;
-        BlockHelper.register(this, itemClass, name);
+        ModBlocks.register(this, itemClass, name);
         setBlockTextureName(Reference.MODID + ":" + name);
     }
     

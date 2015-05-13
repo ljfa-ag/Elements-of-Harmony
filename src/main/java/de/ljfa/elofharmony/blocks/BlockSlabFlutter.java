@@ -17,7 +17,7 @@ public class BlockSlabFlutter extends BlockSlab {
         setHardness(2.0F);
         setResistance(5.0F);
         setStepSound(soundTypeWood);
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
     }
     
     public BlockSlabFlutter() { this(false); }

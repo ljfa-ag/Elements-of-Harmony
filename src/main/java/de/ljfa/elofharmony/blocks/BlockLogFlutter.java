@@ -16,7 +16,7 @@ public class BlockLogFlutter extends BlockLog {
     private IIcon texture_top;
     
     public BlockLogFlutter() {
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
     }
     
     @SideOnly(Side.CLIENT)

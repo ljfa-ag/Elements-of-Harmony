@@ -25,7 +25,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     private IIcon texture_opaque;
     
     public BlockLeavesFlutter() {
-        BlockHelper.register(this, ItemBlockLeavesFlutter.class, name);
+        ModBlocks.register(this, ItemBlockLeavesFlutter.class, name);
     }
     
     @Override

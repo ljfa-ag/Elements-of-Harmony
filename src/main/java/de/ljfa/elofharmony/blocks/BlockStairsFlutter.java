@@ -8,6 +8,6 @@ public class BlockStairsFlutter extends BlockStairs {
     
     public BlockStairsFlutter(Block block, int meta) {
         super(block, meta);
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
     }
 }

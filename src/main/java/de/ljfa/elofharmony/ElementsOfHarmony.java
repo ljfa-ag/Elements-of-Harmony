@@ -36,7 +36,7 @@ public class ElementsOfHarmony {
     
     public static SimpleNetworkWrapper network;
     
-    public static Logger logger = LogManager.getLogger(Reference.MODNAME);
+    public static final Logger logger = LogManager.getLogger(Reference.MODNAME);
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { //TODO: Cleanup the init methods

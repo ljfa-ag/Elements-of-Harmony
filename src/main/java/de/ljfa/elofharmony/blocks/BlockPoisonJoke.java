@@ -31,7 +31,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         setHardness(0.0F);
         setStepSound(soundTypeGrass);
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
     }
     
     @Override

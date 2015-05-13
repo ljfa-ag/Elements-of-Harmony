@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.gui.EohGuiHandler.GuiIDs;
 import de.ljfa.elofharmony.tile.TileLocker;
+import de.ljfa.lib.inventory.InvUtils;
 
 public class BlockLocker extends BlockBase implements ITileEntityProvider {
 
@@ -38,7 +39,7 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         if(!world.isRemote)
-            BlockHelper.spillInventory(world, x, y, z);
+            InvUtils.spillInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, block, meta);
     }
     

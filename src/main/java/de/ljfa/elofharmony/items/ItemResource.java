@@ -32,7 +32,7 @@ public class ItemResource extends Item {
     public final int typeCount = ResourceType.values().length;
     
     public ItemResource() {
-        ItemHelper.register(this, "resource");
+        ModItems.register(this, "resource");
         setHasSubtypes(true);
     }
     

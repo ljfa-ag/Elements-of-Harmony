@@ -25,7 +25,7 @@ public class BlockSaplingFlutter extends BlockSapling {
     
     public BlockSaplingFlutter() {
         setStepSound(soundTypeGrass);
-        BlockHelper.register(this, name);
+        ModBlocks.register(this, name);
         
         treeGen = new FluttertreeGenerator(true, ModBlocks.log_flutter, ModBlocks.leaves_flutter);
     }
