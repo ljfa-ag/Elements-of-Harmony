@@ -8,10 +8,10 @@ import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
-import de.ljfa.lib.gui.GuiBase;
+import de.ljfa.lib.gui.GuiContainerBase;
 import de.ljfa.lib.gui.GuiButtonPicture;
 
-public class GuiLocker extends GuiBase {
+public class GuiLocker extends GuiContainerBase {
 
     private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/locker.png");
     private static final ResourceLocation buttonSwapPic = new ResourceLocation(Reference.MODID, "textures/gui/swap_button.png");
