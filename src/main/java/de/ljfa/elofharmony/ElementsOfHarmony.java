@@ -1,11 +1,13 @@
 package de.ljfa.elofharmony;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -36,7 +38,7 @@ public class ElementsOfHarmony {
     
     public static SimpleNetworkWrapper network;
     
-    public static final Logger logger = LogManager.getLogger(Reference.MODNAME);
+    public static final Logger logger = LogManager.getLogger(Reference.MODNAME, StringFormatterMessageFactory.INSTANCE);
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { //TODO: Cleanup the init methods
