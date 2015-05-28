@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony.challenges.impl;
 
+import static de.ljfa.elofharmony.ElementsOfHarmony.logger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -81,13 +82,13 @@ public class ChallengeContainer implements IExtendedEntityProperties {
                     challenge.readFromNBT(chTag);
                 }
                 catch(Exception e) {
-                    ElementsOfHarmony.logger.error("Failed to create challenge instance for " + chName, e);
+                    logger.error("Failed to create challenge instance for " + chName, e);
                     challenge = null;
                 }
                 player = null;
             }
             else
-                ElementsOfHarmony.logger.warn("Unknown challenge ID: %s", chName);
+                logger.warn("Unknown challenge ID: %s", chName);
         }
     }
 

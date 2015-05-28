@@ -1,10 +1,10 @@
 package de.ljfa.elofharmony.challenges;
 
+import static de.ljfa.elofharmony.ElementsOfHarmony.logger;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.items.ItemHelper;
 import de.ljfa.lib.math.DimPos;
@@ -65,7 +65,7 @@ public abstract class TableChallenge extends Challenge {
         if(tile instanceof TileRitualTable)
             return (TileRitualTable)tile;
         else {
-            ElementsOfHarmony.logger.warn("Missing or wrong tile entity at " + tablePos);
+            logger.warn("Missing or wrong tile entity at " + tablePos);
             return null;
         }
     }

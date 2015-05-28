@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony.blocks;
 
+import static de.ljfa.elofharmony.ElementsOfHarmony.logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -40,7 +41,7 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
         if(tile instanceof TileRitualTable) {
             return ((TileRitualTable)tile).onPlayerInteract(player);
         } else {
-            ElementsOfHarmony.logger.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
+            logger.error("Missing or wrong tile entity at (%d,%d,%d)", x, y, z);
             return false;
         }
     }
