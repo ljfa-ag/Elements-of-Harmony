@@ -8,7 +8,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.challenges.Challenge;
 
 //TODO: A more flexible solution for challenge event handling
-public class ChallengeCommonHandler {
+public class ChallengeProxyHandler {
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event) {

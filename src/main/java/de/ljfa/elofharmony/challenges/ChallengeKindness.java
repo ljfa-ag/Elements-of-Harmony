@@ -22,7 +22,7 @@ import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
-public class ChallengeKindness extends TableChallenge {
+public final class ChallengeKindness extends TableChallenge {
 
     public ChallengeKindness() { }
 

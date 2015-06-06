@@ -17,7 +17,7 @@ import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
 
-public class ChallengeGenerosity extends TableChallenge {
+public final class ChallengeGenerosity extends TableChallenge {
 
     public ChallengeGenerosity(EntityPlayerMP player, TileRitualTable tile) {
         super(player, tile);

@@ -18,7 +18,7 @@ import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.items.ItemHelper;
 
 //TODO: This will probably not work well at all on a laggy server. I need to come up with something different.
-public class ChallengeLaughter extends TableChallenge {
+public final class ChallengeLaughter extends TableChallenge {
 
     public ChallengeLaughter(EntityPlayerMP player, TileRitualTable tile) {
         super(player, tile);

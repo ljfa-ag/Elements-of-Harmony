@@ -18,7 +18,7 @@ import de.ljfa.elofharmony.challenges.Challenge;
  * ExtendedEntityProperties of each player.
  * Challenges have to be registered with the register method.
  */
-public class ChallengeContainer implements IExtendedEntityProperties {
+public final class ChallengeContainer implements IExtendedEntityProperties {
 
     public static final String PROPERTY_KEY = "eoh:Challenge";
     
