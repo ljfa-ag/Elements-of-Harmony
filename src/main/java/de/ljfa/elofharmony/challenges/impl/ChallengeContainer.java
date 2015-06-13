@@ -13,6 +13,8 @@ import com.google.common.collect.HashBiMap;
 
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.challenges.Challenge;
+import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.util.Utils;
 
 /** This is a wrapper class for Challenge objects. Instances of this class get saved to the
  * ExtendedEntityProperties of each player.
@@ -60,8 +62,11 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
     public void saveNBTData(NBTTagCompound tag) {
         if(challenge != null) {
             String chName = registry.inverse().get(challenge.getClass());
-            if(chName == null)
-                throw new RuntimeException("The class " + challenge.getClass() + " has not been registered as challenge!");
+            if(chName == null) {
+                if(Utils.deobfuscatedEnv)
+                    ChatHelper.broadcast("<ElementsOfHarmony> The class " + challenge.getClass().getName() + " has not been registered as challenge!");
+                throw new RuntimeException("The class " + challenge.getClass().getName() + " has not been registered as challenge!");
+            }
             NBTTagCompound chTag = new NBTTagCompound();
             chTag.setString("ID", chName);
             challenge.writeToNBT(chTag);
@@ -102,7 +107,7 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
         this.player = player;
     }
     
-    private static BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
+    private static final BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
     
     private EntityPlayerMP player; //This field is only used when loading challenges from NBT and gets cleared after
     private Challenge challenge;
