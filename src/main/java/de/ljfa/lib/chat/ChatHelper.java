@@ -26,7 +26,7 @@ public class ChatHelper {
     
     /** Broadcasts an unlocalized chat message. */
     public static void broadcast(String msg) {
-        MinecraftServer.getServer().addChatMessage(new ChatComponentText(msg));
+        MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText(msg));
     }
     
     /** Broadcasts an unlocalized chat message which can contain multiple lines. */
@@ -37,7 +37,7 @@ public class ChatHelper {
     
     /** Broadcasts a localized chat message. */
     public static void broadcastLoc(String key, Object... args) {
-        MinecraftServer.getServer().addChatMessage(new ChatComponentTranslation(key, args));
+        MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentTranslation(key, args));
     }
     
     /** Regex pattern that detects newlines (LF or CRLF) */
