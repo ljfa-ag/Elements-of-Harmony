@@ -82,29 +82,26 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     }
     
     private boolean tryStartChallenge(EntityPlayerMP player) {
-        if(!ChallengeHandler.hasChallenge(player)) {
-            if(inv[0] == null)
-                return false;
-            Item item = inv[0].getItem();
-            int meta = inv[0].getItemDamage();
-            Challenge challenge; //TODO: Not hardcode that
-            if(item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal())
-                challenge = new ChallengeKindness(player, this);
-            else if(item == Items.cake)
-                challenge = new ChallengeLaughter(player, this);
-            else if(item == Items.diamond)
-                challenge = new ChallengeGenerosity(player, this);
-            else
-                return false;
-            
-            if(ChallengeHandler.tryStartChallenge(challenge)) {
-                setInventorySlotContents(0, null);
-                this.hasChallenge = true;
-                return true;
-            } else
-                return false;
-        }
-        return false;
+        if(inv[0] == null)
+            return false;
+        Item item = inv[0].getItem();
+        int meta = inv[0].getItemDamage();
+        Challenge challenge; //TODO: Not hardcode that
+        if(item == ModItems.resource && meta == ResourceType.YELLOW_FEATHER.ordinal())
+            challenge = new ChallengeKindness(player, this);
+        else if(item == Items.cake)
+            challenge = new ChallengeLaughter(player, this);
+        else if(item == Items.diamond)
+            challenge = new ChallengeGenerosity(player, this);
+        else
+            return false;
+        
+        if(ChallengeHandler.tryStartChallenge(challenge)) {
+            setInventorySlotContents(0, null);
+            this.hasChallenge = true;
+            return true;
+        } else
+            return false;
     }
     
     public void onChallengeEnded() {

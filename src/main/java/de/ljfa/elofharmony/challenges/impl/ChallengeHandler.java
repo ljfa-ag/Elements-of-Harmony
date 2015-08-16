@@ -10,6 +10,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import de.ljfa.elofharmony.challenges.Challenge;
+import de.ljfa.lib.chat.ChatHelper;
 
 public class ChallengeHandler {
 
@@ -64,6 +65,10 @@ public class ChallengeHandler {
     
     //TODO: Put these methods somewhere else, e.g. ChallengeContainer
     public static boolean tryStartChallenge(Challenge ch) {
+        if(hasChallenge(ch.getPlayer())) {
+            ChatHelper.toPlayerLoc(ch.getPlayer(), "elofharmony.challenge.already_have");
+            return false;
+        }
         if(ch.checkStartingCondition()) {
             startChallenge(ch);
             return true;

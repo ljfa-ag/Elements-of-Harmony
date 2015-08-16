@@ -23,6 +23,7 @@ elofharmony.container.locker=Locker
 elofharmony.challenge.failed=You failed the challenge!
 elofharmony.challenge.success=Congratulations, you completed the challenge!
 elofharmony.challenge.no_challenge=You have no challenge running at the moment.
+elofharmony.challenge.already_have=You already have a challenge running!
 elofharmony.challenge.twilicane_tooltip=Sneak+Right click to abort the current challenge
 
 elofharmony.challenge.generosity.no_items_allowed=In order to start the Generosity challenge you're not allowed to have any items on you besides the Twilicane.
