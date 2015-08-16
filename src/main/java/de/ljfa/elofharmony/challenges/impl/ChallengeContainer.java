@@ -83,14 +83,14 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
             if(clazz != null) {
                 try {
                     challenge = clazz.newInstance();
-                    challenge.setPlayer(player);
+                    challenge.setPlayer(tmpPlayer);
                     challenge.readFromNBT(chTag);
                 }
                 catch(Exception e) {
                     logger.error("Failed to create challenge instance for " + chName, e);
                     challenge = null;
                 }
-                player = null;
+                tmpPlayer = null;
             }
             else
                 logger.warn("Unknown challenge ID: %s", chName);
@@ -104,11 +104,11 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
     }
     
     private ChallengeContainer(EntityPlayerMP player) {
-        this.player = player;
+        this.tmpPlayer = player;
     }
     
     private static final BiMap<String, Class<? extends Challenge>> registry = HashBiMap.create();
     
-    private EntityPlayerMP player; //This field is only used when loading challenges from NBT and gets cleared after
+    private EntityPlayerMP tmpPlayer; //This field is only used when loading challenges from NBT and gets cleared after that
     private Challenge challenge;
 }
