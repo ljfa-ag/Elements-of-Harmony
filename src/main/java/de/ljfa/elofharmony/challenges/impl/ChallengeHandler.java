@@ -25,10 +25,10 @@ public class ChallengeHandler {
         if(ch != null) {
             ch.onTick();
             if(!ch.checkRestriction()) {
-                ChallengeHandler.abortChallenge(ch);
+                ChallengeHandler.failChallenge(ch);
             }
             if(ch.checkCondition()) {
-                ChallengeHandler.endChallenge(ch);
+                ChallengeHandler.finishChallenge(ch);
             }
         }
     }
@@ -104,8 +104,12 @@ public class ChallengeHandler {
         ch.onAbort();
         ChallengeContainer.get(ch.getPlayer()).clearChallenge();
     }
+    private static void failChallenge(Challenge ch) {
+        ch.onFail();
+        ChallengeContainer.get(ch.getPlayer()).clearChallenge();
+    }
     
-    private static void endChallenge(Challenge ch) {
+    private static void finishChallenge(Challenge ch) {
         ch.onComplete();
         ChallengeContainer.get(ch.getPlayer()).clearChallenge();
     }

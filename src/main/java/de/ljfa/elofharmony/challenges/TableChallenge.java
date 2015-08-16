@@ -18,8 +18,16 @@ public abstract class TableChallenge extends Challenge {
     }
     
     public TableChallenge() { }
+    
     @Override
     public void onAbort() {
+        TileRitualTable table = getTable();
+        if(table != null)
+            table.onChallengeEnded();
+    }
+    
+    @Override
+    public void onFail() {
         TileRitualTable table = getTable();
         if(table != null)
             table.onChallengeEnded();

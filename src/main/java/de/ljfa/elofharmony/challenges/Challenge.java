@@ -39,8 +39,11 @@ public abstract class Challenge {
         return true;
     }
     
-    /** Called when the challenge should be aborted */
+    /** Called when the challenge is canceled by the player */
     public abstract void onAbort();
+    
+    /** Called when the challenge's restriction has been violated */
+    public abstract void onFail();
     
     /** Called when the challenge is completed */
     public abstract void onComplete();

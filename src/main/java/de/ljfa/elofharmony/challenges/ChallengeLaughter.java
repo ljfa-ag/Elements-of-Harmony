@@ -70,9 +70,15 @@ public final class ChallengeLaughter extends TableChallenge {
 
     @Override
     public void onAbort() {
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.aborted");
+        super.onAbort();
+    }
+    
+    @Override
+    public void onFail() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.laughter.mined", stoneMined);
-        super.onAbort();
+        super.onFail();
     }
 
     @Override

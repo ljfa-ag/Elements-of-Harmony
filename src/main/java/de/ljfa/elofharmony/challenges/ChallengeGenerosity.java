@@ -83,6 +83,12 @@ public final class ChallengeGenerosity extends TableChallenge {
     
     @Override
     public void onAbort() {
+        ChatHelper.toPlayerLoc(player, "elofharmony.challenge.aborted");
+        super.onAbort();
+    }
+    
+    @Override
+    public void onFail() {
         ChatHelper.toPlayerLoc(player, "elofharmony.challenge.failed");
         super.onAbort();
     }

@@ -20,6 +20,7 @@ item.elofharmony:yellow_feather.name=Yellow Feather
 
 elofharmony.container.locker=Locker
 
+elofharmony.challenge.aborted=You aborted the challenge.
 elofharmony.challenge.failed=You failed the challenge!
 elofharmony.challenge.success=Congratulations, you completed the challenge!
 elofharmony.challenge.no_challenge=You have no challenge running at the moment.
