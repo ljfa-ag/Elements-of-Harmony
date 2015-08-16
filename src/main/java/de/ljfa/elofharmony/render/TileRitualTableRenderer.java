@@ -5,14 +5,11 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.render.models.ModelRitualTable;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 
@@ -21,13 +18,18 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     private final ModelRitualTable model;
     private final RenderItem renderItem;
     
-    private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table.png");
-    private static final ResourceLocation texture_running = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table_running.png");
+    private final EntityItem shownItem;
+    
+    //private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table.png");
+    //private static final ResourceLocation texture_running = new ResourceLocation(Reference.MODID, "textures/tile/ritual_table_running.png");
     
     public TileRitualTableRenderer() {
         model = new ModelRitualTable();
         renderItem = new RenderItem();
         renderItem.setRenderManager(RenderManager.instance);
+        
+        shownItem = new EntityItem(null);
+        shownItem.hoverStart = 0.0f;
     }
     
     @Override
@@ -45,13 +47,8 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         model.renderAll();*/
         
         if(tile.getStackInSlot(0) != null) {
-            //TODO: Optimize it so that it doesn't have to create a new entity every frame
-            //or use some other method of rendering it
-            World world = tile.getWorldObj();
             GL11.glTranslated(0.5, 0.63, 0.5);
-            EntityItem shownItem = new EntityItem(world);
             shownItem.setEntityItemStack(tile.getStackInSlot(0));
-            shownItem.hoverStart = 0.0f;
             renderItem.doRender(shownItem, 0, 0, 0, 0, 0);
         }
         
