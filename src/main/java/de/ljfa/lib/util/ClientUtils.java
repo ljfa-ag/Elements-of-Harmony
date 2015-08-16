@@ -2,6 +2,7 @@ package de.ljfa.lib.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,5 +25,9 @@ public class ClientUtils {
     
     public static EntityPlayer getPlayer() {
         return minecraft.thePlayer;
+    }
+    
+    public static World getWorld() {
+        return minecraft.theWorld;
     }
 }

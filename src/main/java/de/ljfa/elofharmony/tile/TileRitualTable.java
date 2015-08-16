@@ -1,5 +1,6 @@
 package de.ljfa.elofharmony.tile;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -7,10 +8,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.challenges.Challenge;
@@ -21,12 +21,14 @@ import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ItemTwilicane;
 import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.elofharmony.network.DescriptionPacketHandler;
 import de.ljfa.lib.inventory.InvUtils;
+import de.ljfa.lib.tile.DescriptionPacketSynced;
 import de.ljfa.lib.tile.TileInventoryBase;
 import de.ljfa.lib.util.ClientUtils;
 import de.ljfa.lib.util.PotionHelper;
 
-public class TileRitualTable extends TileInventoryBase {
+public class TileRitualTable extends TileInventoryBase implements DescriptionPacketSynced {
     private boolean hasChallenge = false;
     
     public TileRitualTable() {
@@ -122,17 +124,20 @@ public class TileRitualTable extends TileInventoryBase {
         hasChallenge = tag.getBoolean("hasChallenge");
     }
     
-    //TODO: Use something like FMLProxyPacket instead
     @Override
     public Packet getDescriptionPacket() {
-        NBTTagCompound tag = new NBTTagCompound();
-        writeCustomNBT(tag);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
+        return DescriptionPacketHandler.createDescPacket(this);
     }
     
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readCustomNBT(packet.func_148857_g());
+    public void writeToPacket(ByteBuf buf) {
+        ByteBufUtils.writeItemStack(buf, inv[0]);
+        buf.writeBoolean(hasChallenge);
+    }
+    
+    public void readFromPacket(ByteBuf buf) {
+        inv[0] = ByteBufUtils.readItemStack(buf);
+        hasChallenge = buf.readBoolean();
     }
     
     @SideOnly(Side.CLIENT)

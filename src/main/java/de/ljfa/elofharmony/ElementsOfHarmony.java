@@ -24,6 +24,7 @@ import de.ljfa.elofharmony.command.CommandChallengeDebug;
 import de.ljfa.elofharmony.gui.EohGuiHandler;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.elofharmony.network.DescriptionPacketHandler;
 import de.ljfa.elofharmony.proxy.CommonProxy;
 import de.ljfa.elofharmony.worldgen.DecorationPoisonJoke;
 
@@ -47,6 +48,7 @@ public class ElementsOfHarmony {
         ModItems.init();
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new EohGuiHandler());
+        DescriptionPacketHandler.init();
         proxy.preInit(event);
     }
     
