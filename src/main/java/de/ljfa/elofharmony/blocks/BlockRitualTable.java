@@ -4,15 +4,23 @@ import static de.ljfa.elofharmony.ElementsOfHarmony.logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import de.ljfa.elofharmony.ElementsOfHarmony;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.lib.inventory.InvUtils;
 
 public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
+    public static int renderID;
+    
+    @SideOnly(Side.CLIENT)
+    private IIcon textureRunning;
+    
     public BlockRitualTable() {
         super("ritual_table", Material.wood);
         setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.75f, 1.0f);
@@ -47,6 +55,16 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     }
     
     @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        super.registerBlockIcons(iconRegister);
+        textureRunning = iconRegister.registerIcon(Reference.MODID + ":ritual_table_running");
+    }
+    
+    public final IIcon getIconRunning() {
+        return textureRunning;
+    }
+    
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -58,6 +76,6 @@ public class BlockRitualTable extends BlockBase implements ITileEntityProvider {
     
     @Override
     public int getRenderType() {
-        return -1;
+        return renderID;
     }
 }

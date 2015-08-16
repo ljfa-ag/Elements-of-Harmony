@@ -1,4 +1,4 @@
-package de.ljfa.elofharmony.render.tile;
+package de.ljfa.elofharmony.render;
 
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -37,14 +37,16 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
         
-        if(tile.hasChallenge())
+        /*if(tile.hasChallenge())
             bindTexture(texture_running);
         else
             bindTexture(texture);
         
-        model.renderAll();
+        model.renderAll();*/
         
         if(tile.getStackInSlot(0) != null) {
+            //TODO: Optimize it so that it doesn't have to create a new entity every frame
+            //or use some other method of rendering it
             World world = tile.getWorldObj();
             GL11.glTranslated(0.5, 0.63, 0.5);
             EntityItem shownItem = new EntityItem(world);

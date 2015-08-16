@@ -137,7 +137,10 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     
     public void readFromPacket(ByteBuf buf) {
         inv[0] = ByteBufUtils.readItemStack(buf);
-        hasChallenge = buf.readBoolean();
+        if(hasChallenge != buf.readBoolean()) { //Force render update if that has changed
+            hasChallenge = !hasChallenge;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
     }
     
     @SideOnly(Side.CLIENT)
