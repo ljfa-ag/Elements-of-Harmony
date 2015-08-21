@@ -30,9 +30,7 @@ public class BlockSaplingFlutter extends BlockSapling {
     
     /** Grows the tree */
     @Override
-    public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
-        if(world.isRemote)
-            return;
+    public void func_176476_e(World world, BlockPos pos, IBlockState state, Random rand) {
         treeGen.generate(world, rand, pos);
     }
     
