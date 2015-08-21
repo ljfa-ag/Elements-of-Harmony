@@ -12,48 +12,49 @@ import net.minecraft.world.World;
 public class BlockSlabFlutter extends BlockSlab {
     private final String name = "slab_flutter";
     
-    public BlockSlabFlutter(boolean is_double_slab) {
+    private final boolean isDouble;
+    
+    public BlockSlabFlutter(boolean isDouble) {
         super(Material.wood);
+        this.isDouble = isDouble;
         setHardness(2.0F);
         setResistance(5.0F);
         setStepSound(soundTypeWood);
+        IBlockState def = blockState.getBaseState();
+        if(isDouble)
+            def = def.withProperty(HALF_PROP, EnumBlockHalf.BOTTOM);
+        setDefaultState(def);
         ModBlocks.register(this, name);
     }
-    
-    public BlockSlabFlutter() { this(false); }
     
     @Override
     public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(this);
     }
     
-    @Override
+    /*@Override
     protected ItemStack createStackedBlock(IBlockState state) {
         return new ItemStack(this, 2, meta & 7);
-    }
+    }*/
 
     @Override
-    public String getFullSlabName(int p_150002_1_) {
-        // TODO Auto-generated method stub
-        return null;
+    public String getFullSlabName(int meta) {
+        return super.getUnlocalizedName();
     }
 
     @Override
     public boolean isDouble() {
-        // TODO Auto-generated method stub
-        return false;
+        return isDouble;
     }
 
     @Override
     public IProperty func_176551_l() {
-        // TODO Auto-generated method stub
-        return null;
+        return null; //FIXME probably NPE
     }
 
     @Override
     public Object func_176553_a(ItemStack p_176553_1_) {
-        // TODO Auto-generated method stub
-        return null;
+        return null; //FIXME
     }
 
 }

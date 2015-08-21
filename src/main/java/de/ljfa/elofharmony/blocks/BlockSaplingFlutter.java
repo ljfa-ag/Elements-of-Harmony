@@ -12,7 +12,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.worldgen.FluttertreeGenerator;
 
 public class BlockSaplingFlutter extends BlockSapling {
@@ -22,9 +21,10 @@ public class BlockSaplingFlutter extends BlockSapling {
     
     public BlockSaplingFlutter() {
         setStepSound(soundTypeGrass);
+        setDefaultState(blockState.getBaseState().withProperty(STAGE_PROP, 0));
         ModBlocks.register(this, name);
         
-        treeGen = new FluttertreeGenerator(true, ModBlocks.log_flutter, ModBlocks.leaves_flutter);
+        treeGen = new FluttertreeGenerator(true, ModBlocks.log_flutter.getDefaultState(), ModBlocks.leaves_flutter.getDefaultState());
     }
     
     /** Grows the tree */
@@ -32,7 +32,7 @@ public class BlockSaplingFlutter extends BlockSapling {
     public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
         if(world.isRemote)
             return;
-        treeGen.generate(world, rand, x, y, z);
+        treeGen.generate(world, rand, pos);
     }
     
     @SideOnly(Side.CLIENT)

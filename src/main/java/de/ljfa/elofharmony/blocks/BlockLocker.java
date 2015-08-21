@@ -22,6 +22,7 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
         setHardness(2.0f);
         setResistance(20.0f);
         setStepSound(soundTypeWood);
+        setDefaultState(blockState.getBaseState());
     }
 
     @Override

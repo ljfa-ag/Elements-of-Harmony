@@ -25,8 +25,8 @@ public final class ModBlocks {
         leaves_flutter = new BlockLeavesFlutter();
         sapling_flutter = new BlockSaplingFlutter();
         planks_flutter = (BlockBase)new BlockBase("planks_flutter", Material.wood).setHardness(2.0f).setResistance(5.0f).setStepSound(Block.soundTypeWood);
-        slab_flutter = new BlockSlabFlutter();
-        stairs_flutter = new BlockStairsFlutter(planks_flutter, 0);
+        slab_flutter = new BlockSlabFlutter(false);
+        stairs_flutter = new BlockStairsFlutter(planks_flutter.getDefaultState());
         ritual_table = new BlockRitualTable();
         locker = new BlockLocker();
         

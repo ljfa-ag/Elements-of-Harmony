@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,19 +16,21 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Config;
-import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 
 public class BlockPoisonJoke extends BlockBush implements IGrowable {
     private final String name = "poisonjoke";
     
-    private final int maxGrowth = 7;
+    private static final int maxGrowth = 7;
+    
+    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, maxGrowth);
     
     public BlockPoisonJoke() {
         float f = 0.5F;
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
         setHardness(0.0F);
         setStepSound(soundTypeGrass);
+        setDefaultState(blockState.getBaseState().withProperty(AGE, maxGrowth));
         ModBlocks.register(this, name);
     }
     
@@ -36,7 +39,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
         super.onEntityCollidedWithBlock(world, pos, entity);
         if(world.isRemote || Config.pjPlayersOnly && !(entity instanceof EntityPlayer))
             return;
-        else if(world.getBlockMetadata(x, y, z) >= 3)
+        else if(getAge(world.getBlockState(pos)) >= 3)
             PoisonJokeHandler.startIncubation(world, entity);
     }
     
@@ -47,10 +50,11 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     
     /** Increments growth stage by a certain amount */
     public void growBy(World world, BlockPos pos, int increment) {
-        int growthStage = world.getBlockMetadata(x, y, z) + increment;
+        IBlockState state = world.getBlockState(pos);
+        int growthStage = getAge(state) + increment;
         if(growthStage > maxGrowth)
             growthStage = maxGrowth;
-        world.setBlockMetadataWithNotify(x, y, z, growthStage, 2);
+        world.setBlockState(pos, state.withProperty(AGE, growthStage), 2);
     }
     
     /** Called when bone meal is used */
@@ -66,7 +70,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     
     @Override
     public int quantityDropped(IBlockState state, int fortune, Random random) {
-        if(meta == maxGrowth)
+        if(getAge(state) == maxGrowth)
             return MathHelper.getRandomIntegerInRange(random, 1, 3 + fortune);
         else
             return 1;
@@ -75,7 +79,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     /** Is the plant not fully grown yet? */
     @Override
     public boolean isStillGrowing(World world, BlockPos pos, IBlockState state, boolean par5) {
-        return world.getBlockMetadata(x, y, z) != maxGrowth;
+        return getAge(state) != maxGrowth;
     }
 
     /** Can bone meal be used on this plant? */
@@ -88,6 +92,10 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     @Override
     public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
         incrementGrowthStage(world, rand, pos);
+    }
+    
+    private int getAge(IBlockState state) {
+        return (Integer)state.getValue(AGE);
     }
     
     @SideOnly(Side.CLIENT)
