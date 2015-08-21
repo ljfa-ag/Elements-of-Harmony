@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -39,6 +40,16 @@ public class BlockSaplingFlutter extends BlockSapling {
     @Override
     public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
         list.add(new ItemStack(item));
+    }
+    
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(STAGE_PROP, meta);
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return (Integer)state.getValue(STAGE_PROP);
     }
 
 }

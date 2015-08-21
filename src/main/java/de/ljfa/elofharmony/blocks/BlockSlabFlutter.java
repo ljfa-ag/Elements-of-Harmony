@@ -3,6 +3,7 @@ package de.ljfa.elofharmony.blocks;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public class BlockSlabFlutter extends BlockSlab {
         setResistance(5.0F);
         setStepSound(soundTypeWood);
         IBlockState def = blockState.getBaseState();
-        if(isDouble)
+        if(!isDouble)
             def = def.withProperty(HALF_PROP, EnumBlockHalf.BOTTOM);
         setDefaultState(def);
         ModBlocks.register(this, name);
@@ -55,6 +56,30 @@ public class BlockSlabFlutter extends BlockSlab {
     @Override
     public Object func_176553_a(ItemStack p_176553_1_) {
         return null; //FIXME
+    }
+    
+    @Override
+    protected BlockState createBlockState() {
+        if(!isDouble)
+            return new BlockState(this, HALF_PROP);
+        else
+            return new BlockState(this);
+    }
+    
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        if(!isDouble)
+            return getDefaultState().withProperty(HALF_PROP, EnumBlockHalf.values()[meta]);
+        else
+            return getDefaultState();
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        if(!isDouble)
+            return ((EnumBlockHalf)state.getValue(HALF_PROP)).ordinal();
+        else
+            return 0;
     }
 
 }

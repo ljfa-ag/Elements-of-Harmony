@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -103,5 +104,19 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     public int getRenderType() {
         return 1; //Crossed squares
     }
+    
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, AGE);
+    }
 
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(AGE, meta);
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return (Integer)state.getValue(AGE);
+    }
 }
