@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.util.PotionHelper;
@@ -70,7 +70,7 @@ public class PoisonJokeHandler {
         if(entity instanceof EntitySquid)
             return true;
         else if(entity instanceof EntityPlayer)
-            return ((EntityPlayer)entity).getCommandSenderName().toLowerCase().contains("squid");
+            return ((EntityPlayer)entity).getName().toLowerCase().contains("squid");
         else
             return false;
     }

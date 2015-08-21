@@ -1,6 +1,5 @@
 package de.ljfa.elofharmony.tile;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,10 +8,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Potion;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.challenges.Challenge;
 import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
 import de.ljfa.elofharmony.challenges.ChallengeKindness;
@@ -36,7 +36,7 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     }
     
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "elofharmony.container.ritual_table";
     }
     
@@ -106,7 +106,7 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     
     public void onChallengeEnded() {
         hasChallenge = false;
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(pos);
     }
     
     @Override
@@ -127,16 +127,17 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     }
     
     @Override
-    public void writeToPacket(ByteBuf buf) {
+    public void writeToPacket(PacketBuffer buf) {
         ByteBufUtils.writeItemStack(buf, inv[0]);
         buf.writeBoolean(hasChallenge);
     }
     
-    public void readFromPacket(ByteBuf buf) {
+    @Override
+    public void readFromPacket(PacketBuffer buf) {
         inv[0] = ByteBufUtils.readItemStack(buf);
         if(hasChallenge != buf.readBoolean()) { //Force render update if that has changed
             hasChallenge = !hasChallenge;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            worldObj.markBlockForUpdate(pos);
         }
     }
     

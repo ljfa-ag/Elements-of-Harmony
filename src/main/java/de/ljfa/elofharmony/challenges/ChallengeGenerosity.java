@@ -4,18 +4,19 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.PlayerSlotRestriction;
 import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 public final class ChallengeGenerosity extends TableChallenge {
 
@@ -59,7 +60,7 @@ public final class ChallengeGenerosity extends TableChallenge {
         
         int tpx = (int)(player.posX + dist * Math.cos(angle));
         int tpz = (int)(player.posZ + dist * Math.sin(angle));
-        int tpy = world.getTopSolidOrLiquidBlock(tpx, tpz);
+        int tpy = world.func_175672_r(new BlockPos(tpx, 0, tpz)).getY();
         
         float yaw = 360.0f * world.rand.nextFloat();
 

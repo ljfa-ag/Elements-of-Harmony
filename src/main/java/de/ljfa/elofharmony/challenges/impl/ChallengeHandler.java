@@ -6,11 +6,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 public class ChallengeHandler {
 
@@ -38,7 +38,7 @@ public class ChallengeHandler {
         EntityPlayerMP player = (EntityPlayerMP)event.entityPlayer;
         Challenge ch = getChallenge(player);
         if(ch != null && !ch.mayPickUp(event.item.getEntityItem())) {
-            event.item.delayBeforeCanPickup = 10;
+            event.item.setPickupDelay(10);
             event.setCanceled(true);
         }
     }

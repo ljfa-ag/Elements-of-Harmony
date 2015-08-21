@@ -4,16 +4,16 @@ import java.util.Random;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
@@ -22,9 +22,6 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     private final String name = "poisonjoke";
     
     private final int maxGrowth = 7;
-
-    @SideOnly(Side.CLIENT)
-    private IIcon[] textures;
     
     public BlockPoisonJoke() {
         float f = 0.5F;
@@ -35,8 +32,8 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     }
     
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        super.onEntityCollidedWithBlock(world, x, y, z, entity);
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
+        super.onEntityCollidedWithBlock(world, pos, entity);
         if(world.isRemote || Config.pjPlayersOnly && !(entity instanceof EntityPlayer))
             return;
         else if(world.getBlockMetadata(x, y, z) >= 3)
@@ -44,12 +41,12 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     }
     
     @Override
-    public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
         return EnumPlantType.Crop;
     }
     
     /** Increments growth stage by a certain amount */
-    public void growBy(World world, int x, int y, int z, int increment) {
+    public void growBy(World world, BlockPos pos, int increment) {
         int growthStage = world.getBlockMetadata(x, y, z) + increment;
         if(growthStage > maxGrowth)
             growthStage = maxGrowth;
@@ -57,18 +54,18 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     }
     
     /** Called when bone meal is used */
-    public void incrementGrowthStage(World world, Random rand, int x, int y, int z) {
-        growBy(world, x, y, z, MathHelper.getRandomIntegerInRange(rand, 1, 4));
+    public void incrementGrowthStage(World world, Random rand, BlockPos pos) {
+        growBy(world, pos, MathHelper.getRandomIntegerInRange(rand, 1, 4));
     }
     
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
-        growBy(world, x, y, z, 1);
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(world, pos, state, rand);
+        growBy(world, pos, 1);
     }
     
     @Override
-    public int quantityDropped(int meta, int fortune, Random random) {
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
         if(meta == maxGrowth)
             return MathHelper.getRandomIntegerInRange(random, 1, 3 + fortune);
         else
@@ -77,20 +74,20 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     
     /** Is the plant not fully grown yet? */
     @Override
-    public boolean func_149851_a(World world, int x, int y, int z, boolean par5) {
+    public boolean isStillGrowing(World world, BlockPos pos, IBlockState state, boolean par5) {
         return world.getBlockMetadata(x, y, z) != maxGrowth;
     }
 
     /** Can bone meal be used on this plant? */
     @Override
-    public boolean func_149852_a(World world, Random rand, int x, int y, int z) {
+    public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state) {
         return true;
     }
 
     /** Increment growth stage */
     @Override
-    public void func_149853_b(World world, Random rand, int x, int y, int z) {
-        incrementGrowthStage(world, rand, x, y, z);
+    public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
+        incrementGrowthStage(world, rand, pos);
     }
     
     @SideOnly(Side.CLIENT)
@@ -98,29 +95,5 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     public int getRenderType() {
         return 1; //Crossed squares
     }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        textures = new IIcon[3];
-        for(int i = 0; i < textures.length; i++)
-            textures[i] = iconRegister.registerIcon(Reference.MODID + ":poisonjoke_stage_" + i);
-    }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        if(meta < 3)
-            return textures[0];
-        else if(meta < 7)
-            return textures[1];
-        else
-            return textures[2];
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public String getItemIconName() {
-        return Reference.MODID + ":poisonjoke";
-    }
 }

@@ -1,11 +1,12 @@
 package de.ljfa.lib.inventory;
 
-import de.ljfa.lib.tile.TileInventoryBase;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import de.ljfa.lib.tile.TileInventoryBase;
 
 public class InvUtils {
     /**
@@ -40,8 +41,8 @@ public class InvUtils {
         }
     }
 
-    public static void spillInventory(World world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+    public static void spillInventory(World world, BlockPos pos) {
+        TileEntity tile = world.getTileEntity(pos);
         if(tile instanceof TileInventoryBase)
             ((TileInventoryBase)tile).spillItems();
     }

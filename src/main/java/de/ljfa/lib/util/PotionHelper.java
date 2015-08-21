@@ -10,7 +10,7 @@ import net.minecraft.potion.PotionEffect;
 public class PotionHelper {
     /** Adds a potion effect to the entity */
     public static void addEffect(EntityLivingBase entity, int id, int duration, int strength, boolean ambient) {
-        entity.addPotionEffect(new PotionEffect(id, duration, strength, false));
+        entity.addPotionEffect(new PotionEffect(id, duration, strength, false, true));
     }
     
     /** Adds a potion effect to the entity */

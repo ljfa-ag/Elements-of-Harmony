@@ -1,12 +1,14 @@
 package de.ljfa.elofharmony.blocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.gui.EohGuiHandler.GuiIDs;
@@ -28,19 +30,19 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
     }
     
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,
-            int side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
+            EnumFacing side, float hitX, float hitY, float hitZ) {
         if(!world.isRemote) {
-            player.openGui(ElementsOfHarmony.instance, GuiIDs.locker.ordinal(), world, x, y, z);
+            player.openGui(ElementsOfHarmony.instance, GuiIDs.locker.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
         if(!world.isRemote)
-            InvUtils.spillInventory(world, x, y, z);
-        super.breakBlock(world, x, y, z, block, meta);
+            InvUtils.spillInventory(world, pos);
+        super.breakBlock(world, pos, state);
     }
     
     @Override
@@ -50,7 +52,7 @@ public class BlockLocker extends BlockBase implements ITileEntityProvider {
     
     //TODO: Take into account that armor doesn't stack
     @Override
-    public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
-        return Container.calcRedstoneFromInventory((IInventory)world.getTileEntity(x, y, z));
+    public int getComparatorInputOverride(World world, BlockPos pos) {
+        return Container.calcRedstoneFromInventory((IInventory)world.getTileEntity(pos));
     }
 }

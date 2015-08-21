@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableSet;
@@ -31,6 +32,11 @@ public class ItemHelper {
     /** Spawns an EntityItem at the specified position */
     public static void dropItem(World world, double x, double y, double z, ItemStack stack) {
         world.spawnEntityInWorld(new EntityItem(world, x, y, z, stack));
+    }
+    
+    /** Spawns an EntityItem at the specified position */
+    public static void dropItem(World world, BlockPos pos, ItemStack stack) {
+        dropItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
     }
     
     /** Spawns an EntityItem at the specified DimPos */

@@ -1,17 +1,18 @@
 package de.ljfa.elofharmony.blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.Reference;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ModItems;
@@ -19,17 +20,12 @@ import de.ljfa.elofharmony.items.ModItems;
 public class BlockLeavesFlutter extends BlockLeaves {
     private final String name = "leaves_flutter";
     
-    @SideOnly(Side.CLIENT)
-    private IIcon texture_transparent;
-    @SideOnly(Side.CLIENT)
-    private IIcon texture_opaque;
-    
     public BlockLeavesFlutter() {
         ModBlocks.register(this, ItemBlockLeavesFlutter.class, name);
     }
     
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
+    public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         if((meta & 4) != 0)
             return ret;
@@ -57,45 +53,38 @@ public class BlockLeavesFlutter extends BlockLeaves {
         return Blocks.leaves.isOpaqueCube();
     }
     
-    @Override
-    public String[] func_150125_e() {
-        return null;
-    }
-    
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
         if(isOpaqueCube()) {
-            if(world.getBlock(x, y, z) == this)
+            if(world.getBlockState(pos).getBlock() == this)
                 return false;
             else
-                return super.shouldSideBeRendered(world, x, y, z, side);
+                return super.shouldSideBeRendered(world, pos, side);
         } else
             return true;
     }
     
     @SideOnly(Side.CLIENT)
     @Override
-    public IIcon getIcon(int side, int meta) {
-        return isOpaqueCube() ? texture_opaque : texture_transparent;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getRenderColor(int par1) {
+    public int getRenderColor(IBlockState state) {
         return 0xFF75AC; //Pink
     }
     
     @SideOnly(Side.CLIENT)
     @Override
-    public int colorMultiplier(IBlockAccess blockAcc, int x, int y, int z) {
+    public int colorMultiplier(IBlockAccess blockAcc, BlockPos pos, int pass) {
         return 0xFF75AC; //Pink
+    }
+
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return null;
+    }
+
+    @Override
+    public EnumType func_176233_b(int p_176233_1_) {
+        return null;
     };
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        texture_transparent = iconRegister.registerIcon(Reference.MODID + ":leaves_flutter");
-        texture_opaque = iconRegister.registerIcon(Reference.MODID + ":leaves_flutter_opaque");
-    }
+
 }

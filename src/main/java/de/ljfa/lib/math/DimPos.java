@@ -1,7 +1,8 @@
 package de.ljfa.lib.math;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.WorldServer;
 import de.ljfa.lib.util.Utils;
 
@@ -16,29 +17,33 @@ public class DimPos {
         this.dim = dim;
     }
     
+    public DimPos(BlockPos pos, int dim) {
+        this(pos.getX(), pos.getY(), pos.getZ(), dim);
+    }
+    
     /** Creates a DimPos from an {x, y, z, dim} array of coordinates. */
     public static DimPos fromArray(int[] arr) {
         return new DimPos(arr[0], arr[1], arr[2], arr[3]);
     }
     
     public static DimPos fromTile(TileEntity tile) {
-        return new DimPos(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
+        return new DimPos(tile.getPos(), tile.getWorld().provider.getDimensionId());
+    }
+    
+    public BlockPos toPos() {
+        return new BlockPos(x, y, z);
     }
     
     public WorldServer getWorld() {
         return Utils.getOrInitWorld(dim);
     }
     
-    public Block getBlock() {
-        return getWorld().getBlock(x, y, z);
-    }
-    
-    public int getMeta() {
-        return getWorld().getBlockMetadata(x, y, z);
+    public IBlockState getState() {
+        return getWorld().getBlockState(toPos());
     }
     
     public TileEntity getTile() {
-        return getWorld().getTileEntity(x, y, z);
+        return getWorld().getTileEntity(toPos());
     }
     
     public int[] toArray() {

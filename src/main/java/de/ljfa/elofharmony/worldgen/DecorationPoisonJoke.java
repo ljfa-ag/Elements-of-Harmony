@@ -2,14 +2,16 @@ package de.ljfa.elofharmony.worldgen;
 
 import java.util.Random;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.blocks.ModBlocks;
 import de.ljfa.lib.math.MathUtils;
@@ -21,16 +23,18 @@ public class DecorationPoisonJoke {
             return;
         Random rand = event.rand;
 
-        int xGen = event.chunkX + rand.nextInt(16) + 8;
-        int zGen = event.chunkZ + rand.nextInt(16) + 8;
+        int xGen = event.pos.getX() + rand.nextInt(16) + 8;
+        int zGen = event.pos.getZ() + rand.nextInt(16) + 8;
+        BlockPos posGen = new BlockPos(xGen, 0, zGen);
         
-        if(!canGeneratePoisonJoke(event.world.getBiomeGenForCoords(xGen, zGen)) || rand.nextInt(256) >= Config.pjSpawnChance)
+        if(!canGeneratePoisonJoke(event.world.getBiomeGenForCoords(posGen)) || rand.nextInt(256) >= Config.pjSpawnChance)
             return;
         
         double xSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
         double zSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
         
-        int yGen = event.world.getTopSolidOrLiquidBlock(xGen, zGen);
+        posGen = event.world.func_175672_r(posGen);
+        int yGen = posGen.getY();
         
         // Bounding box of the patch
         // Add one to account for the random distortion
@@ -41,13 +45,15 @@ public class DecorationPoisonJoke {
         int minZ = (int)Math.floor(zGen - zSize) - 1;
         int maxZ = (int)Math.ceil(zGen + zSize) + 1;
         
+        IBlockState state = ModBlocks.poisonjoke.getDefaultState(); //FIXME: Need the fully grown state here
         for(int x = minX; x <= maxX; x++)
             for(int z = minZ; z <= maxZ; z++) {
                 // The patch is roughly diamond-shaped (1-sphere)
                 if(Math.abs(x - xGen)/xSize + Math.abs(z - zGen)/zSize <= 0.5 + rand.nextDouble()) {
                     for(int y = minY; y <= maxY; y++) {
-                        if(event.world.isAirBlock(x, y, z) && ModBlocks.poisonjoke.canBlockStay(event.world, x, y, z)) {
-                            event.world.setBlock(x, y, z, ModBlocks.poisonjoke, 7, 2);
+                        BlockPos pos = new BlockPos(x, y, z);
+                        if(event.world.isAirBlock(pos) && ModBlocks.poisonjoke.canBlockStay(event.world, pos, state)) {
+                            event.world.setBlockState(pos, state, 2);
                             break;
                         }
                     }

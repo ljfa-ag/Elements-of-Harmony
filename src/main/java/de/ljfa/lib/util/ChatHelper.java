@@ -1,4 +1,4 @@
-package de.ljfa.lib.chat;
+package de.ljfa.lib.util;
 
 import java.util.regex.Pattern;
 

@@ -3,13 +3,15 @@ package de.ljfa.elofharmony.command;
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import de.ljfa.elofharmony.challenges.Challenge;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
-import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 public class CommandChallengeDebug extends CommandBase {
 
@@ -29,7 +31,7 @@ public class CommandChallengeDebug extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) {
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         EntityPlayerMP player;
         if(args.length < 1)
             player = getCommandSenderAsPlayer(sender);
@@ -39,11 +41,11 @@ public class CommandChallengeDebug extends CommandBase {
                 throw new PlayerNotFoundException();
         }
         Challenge ch = ChallengeHandler.getChallenge(player);
-        ChatHelper.toPlayerLines(sender, "Current challenge for " + player.getCommandSenderName() + ":\n" + String.valueOf(ch));
+        ChatHelper.toPlayerLines(sender, "Current challenge for " + player.getName() + ":\n" + String.valueOf(ch));
     }
     
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args) {
+    public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
         return args.length != 1 ? null : getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
     }
     

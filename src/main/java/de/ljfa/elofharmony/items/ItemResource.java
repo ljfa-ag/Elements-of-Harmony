@@ -2,19 +2,14 @@ package de.ljfa.elofharmony.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Reference;
 
 public class ItemResource extends Item {
-    @SideOnly(Side.CLIENT)
-    private IIcon[] textures;
-    
     public enum ResourceType {
         YELLOW_FEATHER("yellow_feather");
         
@@ -50,20 +45,5 @@ public class ItemResource extends Item {
         for(int i = 0; i < typeCount; i++)
             list.add(new ItemStack(item, 1, i));
     }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        textures = new IIcon[typeCount];
-        for(int i = 0; i < typeCount; i++)
-            textures[i] = iconRegister.registerIcon(ResourceType.values()[i].textureName);
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        if(meta >= typeCount)
-            meta = 0;
-        return textures[meta];
-    }
+
 }

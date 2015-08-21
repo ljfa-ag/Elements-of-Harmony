@@ -4,9 +4,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.lib.items.ItemHelper;
 
 /** A slot which only accepts armor items of the specified type */
@@ -30,8 +30,9 @@ public class SlotArmor extends Slot {
     }
     
     @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getBackgroundIconIndex() {
-        return ItemArmor.func_94602_b(armorType);
+    public String func_178171_c()
+    {
+        return ItemArmor.EMPTY_SLOT_NAMES[armorType];
     }
+
 }

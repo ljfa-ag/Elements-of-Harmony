@@ -5,12 +5,14 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
-import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 public class ItemTwilicane extends Item {
     public ItemTwilicane() {
@@ -20,7 +22,7 @@ public class ItemTwilicane extends Item {
     
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player,
-            World world, int x, int y, int z, int side, float fx, float fy, float fz) {
+            World world, BlockPos pos, EnumFacing side, float fx, float fy, float fz) {
         if(world.isRemote)
             return true;
         if(player.isSneaking()) {

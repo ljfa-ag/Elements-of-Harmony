@@ -31,7 +31,7 @@ public class MathUtils {
     
     /** @return an AxisAlignedBB with the specified midpoint and the specified semi-axes */
     public static AxisAlignedBB boundingBoxAround(double xmid, double ymid, double zmid, double xrad, double yrad, double zrad) {
-        return AxisAlignedBB.getBoundingBox(xmid-xrad, ymid-yrad, zmid-zrad,  xmid+xrad, ymid+yrad, zmid+zrad);
+        return AxisAlignedBB.fromBounds(xmid-xrad, ymid-yrad, zmid-zrad,  xmid+xrad, ymid+yrad, zmid+zrad);
     }
     
     /** @return an AxisAlignedBB with the specified midpoint and the specified radius in all directions */

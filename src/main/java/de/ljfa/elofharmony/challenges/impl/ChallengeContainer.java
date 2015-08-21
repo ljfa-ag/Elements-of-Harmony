@@ -11,9 +11,8 @@ import net.minecraftforge.common.util.Constants;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.lib.chat.ChatHelper;
+import de.ljfa.lib.util.ChatHelper;
 import de.ljfa.lib.util.Utils;
 
 /** This is a wrapper class for Challenge objects. Instances of this class get saved to the

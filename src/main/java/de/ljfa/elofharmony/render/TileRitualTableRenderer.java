@@ -5,18 +5,18 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.render.models.ModelRitualTable;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 
 @SideOnly(Side.CLIENT)
 public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     private final ModelRitualTable model;
-    private final RenderItem renderItem;
+    //private final RenderItem renderItem;
     
     private final EntityItem shownItem;
     
@@ -25,15 +25,15 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
     
     public TileRitualTableRenderer() {
         model = new ModelRitualTable();
-        renderItem = new RenderItem();
-        renderItem.setRenderManager(RenderManager.instance);
+        //renderItem = new RenderItem();
         
         shownItem = new EntityItem(null);
         shownItem.hoverStart = 0.0f;
     }
     
+    //destroyProgress: Ranges from 0 to 9 when the block gets dug, negative otherwise
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTick) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTick, int destroyProgress) {
         TileRitualTable tile = (TileRitualTable)te;
         
         GL11.glPushMatrix();
@@ -49,7 +49,7 @@ public class TileRitualTableRenderer extends TileEntitySpecialRenderer {
         if(tile.getStackInSlot(0) != null) {
             GL11.glTranslated(0.5, 0.63, 0.5);
             shownItem.setEntityItemStack(tile.getStackInSlot(0));
-            renderItem.doRender(shownItem, 0, 0, 0, 0, 0);
+            //renderItem.doRender(shownItem, 0, 0, 0, 0, 0);
         }
         
         GL11.glPopMatrix();

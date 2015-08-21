@@ -8,8 +8,8 @@ import de.ljfa.elofharmony.ElementsOfHarmony;
 import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
-import de.ljfa.lib.gui.GuiContainerBase;
 import de.ljfa.lib.gui.GuiButtonPicture;
+import de.ljfa.lib.gui.GuiContainerBase;
 
 public class GuiLocker extends GuiContainerBase {
 

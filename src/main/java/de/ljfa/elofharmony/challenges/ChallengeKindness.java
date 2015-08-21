@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -14,13 +15,13 @@ import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.PlayerSlotRestriction;
 import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.math.MathUtils;
 import de.ljfa.lib.math.Metric;
 import de.ljfa.lib.math.MetricHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 public final class ChallengeKindness extends TableChallenge {
 
@@ -44,7 +45,7 @@ public final class ChallengeKindness extends TableChallenge {
             for(int zo = -radius; zo <= radius; zo++) {
                 if(xo == 0 && zo == 0)
                     continue;
-                if(!world.isAirBlock(tablePos.x+xo, tablePos.y, tablePos.z+zo)) {
+                if(!world.isAirBlock(new BlockPos(tablePos.x+xo, tablePos.y, tablePos.z+zo))) {
                     ChatHelper.toPlayerLoc(player, "elofharmony.challenge.kindness.flat_ground");
                     return false;
                 }

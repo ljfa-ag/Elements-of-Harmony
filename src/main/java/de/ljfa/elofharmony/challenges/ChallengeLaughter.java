@@ -11,11 +11,11 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import de.ljfa.elofharmony.items.ItemElement.ElementType;
 import de.ljfa.elofharmony.items.ModItems;
 import de.ljfa.elofharmony.tile.TileRitualTable;
-import de.ljfa.lib.chat.ChatHelper;
 import de.ljfa.lib.inventory.FullInvRestriction;
 import de.ljfa.lib.inventory.PlayerSlotRestriction;
 import de.ljfa.lib.inventory.PlayerSlotType;
 import de.ljfa.lib.items.ItemHelper;
+import de.ljfa.lib.util.ChatHelper;
 
 //TODO: This will probably not work well at all on a laggy server. I need to come up with something different.
 public final class ChallengeLaughter extends TableChallenge {
@@ -64,7 +64,7 @@ public final class ChallengeLaughter extends TableChallenge {
     
     @Override
     public void onPlayerBreakBlock(BreakEvent event) {
-        if(event.block == Blocks.stone || event.block == Blocks.cobblestone)
+        if(event.state.getBlock() == Blocks.stone || event.state.getBlock() == Blocks.cobblestone)
             stoneMined++;
     }
 
