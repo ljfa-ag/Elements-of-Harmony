@@ -99,12 +99,6 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
         return (Integer)state.getValue(AGE);
     }
     
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getRenderType() {
-        return 1; //Crossed squares
-    }
-    
     @Override
     protected BlockState createBlockState() {
         return new BlockState(this, AGE);
