@@ -34,7 +34,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     @Override
     public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        if((Boolean)state.getValue(DECAYABLE))
+        if(!(Boolean)state.getValue(DECAYABLE))
             return ret;
         
         Random rand = world instanceof World ? ((World)world).rand : new Random();
@@ -97,14 +97,14 @@ public class BlockLeavesFlutter extends BlockLeaves {
     
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(DECAYABLE, (meta & 4) != 0)
+        return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0)
                 .withProperty(CHECK_DECAY, (meta & 8) != 0);
     }
     
     @Override
     public int getMetaFromState(IBlockState state) {
         int ret = 0;
-        if((Boolean)state.getValue(DECAYABLE))
+        if(!(Boolean)state.getValue(DECAYABLE))
             ret |= 4;
         if((Boolean)state.getValue(CHECK_DECAY))
             ret |= 8;
