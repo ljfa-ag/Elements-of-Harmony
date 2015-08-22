@@ -33,7 +33,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
         ModBlocks.register(this, name);
     }
     
-    @Override
+    @Override //TODO: Find out why this method is only called sometimes
     public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         super.onEntityCollidedWithBlock(world, pos, entity);
         if(world.isRemote || Config.pjPlayersOnly && !(entity instanceof EntityPlayer))
