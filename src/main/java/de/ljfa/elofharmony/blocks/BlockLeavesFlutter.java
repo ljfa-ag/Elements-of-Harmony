@@ -1,6 +1,7 @@
 package de.ljfa.elofharmony.blocks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -30,7 +31,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     
     @Override
     public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> ret = new ArrayList<>();
         if(!(Boolean)state.getValue(DECAYABLE))
             return ret;
         
@@ -84,7 +85,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return null;
+        return Arrays.asList(new ItemStack(this));
     }
     
     @Override
@@ -94,7 +95,8 @@ public class BlockLeavesFlutter extends BlockLeaves {
     
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0)
+        return getDefaultState()
+                .withProperty(DECAYABLE, (meta & 4) == 0)
                 .withProperty(CHECK_DECAY, (meta & 8) != 0);
     }
     
