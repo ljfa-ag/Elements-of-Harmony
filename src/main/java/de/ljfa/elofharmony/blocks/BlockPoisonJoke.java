@@ -14,8 +14,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import de.ljfa.elofharmony.Config;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 
@@ -79,7 +77,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable {
     
     /** Is the plant not fully grown yet? */
     @Override
-    public boolean isStillGrowing(World world, BlockPos pos, IBlockState state, boolean par5) {
+    public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean par5) {
         return getAge(state) != maxGrowth;
     }
 

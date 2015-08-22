@@ -36,7 +36,7 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     }
     
     @Override
-    public String getName() {
+    public String getCommandSenderName() {
         return "elofharmony.container.ritual_table";
     }
     

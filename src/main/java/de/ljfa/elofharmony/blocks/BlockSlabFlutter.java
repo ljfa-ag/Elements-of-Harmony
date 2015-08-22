@@ -23,7 +23,7 @@ public class BlockSlabFlutter extends BlockSlab {
         setStepSound(soundTypeWood);
         IBlockState def = blockState.getBaseState();
         if(!isDouble)
-            def = def.withProperty(HALF_PROP, EnumBlockHalf.BOTTOM);
+            def = def.withProperty(HALF, EnumBlockHalf.BOTTOM);
         setDefaultState(def);
         ModBlocks.register(this, name);
     }
@@ -39,7 +39,7 @@ public class BlockSlabFlutter extends BlockSlab {
     }*/
 
     @Override
-    public String getFullSlabName(int meta) {
+    public String getUnlocalizedName(int meta) {
         return super.getUnlocalizedName();
     }
 
@@ -49,19 +49,19 @@ public class BlockSlabFlutter extends BlockSlab {
     }
 
     @Override
-    public IProperty func_176551_l() {
+    public IProperty getVariantProperty() {
         return null; //FIXME probably NPE
     }
 
     @Override
-    public Object func_176553_a(ItemStack p_176553_1_) {
+    public Object getVariant(ItemStack p_176553_1_) {
         return null; //FIXME
     }
     
     @Override
     protected BlockState createBlockState() {
         if(!isDouble)
-            return new BlockState(this, HALF_PROP);
+            return new BlockState(this, HALF);
         else
             return new BlockState(this);
     }
@@ -69,7 +69,7 @@ public class BlockSlabFlutter extends BlockSlab {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         if(!isDouble)
-            return getDefaultState().withProperty(HALF_PROP, EnumBlockHalf.values()[meta]);
+            return getDefaultState().withProperty(HALF, EnumBlockHalf.values()[meta]);
         else
             return getDefaultState();
     }
@@ -77,7 +77,7 @@ public class BlockSlabFlutter extends BlockSlab {
     @Override
     public int getMetaFromState(IBlockState state) {
         if(!isDouble)
-            return ((EnumBlockHalf)state.getValue(HALF_PROP)).ordinal();
+            return ((EnumBlockHalf)state.getValue(HALF)).ordinal();
         else
             return 0;
     }

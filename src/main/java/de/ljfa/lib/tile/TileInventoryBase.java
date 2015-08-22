@@ -67,13 +67,13 @@ public abstract class TileInventoryBase extends TileEntity implements IInventory
     }
 
     @Override
-    public abstract String getName();
+    public abstract String getCommandSenderName();
     
     @Override
     public IChatComponent getDisplayName() {
         return hasCustomName()
-                ? new ChatComponentText(getName())
-                : new ChatComponentTranslation(getName());
+                ? new ChatComponentText(getCommandSenderName())
+                : new ChatComponentTranslation(getCommandSenderName());
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.Random;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,8 +22,6 @@ import de.ljfa.elofharmony.items.ModItems;
 
 public class BlockLeavesFlutter extends BlockLeaves {
     private final String name = "leaves_flutter";
-    
-    private static final PropertyBool DECAYABLE = field_176237_a, CHECK_DECAY = field_176236_b;
     
     public BlockLeavesFlutter() {
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
@@ -112,8 +109,8 @@ public class BlockLeavesFlutter extends BlockLeaves {
     }
 
     @Override
-    public EnumType func_176233_b(int par1) {
+    public EnumType getWoodType(int meta) {
         return null;
-    };
+    }
 
 }

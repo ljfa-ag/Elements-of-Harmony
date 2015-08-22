@@ -34,11 +34,11 @@ public final class ModBlocks {
     }
     
     private static void setFireInfo() {
-        Blocks.fire.func_180686_a(log_flutter, 5, 5);
-        Blocks.fire.func_180686_a(leaves_flutter, 30, 60);
-        Blocks.fire.func_180686_a(planks_flutter, 5, 20);
-        Blocks.fire.func_180686_a(slab_flutter, 5, 20);
-        Blocks.fire.func_180686_a(stairs_flutter, 5, 20);
+        Blocks.fire.setFireInfo(log_flutter, 5, 5);
+        Blocks.fire.setFireInfo(leaves_flutter, 30, 60);
+        Blocks.fire.setFireInfo(planks_flutter, 5, 20);
+        Blocks.fire.setFireInfo(slab_flutter, 5, 20);
+        Blocks.fire.setFireInfo(stairs_flutter, 5, 20);
     }
 
     /** Sets the block's name and registers it with the given ItemBlock class */

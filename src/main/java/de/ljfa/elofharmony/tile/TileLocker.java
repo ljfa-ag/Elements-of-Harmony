@@ -16,7 +16,7 @@ public class TileLocker extends TileInventoryBase {
     }
 
     @Override
-    public String getName() {
+    public String getCommandSenderName() {
         return "elofharmony.container.locker";
     }
 

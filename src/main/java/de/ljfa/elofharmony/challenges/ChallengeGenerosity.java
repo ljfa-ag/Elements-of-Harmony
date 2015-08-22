@@ -60,7 +60,7 @@ public final class ChallengeGenerosity extends TableChallenge {
         
         int tpx = (int)(player.posX + dist * Math.cos(angle));
         int tpz = (int)(player.posZ + dist * Math.sin(angle));
-        int tpy = world.func_175672_r(new BlockPos(tpx, 0, tpz)).getY();
+        int tpy = world.getTopSolidOrLiquidBlock(new BlockPos(tpx, 0, tpz)).getY();
         
         float yaw = 360.0f * world.rand.nextFloat();
 

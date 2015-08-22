@@ -33,7 +33,7 @@ public class DecorationPoisonJoke {
         double xSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
         double zSize = MathUtils.triangularDouble(rand, 2.0, 5.0);
         
-        posGen = event.world.func_175672_r(posGen);
+        posGen = event.world.getTopSolidOrLiquidBlock(posGen);
         int yGen = posGen.getY();
         
         // Bounding box of the patch

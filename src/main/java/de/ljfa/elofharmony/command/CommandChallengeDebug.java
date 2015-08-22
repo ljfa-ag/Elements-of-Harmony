@@ -41,7 +41,7 @@ public class CommandChallengeDebug extends CommandBase {
                 throw new PlayerNotFoundException();
         }
         Challenge ch = ChallengeHandler.getChallenge(player);
-        ChatHelper.toPlayerLines(sender, "Current challenge for " + player.getName() + ":\n" + String.valueOf(ch));
+        ChatHelper.toPlayerLines(sender, "Current challenge for " + player.getCommandSenderName() + ":\n" + String.valueOf(ch));
     }
     
     @Override

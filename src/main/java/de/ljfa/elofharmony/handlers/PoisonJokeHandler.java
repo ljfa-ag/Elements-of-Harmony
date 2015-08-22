@@ -70,7 +70,7 @@ public class PoisonJokeHandler {
         if(entity instanceof EntitySquid)
             return true;
         else if(entity instanceof EntityPlayer)
-            return ((EntityPlayer)entity).getName().toLowerCase().contains("squid");
+            return ((EntityPlayer)entity).getCommandSenderName().toLowerCase().contains("squid");
         else
             return false;
     }

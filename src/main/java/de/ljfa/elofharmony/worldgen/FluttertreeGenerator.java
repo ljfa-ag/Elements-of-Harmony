@@ -25,11 +25,11 @@ public class FluttertreeGenerator extends WorldGenAbstractTree {
         if(!canTreeGrow(world, pos, aboveGround + 3))
             return false;
         
-        world.getBlockState(pos.offsetDown()).getBlock().onPlantGrow(world, pos.offsetDown(), pos);
+        world.getBlockState(pos.down()).getBlock().onPlantGrow(world, pos.down(), pos);
         
         //Place logs
         for(int yo = 0; yo <= aboveGround+2; yo++)
-            func_175903_a(world, pos.offsetUp(yo), log);
+            setBlockAndNotifyAdequately(world, pos.up(yo), log);
         
         //Place leaves
         for(int xo = -2; xo <= 2; xo++)
@@ -53,7 +53,7 @@ public class FluttertreeGenerator extends WorldGenAbstractTree {
     public void placeLeaf(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
         if(!block.isWood(world, pos))
-            func_175903_a(world, pos, leaves);
+            setBlockAndNotifyAdequately(world, pos, leaves);
     }
     
     public boolean canTreeGrow(World world, BlockPos pos, int height) {
@@ -61,7 +61,7 @@ public class FluttertreeGenerator extends WorldGenAbstractTree {
         
         //Check logs
         for(int yo = 1; yo <= height; yo++) {
-            BlockPos offpos = pos.offsetUp(yo);
+            BlockPos offpos = pos.up(yo);
             Block block = world.getBlockState(offpos).getBlock();
             if(!(block.isLeaves(world, offpos) || block.isReplaceable(world, offpos)))
                 return false;
