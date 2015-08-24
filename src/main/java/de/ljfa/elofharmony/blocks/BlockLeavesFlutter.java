@@ -5,28 +5,34 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import de.ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
+import de.ljfa.elofharmony.items.ItemResource.ResourceType;
+import de.ljfa.elofharmony.items.ModItems;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
-import de.ljfa.elofharmony.items.ItemResource.ResourceType;
-import de.ljfa.elofharmony.items.ModItems;
 
 public class BlockLeavesFlutter extends BlockLeaves {
-    private final String name = "leaves_flutter";
+    public final String name = "leaves_flutter";
+    
+    public static final int pink_color = 0xFF75AC;
     
     public BlockLeavesFlutter() {
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
+        setGraphicsLevel(true); //meh, Vanilla only calls this on vanilla leaves
+                                //TODO: Fix fast graphics
         ModBlocks.register(this, ItemBlockLeavesFlutter.class, name);
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(DECAYABLE, CHECK_DECAY).build());
     }
     
     @Override
@@ -54,11 +60,6 @@ public class BlockLeavesFlutter extends BlockLeaves {
         return false;
     }
     
-    @Override
-    public boolean isOpaqueCube() {
-        return Blocks.leaves.isOpaqueCube();
-    }
-    
     @SideOnly(Side.CLIENT)
     @Override
     public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
@@ -74,13 +75,13 @@ public class BlockLeavesFlutter extends BlockLeaves {
     @SideOnly(Side.CLIENT)
     @Override
     public int getRenderColor(IBlockState state) {
-        return 0xFF75AC; //Pink
+        return pink_color;
     }
     
     @SideOnly(Side.CLIENT)
     @Override
     public int colorMultiplier(IBlockAccess blockAcc, BlockPos pos, int pass) {
-        return 0xFF75AC; //Pink
+        return pink_color;
     }
 
     @Override
@@ -114,5 +115,4 @@ public class BlockLeavesFlutter extends BlockLeaves {
     public EnumType getWoodType(int meta) {
         return null;
     }
-
 }

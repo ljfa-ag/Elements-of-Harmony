@@ -1,0 +1,6 @@
+{
+    "parent": "block/leaves",
+    "textures": {
+        "all": "elofharmony:blocks/leaves_flutter"
+    }
+}

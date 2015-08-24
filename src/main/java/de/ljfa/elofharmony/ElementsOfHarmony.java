@@ -29,7 +29,7 @@ import de.ljfa.elofharmony.proxy.CommonProxy;
 import de.ljfa.elofharmony.worldgen.DecorationPoisonJoke;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION,
-    guiFactory = Reference.GUI_FACTORY_CLASS)
+    guiFactory = Reference.GUI_FACTORY_CLASS, acceptedMinecraftVersions = "[1.8, 1.9)")
 public class ElementsOfHarmony {
     @Mod.Instance(Reference.MODID)
     public static ElementsOfHarmony instance;

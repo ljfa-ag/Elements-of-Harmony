@@ -1,12 +1,17 @@
 package de.ljfa.elofharmony.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.CreativeTabEoh;
 import de.ljfa.elofharmony.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class ModBlocks {
     public static BlockPoisonJoke poisonjoke;
@@ -31,6 +36,11 @@ public final class ModBlocks {
         locker = new BlockLocker();
         
         setFireInfo();
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static void registerItemModels(ItemModelMesher mesher) {
+        mesher.register(Item.getItemFromBlock(leaves_flutter), 0, new ModelResourceLocation(Reference.MODID + ":" + leaves_flutter.name, "inventory"));
     }
     
     private static void setFireInfo() {

@@ -1,9 +1,12 @@
 package de.ljfa.elofharmony.items;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import de.ljfa.elofharmony.CreativeTabEoh;
 import de.ljfa.elofharmony.Reference;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class ModItems {
@@ -16,6 +19,11 @@ public class ModItems {
         elementOfHarmony = new ItemElement();
         twilicane = new ItemTwilicane();
         resource = new ItemResource();
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static void registerItemModels(ItemModelMesher mesher) {
+        
     }
 
     /** Sets the item's name and texture and registers it */
