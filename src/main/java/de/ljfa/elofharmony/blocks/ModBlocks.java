@@ -41,6 +41,7 @@ public final class ModBlocks {
     @SideOnly(Side.CLIENT)
     public static void registerItemModels(ItemModelMesher mesher) {
         mesher.register(Item.getItemFromBlock(leaves_flutter), 0, new ModelResourceLocation(Reference.MODID + ":" + leaves_flutter.name, "inventory"));
+        mesher.register(Item.getItemFromBlock(poisonjoke), 0, new ModelResourceLocation(Reference.MODID + ":" + poisonjoke.name, "inventory"));
     }
     
     private static void setFireInfo() {

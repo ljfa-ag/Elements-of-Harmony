@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":    { "model": "elofharmony:log_flutter" },
+        "axis=z":    { "model": "elofharmony:log_flutter_side" },
+        "axis=x":    { "model": "elofharmony:log_flutter_side", "y": 90 },
+        "axis=none": { "model": "elofharmony:log_flutter_bark" }
+    }
+}

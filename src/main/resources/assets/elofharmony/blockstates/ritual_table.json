@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "running=false": { "model": "elofharmony:ritual_table" },
+        "running=true": { "model": "elofharmony:ritual_table_running" }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "elofharmony:poisonjoke_stage_0" },
+        "age=1": { "model": "elofharmony:poisonjoke_stage_0" },
+        "age=2": { "model": "elofharmony:poisonjoke_stage_0" },
+        "age=3": { "model": "elofharmony:poisonjoke_stage_1" },
+        "age=4": { "model": "elofharmony:poisonjoke_stage_1" },
+        "age=5": { "model": "elofharmony:poisonjoke_stage_1" },
+        "age=6": { "model": "elofharmony:poisonjoke_stage_1" },
+        "age=7": { "model": "elofharmony:poisonjoke_stage_2" }
+    }
+}

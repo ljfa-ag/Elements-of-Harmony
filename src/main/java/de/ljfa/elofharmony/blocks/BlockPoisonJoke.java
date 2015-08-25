@@ -2,6 +2,8 @@ package de.ljfa.elofharmony.blocks;
 
 import java.util.Random;
 
+import de.ljfa.elofharmony.Config;
+import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyInteger;
@@ -14,11 +16,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import de.ljfa.elofharmony.Config;
-import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 
 public class BlockPoisonJoke extends BlockBush implements IGrowable {
-    private final String name = "poisonjoke";
+    public final String name = "poisonjoke";
     
     private static final int maxGrowth = 7;
     

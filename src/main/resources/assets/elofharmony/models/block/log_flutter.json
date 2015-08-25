@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "elofharmony:blocks/log_flutter_top",
+        "side": "elofharmony:blocks/log_flutter"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "elofharmony:blocks/ritual_table_running",
+        "top": "elofharmony:blocks/ritual_table_running",
+        "side": "elofharmony:blocks/ritual_table_running"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "elofharmony:half_slab_flutter" },
+        "half=top": { "model": "elofharmony:upper_slab_flutter" }
+    }
+}

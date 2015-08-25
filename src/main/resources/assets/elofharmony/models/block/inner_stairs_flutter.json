@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "elofharmony:blocks/planks_flutter",
+        "top": "elofharmony:blocks/planks_flutter",
+        "side": "elofharmony:blocks/planks_flutter"
+    }
+}
