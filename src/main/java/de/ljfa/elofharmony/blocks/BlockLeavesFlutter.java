@@ -29,10 +29,7 @@ public class BlockLeavesFlutter extends BlockLeaves {
     
     public BlockLeavesFlutter() {
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
-        setGraphicsLevel(true); //meh, Vanilla only calls this on vanilla leaves
-                                //TODO: Fix fast graphics
         ModBlocks.register(this, ItemBlockLeavesFlutter.class, name);
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(DECAYABLE, CHECK_DECAY).build());
     }
     
     @Override
@@ -109,6 +106,11 @@ public class BlockLeavesFlutter extends BlockLeaves {
         if((Boolean)state.getValue(CHECK_DECAY))
             ret |= 8;
         return ret;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void setStateMapper() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(DECAYABLE, CHECK_DECAY).build());
     }
 
     @Override

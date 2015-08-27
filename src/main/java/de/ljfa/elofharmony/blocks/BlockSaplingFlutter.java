@@ -25,10 +25,6 @@ public class BlockSaplingFlutter extends BlockSapling {
         setStepSound(soundTypeGrass);
         setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
         ModBlocks.register(this, name);
-        //FIXME: Hacky solution, I'd rather not have the TYPE property at all in the state
-        //but that messes with BlockSapling's constructor...
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(TYPE, STAGE).build());
-        
         treeGen = new FluttertreeGenerator(true, ModBlocks.log_flutter.getDefaultState(), ModBlocks.leaves_flutter.getDefaultState());
     }
     
@@ -53,5 +49,11 @@ public class BlockSaplingFlutter extends BlockSapling {
     public int getMetaFromState(IBlockState state) {
         return (Integer)state.getValue(STAGE);
     }
-
+    
+    @SideOnly(Side.CLIENT)
+    public void setStateMapper() {
+        //FIXME: Hacky solution, I'd rather not have the TYPE property at all in the state
+        //but that messes with BlockSapling's constructor...
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(TYPE, STAGE).build());
+    }
 }
