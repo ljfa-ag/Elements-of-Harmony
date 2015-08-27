@@ -1,17 +1,23 @@
 package de.ljfa.elofharmony;
 
+import de.ljfa.elofharmony.blocks.ModBlocks;
+import de.ljfa.elofharmony.items.ItemResource.ResourceType;
+import de.ljfa.elofharmony.items.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import de.ljfa.elofharmony.blocks.ModBlocks;
-import de.ljfa.elofharmony.items.ItemResource.ResourceType;
-import de.ljfa.elofharmony.items.ModItems;
 
 public class ModRecipes {
-    public static void addOredict() {
+    public static void init() {
+        addOredict();
+        addRecipes();
+        addSmelting();
+    }
+    
+    private static void addOredict() {
         OreDictionary.registerOre("itemFeather", Items.feather);
         OreDictionary.registerOre("itemFeather", new ItemStack(ModItems.resource, 1, ResourceType.YELLOW_FEATHER.ordinal()));
         
@@ -23,7 +29,7 @@ public class ModRecipes {
         OreDictionary.registerOre("stairsWood", ModBlocks.stairs_flutter);
     }
     
-    public static void addRecipes() {
+    private static void addRecipes() {
         GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks_flutter, 4), ModBlocks.log_flutter);
         GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.sapling_flutter, "FYF", "PSP", "JYJ",
                 'J', ModBlocks.poisonjoke, 'P', "dyePink", 'Y', "dyeYellow", 'S', "treeSapling", 'F', "itemFeather").setMirrored(false));
@@ -42,7 +48,7 @@ public class ModRecipes {
                 'I', "ingotIron", 'C', Blocks.chest, 'S', ModBlocks.slab_flutter));
     }
     
-    public static void addSmelting() {
+    private static void addSmelting() {
         GameRegistry.addSmelting(ModBlocks.log_flutter, new ItemStack(Items.coal, 1, 1), 0.15F);
     }
 }

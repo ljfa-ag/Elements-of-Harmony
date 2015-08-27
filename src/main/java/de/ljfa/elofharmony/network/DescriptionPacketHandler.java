@@ -19,7 +19,7 @@ public class DescriptionPacketHandler extends SimpleChannelInboundHandler<FMLPro
     //Huh, apparently the channel name can't be longer than 20 characters
     public static final String CHANNEL = Reference.MODID + "Desc";
     
-    public static void init() {
+    public static void preInit() {
         NetworkRegistry.INSTANCE.newChannel(CHANNEL, new DescriptionPacketHandler());
     }
     

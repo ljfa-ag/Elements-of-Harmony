@@ -15,7 +15,7 @@ public class ModItems {
     public static ItemTwilicane twilicane;
     public static ItemResource resource;
     
-    public static void init() {
+    public static void preInit() {
         elementOfHarmony = new ItemElement();
         twilicane = new ItemTwilicane();
         resource = new ItemResource();
