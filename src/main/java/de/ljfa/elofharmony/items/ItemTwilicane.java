@@ -2,6 +2,8 @@ package de.ljfa.elofharmony.items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,13 +13,23 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import de.ljfa.elofharmony.Reference;
 import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
+import de.ljfa.lib.items.ModeledItem;
 import de.ljfa.lib.util.ChatHelper;
 
-public class ItemTwilicane extends Item {
+public class ItemTwilicane extends Item implements ModeledItem {
+    public final String name = "twilicane";
+    
     public ItemTwilicane() {
-        ModItems.register(this, "twilicane");
+        ModItems.register(this, name);
         setMaxStackSize(1);
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerItemModels(ItemModelMesher mesher) {
+        ModItems.defaultRegisterModel(mesher, this, name);
     }
     
     @Override

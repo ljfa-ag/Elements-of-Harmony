@@ -2,25 +2,27 @@ package de.ljfa.elofharmony.items;
 
 import java.util.List;
 
+import de.ljfa.elofharmony.Reference;
+import de.ljfa.lib.items.ModeledItem;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.Reference;
 
-public class ItemResource extends Item {
+public class ItemResource extends Item implements ModeledItem {
     public enum ResourceType {
         YELLOW_FEATHER("yellow_feather");
         
         private final String name;
         private final String unlocalizedName;
-        private final String textureName;
         
         private ResourceType(String name) {
             this.name = name;
-            this.unlocalizedName = Reference.MODID + ":" + name; 
-            this.textureName = Reference.MODID + ":" + name; 
+            this.unlocalizedName = Reference.MODID + ":" + name;
         }
     }
     
@@ -44,6 +46,14 @@ public class ItemResource extends Item {
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
         for(int i = 0; i < typeCount; i++)
             list.add(new ItemStack(item, 1, i));
+    }
+
+    @Override
+    public void registerItemModels(ItemModelMesher mesher) {
+        for(ResourceType type: ResourceType.values()) {
+            ModelBakery.addVariantName(this, type.unlocalizedName);
+            mesher.register(this, type.ordinal(), new ModelResourceLocation(type.unlocalizedName, "inventory"));
+        }
     }
 
 }

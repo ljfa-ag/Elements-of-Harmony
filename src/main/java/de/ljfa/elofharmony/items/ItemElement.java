@@ -2,15 +2,19 @@ package de.ljfa.elofharmony.items;
 
 import java.util.List;
 
+import de.ljfa.elofharmony.Reference;
+import de.ljfa.lib.items.ModeledItem;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.Reference;
 
-public class ItemElement extends Item {
+public class ItemElement extends Item implements ModeledItem {
     public enum ElementType {
         HONESTY("honesty"),
         KINDNESS("kindness"),
@@ -21,19 +25,17 @@ public class ItemElement extends Item {
         
         private final String subname;
         private final String unlocalizedName;
-        private final String textureName;
         
         private ElementType(String subname) {
             this.subname = subname;
-            this.unlocalizedName = Reference.MODID + ":element_" + subname; 
-            this.textureName = Reference.MODID + ":element_" + subname; 
+            this.unlocalizedName = Reference.MODID + ":element_" + subname;
         }
     }
     
     public final int elementCount = ElementType.values().length;
     
     public ItemElement() {
-        ModItems.register(this, "element_of_harmony", "element_honesty");
+        ModItems.register(this, "element_of_harmony");
         setHasSubtypes(true);
         setMaxStackSize(1);
     }
@@ -65,6 +67,14 @@ public class ItemElement extends Item {
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
         for(int i = 0; i < elementCount; i++)
             list.add(new ItemStack(item, 1, i));
+    }
+    
+    @Override
+    public void registerItemModels(ItemModelMesher mesher) {
+        for(ElementType type: ElementType.values()) {
+            ModelBakery.addVariantName(this, type.unlocalizedName);
+            mesher.register(this, type.ordinal(), new ModelResourceLocation(type.unlocalizedName, "inventory"));
+        }
     }
 
 }
