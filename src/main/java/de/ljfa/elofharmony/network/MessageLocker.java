@@ -1,14 +1,12 @@
 package de.ljfa.elofharmony.network;
 
 import de.ljfa.elofharmony.gui.ContainerLocker;
-import de.ljfa.lib.network.MessageBase;
+import de.ljfa.lib.network.SynchronizedMessageBase;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.relauncher.Side;
 
-public class MessageLocker extends MessageBase<MessageLocker> {
+public class MessageLocker extends SynchronizedMessageBase<MessageLocker> {
     
     public MessageLocker() { }
     
@@ -23,15 +21,9 @@ public class MessageLocker extends MessageBase<MessageLocker> {
     }
 
     @Override
-    public void process(final EntityPlayer player, Side side) {
-        ((WorldServer)player.worldObj).addScheduledTask(new Runnable() {
-            @Override
-            public void run() {
-                Container cont = player.openContainer;
-                if(cont instanceof ContainerLocker)
-                    ((ContainerLocker)cont).swapWithPlayer();
-            }
-        });
+    public void handleServer(EntityPlayerMP player) {
+        Container cont = player.openContainer;
+        if(cont instanceof ContainerLocker)
+            ((ContainerLocker)cont).swapWithPlayer();
     }
-    
 }
