@@ -27,7 +27,7 @@ targetCompatibility = '1.7'
 minecraft {
     version = "1.8-11.14.3.1450"
     mappings = "snapshot_20150404"
-    runDir = "eclipse"
+    runDir = "run"
     
     replaceIn "Reference.java"
     replace "@VERSION@", project.version
