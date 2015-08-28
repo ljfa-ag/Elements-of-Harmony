@@ -8,10 +8,12 @@ import java.util.Random;
 import de.ljfa.elofharmony.blocks.itemblock.ItemBlockLeavesFlutter;
 import de.ljfa.elofharmony.items.ItemResource.ResourceType;
 import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.lib.items.ModeledItem;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -19,10 +21,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLeavesFlutter extends BlockLeaves {
+public class BlockLeavesFlutter extends BlockLeaves implements ModeledItem {
     public final String name = "leaves_flutter";
     
     public static final int pink_color = 0xFF75AC;
@@ -30,6 +33,9 @@ public class BlockLeavesFlutter extends BlockLeaves {
     public BlockLeavesFlutter() {
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
         ModBlocks.register(this, ItemBlockLeavesFlutter.class, name);
+        
+        if(FMLCommonHandler.instance().getSide() == Side.CLIENT)
+            setStateMapper(); //meh, classloading...
     }
     
     @Override
@@ -50,6 +56,11 @@ public class BlockLeavesFlutter extends BlockLeaves {
             ret.add(new ItemStack(ModItems.resource, 1, ResourceType.YELLOW_FEATHER.ordinal()));
         
         return ret;
+    }
+    
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return Arrays.asList(new ItemStack(this));
     }
     
     @Override
@@ -81,9 +92,18 @@ public class BlockLeavesFlutter extends BlockLeaves {
         return pink_color;
     }
 
+    @SideOnly(Side.CLIENT)
+    private void setStateMapper() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(DECAYABLE, CHECK_DECAY).build());
+        //meh, Vanilla only calls this on vanilla leaves
+        //TODO: Fix fast graphics
+        setGraphicsLevel(true);
+    }
+    
     @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return Arrays.asList(new ItemStack(this));
+    @SideOnly(Side.CLIENT)
+    public void registerItemModels(ItemModelMesher mesher) {
+        ModBlocks.defaultRegisterModel(mesher, this, name);
     }
     
     @Override
@@ -106,11 +126,6 @@ public class BlockLeavesFlutter extends BlockLeaves {
         if((Boolean)state.getValue(CHECK_DECAY))
             ret |= 8;
         return ret;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public void setStateMapper() {
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().addPropertiesToIgnore(DECAYABLE, CHECK_DECAY).build());
     }
 
     @Override

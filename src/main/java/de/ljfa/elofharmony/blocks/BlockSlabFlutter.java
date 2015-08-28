@@ -1,16 +1,20 @@
 package de.ljfa.elofharmony.blocks;
 
+import de.ljfa.lib.items.ModeledItem;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSlabFlutter extends BlockSlab {
+public class BlockSlabFlutter extends BlockSlab implements ModeledItem {
     private final String name = "slab_flutter";
     
     private final boolean isDouble;
@@ -81,5 +85,10 @@ public class BlockSlabFlutter extends BlockSlab {
         else
             return 0;
     }
-
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerItemModels(ItemModelMesher mesher) {
+        ModBlocks.defaultRegisterModel(mesher, this, name);
+    }
 }

@@ -14,12 +14,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        //TODO: These should really be local to the blocks
-        ModBlocks.leaves_flutter.setStateMapper();
-        ModBlocks.leaves_flutter.setGraphicsLevel(true);
-                                //meh, Vanilla only calls this on vanilla leaves
-                                //TODO: Fix fast graphics
-        ModBlocks.sapling_flutter.setStateMapper();
     }
     
     @Override

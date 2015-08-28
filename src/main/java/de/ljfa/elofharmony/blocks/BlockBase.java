@@ -1,10 +1,14 @@
 package de.ljfa.elofharmony.blocks;
 
+import de.ljfa.lib.items.ModeledItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBase extends Block {
+public class BlockBase extends Block implements ModeledItem {
     
     protected final String name;
 
@@ -22,5 +26,11 @@ public class BlockBase extends Block {
     
     public String getName() {
         return name;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerItemModels(ItemModelMesher mesher) {
+        ModBlocks.defaultRegisterModel(mesher, this, name);
     }
 }
