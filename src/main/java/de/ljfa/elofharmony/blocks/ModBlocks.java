@@ -1,11 +1,16 @@
 package de.ljfa.elofharmony.blocks;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import de.ljfa.elofharmony.CreativeTabEoh;
 import de.ljfa.elofharmony.Reference;
+import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.lib.items.ModeledItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -38,10 +43,16 @@ public final class ModBlocks {
         setFireInfo();
     }
     
+    public static List<Block> getList() {
+        return Collections.unmodifiableList(blockList);
+    }
+    
     @SideOnly(Side.CLIENT)
     public static void registerItemModels(ItemModelMesher mesher) {
-        mesher.register(Item.getItemFromBlock(leaves_flutter), 0, new ModelResourceLocation(Reference.MODID + ":" + leaves_flutter.name, "inventory"));
-        mesher.register(Item.getItemFromBlock(poisonjoke), 0, new ModelResourceLocation(Reference.MODID + ":" + poisonjoke.name, "inventory"));
+        for(Block block: blockList) {
+            if(block instanceof ModeledItem)
+                ((ModeledItem)block).registerItemModels(mesher);
+        }
     }
     
     private static void setFireInfo() {
@@ -57,14 +68,20 @@ public final class ModBlocks {
         block.setUnlocalizedName(Reference.MODID + ":" + name)
         .setCreativeTab(CreativeTabEoh.EOH_TAB);
         GameRegistry.registerBlock(block, itemClass, name);
+        blockList.add(block);
         return block;
     }
 
     /** Sets the block's name and registers it */
     public static <T extends Block> T register(T block, String name) {
-        block.setUnlocalizedName(Reference.MODID + ":" + name)
-        .setCreativeTab(CreativeTabEoh.EOH_TAB);
-        GameRegistry.registerBlock(block, name);
-        return block;
+        return register(block, ItemBlock.class, name);
     }
+    
+    /** Default implementation of registerItemModels */
+    @SideOnly(Side.CLIENT)
+    public static void defaultRegisterModel(ItemModelMesher mesher, Block block, String name) {
+        ModItems.defaultRegisterModel(mesher, Item.getItemFromBlock(block), name);
+    }
+    
+    private static final List<Block> blockList = new ArrayList<>();
 }
