@@ -52,23 +52,20 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable, ModeledItem
     }
     
     /** Increments growth stage by a certain amount */
-    public void growBy(World world, BlockPos pos, int increment) {
-        IBlockState state = world.getBlockState(pos);
+    public void growBy(World world, BlockPos pos, IBlockState state, int increment) {
         int growthStage = getAge(state) + increment;
         if(growthStage > maxGrowth)
             growthStage = maxGrowth;
         world.setBlockState(pos, state.withProperty(AGE, growthStage), 2);
     }
     
-    /** Called when bone meal is used */
-    public void incrementGrowthStage(World world, Random rand, BlockPos pos) {
-        growBy(world, pos, MathHelper.getRandomIntegerInRange(rand, 1, 4));
-    }
-    
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(world, pos, state, rand);
-        growBy(world, pos, 1);
+        //super.updateTick will remove and drop the block if canBlockStay is false
+        //so we have to check this
+        if(world.getBlockState(pos).getBlock() == this)
+            growBy(world, pos, state, 1);
     }
     
     @Override
@@ -81,7 +78,7 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable, ModeledItem
     
     /** Is the plant not fully grown yet? */
     @Override
-    public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean par5) {
+    public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
         return getAge(state) != maxGrowth;
     }
 
@@ -90,11 +87,11 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable, ModeledItem
     public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state) {
         return true;
     }
-
-    /** Increment growth stage */
+    
+    /** Called when bone meal is used */
     @Override
     public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
-        incrementGrowthStage(world, rand, pos);
+        growBy(world, pos, state, MathHelper.getRandomIntegerInRange(rand, 1, 4));
     }
     
     private int getAge(IBlockState state) {
