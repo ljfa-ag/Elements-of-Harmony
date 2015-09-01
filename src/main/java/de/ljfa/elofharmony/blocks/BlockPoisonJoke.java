@@ -1,5 +1,7 @@
 package de.ljfa.elofharmony.blocks;
 
+import static de.ljfa.elofharmony.ElementsOfHarmony.logger;
+
 import java.util.Random;
 
 import de.ljfa.elofharmony.Config;
@@ -37,12 +39,11 @@ public class BlockPoisonJoke extends BlockBush implements IGrowable, ModeledItem
         ModBlocks.register(this, name);
     }
     
-    @Override //TODO: Find out why this method is only called sometimes
-    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
-        super.onEntityCollidedWithBlock(world, pos, entity);
+    @Override
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
         if(world.isRemote || Config.pjPlayersOnly && !(entity instanceof EntityPlayer))
             return;
-        else if(getAge(world.getBlockState(pos)) >= 3)
+        else if(getAge(state) >= 3)
             PoisonJokeHandler.startIncubation(world, entity);
     }
     
