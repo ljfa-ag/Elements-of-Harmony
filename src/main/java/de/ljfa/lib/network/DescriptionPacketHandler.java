@@ -1,6 +1,5 @@
-package de.ljfa.elofharmony.network;
+package de.ljfa.lib.network;
 
-import de.ljfa.elofharmony.Reference;
 import de.ljfa.lib.tile.DescriptionPacketSynced;
 import de.ljfa.lib.util.ClientUtils;
 import io.netty.buffer.Unpooled;
@@ -14,23 +13,39 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
+/**
+ * A packet handler for custom tile entity description packets.
+ * 
+ * This handler handles incoming FMLProxyPackets from tile entities, which can
+ * be used in place of vanilla S35PacketUpdateTileEntity, allowing for slimmer
+ * packets and more flexibility.
+ */
 @Sharable
 public class DescriptionPacketHandler extends SimpleChannelInboundHandler<FMLProxyPacket> {
-    //Huh, apparently the channel name can't be longer than 20 characters
-    public static final String CHANNEL = Reference.MODID + "Desc";
+    public final String channel;
     
-    public static void preInit() {
-        NetworkRegistry.INSTANCE.newChannel(CHANNEL, new DescriptionPacketHandler());
+    /**  @param channel The channel name. Maximum 20 characters. */
+    public DescriptionPacketHandler(String channel) {
+        this.channel = channel;
     }
     
-    public static <T extends TileEntity & DescriptionPacketSynced> FMLProxyPacket createDescPacket(T te) {
+    /** Registers the handler to the NetworkRegistry */
+    public void preInit() {
+        NetworkRegistry.INSTANCE.newChannel(channel, this);
+    }
+    
+    /**
+     * Creates a new FMLProxyPacket from a tile entity that implements DescriptionPacketSynced
+     * @return a packet which can be used as return value of getDescriptionPacket()
+     */
+    public <T extends TileEntity & DescriptionPacketSynced> FMLProxyPacket createDescPacket(T te) {
         PacketBuffer buf = new PacketBuffer(Unpooled.buffer());
         BlockPos pos = te.getPos();
         buf.writeInt(pos.getX());
         buf.writeShort(pos.getY());
         buf.writeInt(pos.getZ());
         te.writeToPacket(buf);
-        return new FMLProxyPacket(buf, CHANNEL);
+        return new FMLProxyPacket(buf, channel);
     }
     
     @Override

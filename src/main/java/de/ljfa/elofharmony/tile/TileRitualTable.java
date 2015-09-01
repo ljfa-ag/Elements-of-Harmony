@@ -1,5 +1,19 @@
 package de.ljfa.elofharmony.tile;
 
+import de.ljfa.elofharmony.ElementsOfHarmony;
+import de.ljfa.elofharmony.challenges.Challenge;
+import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
+import de.ljfa.elofharmony.challenges.ChallengeKindness;
+import de.ljfa.elofharmony.challenges.ChallengeLaughter;
+import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
+import de.ljfa.elofharmony.items.ItemResource.ResourceType;
+import de.ljfa.elofharmony.items.ItemTwilicane;
+import de.ljfa.elofharmony.items.ModItems;
+import de.ljfa.lib.inventory.InvUtils;
+import de.ljfa.lib.tile.DescriptionPacketSynced;
+import de.ljfa.lib.tile.TileInventoryBase;
+import de.ljfa.lib.util.ClientUtils;
+import de.ljfa.lib.util.PotionHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,20 +27,6 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.ljfa.elofharmony.challenges.Challenge;
-import de.ljfa.elofharmony.challenges.ChallengeGenerosity;
-import de.ljfa.elofharmony.challenges.ChallengeKindness;
-import de.ljfa.elofharmony.challenges.ChallengeLaughter;
-import de.ljfa.elofharmony.challenges.impl.ChallengeHandler;
-import de.ljfa.elofharmony.items.ItemResource.ResourceType;
-import de.ljfa.elofharmony.items.ItemTwilicane;
-import de.ljfa.elofharmony.items.ModItems;
-import de.ljfa.elofharmony.network.DescriptionPacketHandler;
-import de.ljfa.lib.inventory.InvUtils;
-import de.ljfa.lib.tile.DescriptionPacketSynced;
-import de.ljfa.lib.tile.TileInventoryBase;
-import de.ljfa.lib.util.ClientUtils;
-import de.ljfa.lib.util.PotionHelper;
 
 public class TileRitualTable extends TileInventoryBase implements DescriptionPacketSynced {
     private boolean hasChallenge = false;
@@ -123,7 +123,7 @@ public class TileRitualTable extends TileInventoryBase implements DescriptionPac
     
     @Override
     public Packet getDescriptionPacket() {
-        return DescriptionPacketHandler.createDescPacket(this);
+        return ElementsOfHarmony.descHandler.createDescPacket(this);
     }
     
     @Override

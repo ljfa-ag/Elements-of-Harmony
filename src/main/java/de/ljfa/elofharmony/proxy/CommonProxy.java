@@ -15,11 +15,11 @@ import de.ljfa.elofharmony.command.CommandChallengeDebug;
 import de.ljfa.elofharmony.gui.EohGuiHandler;
 import de.ljfa.elofharmony.handlers.PoisonJokeHandler;
 import de.ljfa.elofharmony.items.ModItems;
-import de.ljfa.elofharmony.network.DescriptionPacketHandler;
 import de.ljfa.elofharmony.network.MessageLocker;
 import de.ljfa.elofharmony.tile.TileLocker;
 import de.ljfa.elofharmony.tile.TileRitualTable;
 import de.ljfa.elofharmony.worldgen.DecorationPoisonJoke;
+import de.ljfa.lib.network.DescriptionPacketHandler;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,7 +37,8 @@ public class CommonProxy {
         ElementsOfHarmony.network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
         ElementsOfHarmony.network.registerMessage(MessageLocker.class, MessageLocker.class, 0, Side.SERVER);
         NetworkRegistry.INSTANCE.registerGuiHandler(ElementsOfHarmony.instance, new EohGuiHandler());
-        DescriptionPacketHandler.preInit();
+        ElementsOfHarmony.descHandler = new DescriptionPacketHandler(Reference.MODID + "Desc");
+        ElementsOfHarmony.descHandler.preInit();
         ModBlocks.preInit();
         ModItems.preInit();
     }

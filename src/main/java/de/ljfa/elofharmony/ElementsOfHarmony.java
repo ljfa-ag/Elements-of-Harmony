@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import de.ljfa.elofharmony.proxy.CommonProxy;
+import de.ljfa.lib.network.DescriptionPacketHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -23,6 +24,7 @@ public class ElementsOfHarmony {
     public static CommonProxy proxy;
     
     public static SimpleNetworkWrapper network;
+    public static DescriptionPacketHandler descHandler;
     
     public static final Logger logger = LogManager.getLogger(Reference.MODNAME, StringFormatterMessageFactory.INSTANCE);
     
