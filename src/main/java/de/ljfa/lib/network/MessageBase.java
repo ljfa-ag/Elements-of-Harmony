@@ -18,6 +18,6 @@ public abstract class MessageBase<T extends MessageBase<T>> implements IMessage,
         return null;
     }
 
-    public void handleClient() {}
-    public void handleServer(EntityPlayerMP player) {}
+    protected void handleClient() {}
+    protected void handleServer(EntityPlayerMP player) {}
 }

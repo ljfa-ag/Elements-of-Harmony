@@ -23,7 +23,7 @@ public abstract class SynchronizedMessageBase<T extends SynchronizedMessageBase<
         return null;
     }
 
-    private void enqueueServer(final EntityPlayerMP player) {
+    protected void enqueueServer(final EntityPlayerMP player) {
         ((WorldServer)player.worldObj).addScheduledTask(new Runnable() {
             @Override
             public void run() {
@@ -32,7 +32,7 @@ public abstract class SynchronizedMessageBase<T extends SynchronizedMessageBase<
         });
     }
     
-    private void enqueueClient() {
+    protected void enqueueClient() {
         Minecraft.getMinecraft().addScheduledTask(new Runnable() {
             @Override
             public void run() {
