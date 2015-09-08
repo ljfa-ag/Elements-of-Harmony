@@ -26,7 +26,7 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
     /** Registers a Challenge class. The challenge must have a no-arguments constructor. */
     public static void register(Class<? extends Challenge> clazz, String name) {
         if(registry.containsKey(name))
-            throw new RuntimeException("Duplicate entry for challenge ID " + name);
+            throw new IllegalArgumentException("Duplicate entry for challenge ID " + name);
         registry.put(name, clazz);
     }
     
@@ -62,7 +62,7 @@ public final class ChallengeContainer implements IExtendedEntityProperties {
         if(challenge != null) {
             String chName = registry.inverse().get(challenge.getClass());
             if(chName == null) {
-                if(Utils.deobfuscatedEnv)
+                if(Utils.deobfuscatedEnv) //the RuntimeException below will get swallowed by Minecraft and is hardly noticable in the log
                     ChatHelper.broadcast("<ElementsOfHarmony> The class " + challenge.getClass().getName() + " has not been registered as challenge!");
                 throw new RuntimeException("The class " + challenge.getClass().getName() + " has not been registered as challenge!");
             }
